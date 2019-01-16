@@ -15,12 +15,6 @@ CREATE SCHEMA IF NOT EXISTS `smarthome` DEFAULT CHARACTER SET utf8 ;
 USE `smarthome` ;
 
 -- -----------------------------------------------------
--- User smarthome
--- -----------------------------------------------------
-create user 'smarthome_manager'@'localhost' identified by '3A*Y!It5BvLm';
-grant all PRIVILEGES on smarthome.* to 'smarthome_manager'@'localhost';
-
--- -----------------------------------------------------
 -- Table `smarthome`.`users`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `smarthome`.`users` (
@@ -28,6 +22,7 @@ CREATE TABLE IF NOT EXISTS `smarthome`.`users` (
   `username` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
   `token` VARCHAR(45) NOT NULL,
+  `last_login` DATETIME NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `idusers_UNIQUE` (`id` ASC) VISIBLE,
   UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE,
@@ -72,3 +67,13 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Data for table `smarthome`.`users`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `smarthome`;
+INSERT INTO `smarthome`.`users` (`id`, `username`, `password`, `token`, `last_login`) VALUES (DEFAULT, 'admin', '1234', DEFAULT, DEFAULT);
+
+COMMIT;
+
