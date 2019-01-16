@@ -1,8 +1,8 @@
 {
     "database": {
         "host": "localhost",
-        "user": "admin",
-        "password": "CrqTUXWt47RBLYV",
-        "db": "smarthomemanager"
+        "user": "smarthome_manager",
+        "password": "3A*Y!It5BvLm",
+        "db": "smarthome"
     } 
 }
