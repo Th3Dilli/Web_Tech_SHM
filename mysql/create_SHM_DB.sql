@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `smarthome`.`users` (
   `username` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
   `token` VARCHAR(45) NOT NULL,
-  `last_login` DATETIME NOT NULL,
+  `last_login` DATETIME NOT NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `idusers_UNIQUE` (`id` ASC) VISIBLE,
   UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE,
