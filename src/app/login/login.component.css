@@ -1,0 +1,38 @@
+mat-card {
+    max-width: 400px;
+    margin: 2em auto;
+    text-align: center;
+    min-width: 150px;
+    border-radius: 0px;
+
+  }
+  .signin-content {
+    padding: 60px 1rem;
+  }
+  
+  .full-width-input {
+    width: 100%;
+  }
+
+  .mat-button{
+    margin-top: 10px;
+    background: crimson;
+    color: white;
+    min-width: 150px;
+  }
+
+#logicon{
+    display: inline-flex;
+    vertical-align: middle;
+}
+
+p{
+    font-size: 18px;
+    margin: 0px;
+}
+
+#login-error{
+  padding-top: 15px;
+  font-weight: bold;
+}
+

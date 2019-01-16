@@ -1,0 +1,66 @@
+<div class="maincontent">
+  <mat-tab-group mat-align-tabs="start">
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">meeting_room
+              </mat-icon>
+            Room 1
+          </ng-template>
+      <mat-card>
+        <mat-card-title>Devices
+        </mat-card-title>
+        <mat-card-content>
+          <p>Some Devices...</p>
+          <mat-selection-list #devices>
+            <mat-list-option *ngFor="let devices of typesOfdevices">
+              {{devices}}
+            </mat-list-option>
+          </mat-selection-list>
+          <p>
+            Options selected: {{devices.selectedOptions.selected.length}}
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </mat-tab>
+    <mat-tab label="Room 2">
+      <mat-card>
+        <mat-card-title>Devices
+        </mat-card-title>
+        <mat-card-content>
+          <p>Some Devices...</p>
+          <mat-selection-list #devices>
+            <mat-list-option *ngFor="let devices of typesOfdevices">
+              {{devices}}
+            </mat-list-option>
+          </mat-selection-list>
+          <p>
+            Options selected: {{devices.selectedOptions.selected.length}}
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </mat-tab>
+
+    <mat-tab label="Room 3">
+      <mat-card>
+        <mat-card-title>Devices
+        </mat-card-title>
+        <mat-card-content>
+          <p>Some Devices...</p>
+          <mat-selection-list #devices>
+            <mat-list-option *ngFor="let devices of typesOfdevices">
+              {{devices}}
+            </mat-list-option>
+          </mat-selection-list>
+          <p>
+            Options selected: {{devices.selectedOptions.selected.length}}
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </mat-tab>
+
+    <mat-tab label="All Devices">Bla Bla Bla </mat-tab>
+
+  </mat-tab-group>
+
+
+</div>

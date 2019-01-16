@@ -1,0 +1,27 @@
+mat-card{
+    margin:2em;
+    padding-top:0;
+    padding-left:0;
+    padding-right:0;
+    border-radius: 5px;
+
+}
+
+mat-card-title{
+    background:rgba(0,0,0,.06); 
+    padding:20px 20px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+mat-card-content{
+    padding:1em;
+}
+
+mat-tab-group{
+    margin: 10px;
+}
+
+.example-tab-icon {
+    margin-right: 8px;
+  }
