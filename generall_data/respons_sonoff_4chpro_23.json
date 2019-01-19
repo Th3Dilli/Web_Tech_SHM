@@ -1,0 +1,103 @@
+STATUS = {
+    "Status": {
+        "Module": 23,
+        "FriendlyName": "Sonoff",
+        "Topic": "sonoff",
+        "ButtonTopic": "0",
+        "Power": 0,
+        "PowerOnState": 3,
+        "LedState": 1,
+        "SaveData": 1,
+        "SaveState": 1,
+        "ButtonRetain": 0,
+        "PowerRetain": 0
+    }
+}
+STATUS1 = {
+    "StatusPRM": {
+        "Baudrate": 115200,
+        "GroupTopic": "sonoffs",
+        "OtaUrl": "http://domus1:80/api/arduino/sonoff.ino.bin",
+        "Uptime": 140,
+        "Sleep": 0,
+        "BootCount": 61,
+        "SaveCount": 7646,
+        "SaveAddress": "F6000"
+    }
+}
+STATUS2 = {
+    "StatusFWR": {
+        "Version": "5.9.1",
+        "BuildDateTime": "2017-11-13T21:43:41",
+        "Boot": 6,
+        "Core": "2_3_0",
+        "SDK": "1.5.3(aec24ac9)"
+    }
+}
+STATUS3 = {
+    "StatusLOG": {
+        "SerialLog": 2,
+        "WebLog": 2,
+        "SysLog": 0,
+        "LogHost": "domus1",
+        "LogPort": 514,
+        "SSId1": "Freislich-Wlan",
+        "SSId2": "indebuurt2",
+        "TelePeriod": 300,
+        "SetOption": "55C00001"
+    }
+}
+STATUS4 = {
+    "StatusMEM": {
+        "ProgramSize": 471,
+        "Free": 532,
+        "Heap": 23,
+        "ProgramFlashSize": 1024,
+        "FlashSize": 1024,
+        "FlashMode": 3
+    }
+}
+STATUS5 = {
+    "StatusNET": {
+        "Hostname": "Sonoff-Tasmota-4ch",
+        "IPAddress": "10.0.0.11",
+        "Gateway": "10.0.0.138",
+        "Subnetmask": "255.255.255.0",
+        "DNSServer": "10.0.0.138",
+        "Mac": "60:01:94:85:74:15",
+        "Webserver": 2,
+        "WifiConfig": 2
+    }
+}
+STATUS7 = {
+    "StatusTIM": {
+        "UTC": "Sat Jan 19 17:23:07 2019",
+        "Local": "Sat Jan 19 18:23:07 2019",
+        "StartDST": "Sun Mar 31 02:00:00 2019",
+        "EndDST": "Sun Oct 27 03:00:00 2019",
+        "Timezone": 1
+    }
+}
+STATUS10 = {
+    "StatusSNS": {
+        "Time": "2019-01-19T18:23:07",
+        "Switch4": "ON"
+    }
+}
+STATUS11 = {
+    "StatusSTS": {
+        "Time": "2019-01-19T18:23:07",
+        "Uptime": 140,
+        "Vcc": 3.116,
+        "POWER1": "OFF",
+        "POWER2": "OFF",
+        "POWER3": "OFF",
+        "POWER4": "OFF",
+        "Wifi": {
+            "AP": 1,
+            "SSId": "Freislich-Wlan",
+            "RSSI": 54,
+            "APMac": "C4:EA:1D:0C:D4:31"
+        }
+    }
+}

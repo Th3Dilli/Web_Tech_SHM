@@ -68,6 +68,8 @@ enum SupportedModules {
   MI_DESK_LAMP,
   MAXMODULE };
 
+
+//############### NOT USED ###################################
   const uint8_t kModuleNiceList[MAXMODULE] PROGMEM = {
   SONOFF_BASIC,        // Sonoff Relay Devices
   SONOFF_RF,
