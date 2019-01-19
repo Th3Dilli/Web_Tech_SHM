@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-home',
@@ -8,13 +9,18 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   username:String;
+  userid : number;
+  role :String;
 
-
-  constructor() { }
+  constructor(public jwtHelper: JwtHelperService) { }
 
   ngOnInit() {
-
-    this.username = localStorage.getItem("currentUser");
+    let token = sessionStorage.getItem("token");
+    let payload = this.jwtHelper.decodeToken(token);
+    console.log(payload);
+    this.username = payload.user;
+    this.userid = payload.userid;
+    this.role = payload.role;
 
   }
 

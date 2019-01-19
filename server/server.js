@@ -1,10 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const checkAuth = require('./check_auth')
 const db = require('./controller');
-
 const PORT = 3000
 const app = express();
-
+const router = express.Router();
 
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json())
@@ -13,24 +13,18 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    res.header("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src'self'");
     next();
 });
-const router = express.Router();
 
-let login = require('./routes/login');
 
-//landing page
-app.use("/", router);
-router.get("/", function (req, res) {
-    res.json({
-        mesage: 'Welcome to module api'
-    });
-});
+// Routes
+let loginRoutes = require('./routes/login');
+let deviceRoutes = require('./routes/device');
 
-router.post('/login', login.login);
-app.get('/login', login.loginlanding);
-
+app.use('/login', loginRoutes);
+app.use('/devices', deviceRoutes);
 
 db.initDb.then(() => {
     app.listen(PORT, function () {

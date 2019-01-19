@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ErrorHandler } from '@angular/core';
+import { DeviceService } from '../services/device.service';
+import { Device } from '../services/device'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-devices',
@@ -7,11 +10,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DevicesComponent implements OnInit {
 
-  typesOfdevices: string[] = ['Device 1', 'Device 2', 'Device 3', 'Device 4', 'Device 5'];
+  typesOfdevices: Device[];
+  editDevice: Device;
 
-  constructor() { }
+  constructor(private device_service: DeviceService,  private _router: Router) { }
 
   ngOnInit() {
+    this.getDevices();
+    }
+
+    getDevices(): void {
+      this.device_service.getAllDevices()
+        .subscribe(
+          res => {
+            this.typesOfdevices = res;
+          }, err =>{
+
+          });
+    }
+
+    
   }
 
-}
+  
+
+    
+
+  
+
+    
+
+    
+    
+  
+
+

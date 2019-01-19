@@ -9,6 +9,7 @@ let initDb = new Promise((resolve, reject) => {
         user: cfg.database.user,
         password: cfg.database.password,
         database: cfg.database.db
+        
     });
     _db.connect((err) => {
         if (err) {
@@ -20,7 +21,6 @@ let initDb = new Promise((resolve, reject) => {
         }
     });
 });
-
 function getDb() {
     if (!_db) {
         console.log("Db has not been initialized. Please call init first.");

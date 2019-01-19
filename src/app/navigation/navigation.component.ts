@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material';
 })
 export class NavigationComponent implements OnInit {
  
-  // ngif bug undefiend, view child update the property if dom change
+  // ngif bug undefined, view child update the property if dom change
   @ViewChild('sidenav') sidenav;
   
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)

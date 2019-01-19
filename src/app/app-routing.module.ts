@@ -2,10 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DevicesComponent } from './devices/devices.component';
 import { LoginComponent } from './login/login.component';
-import { CanActivate } from '@angular/router/src/utils/preactivation';
 import { AuthGuard } from './auth.guard';
-import { NavigationComponent } from './navigation/navigation.component';
 import { HomeComponent } from './home/home.component';
+import { DeviceDetailComponent } from './device-detail/device-detail.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent, children: [
@@ -14,6 +13,7 @@ const routes: Routes = [
   },
 {path:'devices', component: DevicesComponent, canActivate: [AuthGuard] },
 {path:'home', component: HomeComponent, canActivate: [AuthGuard] },
+{path:'detail/:id', component: DeviceDetailComponent, canActivate: [AuthGuard]},
 
 
 ];

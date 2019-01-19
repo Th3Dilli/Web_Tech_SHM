@@ -16,6 +16,16 @@ import { LoginComponent } from './login/login.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { DevicesComponent } from './devices/devices.component';
 import { HomeComponent } from './home/home.component';
+import { JwtModule } from '@auth0/angular-jwt';
+import { DeviceService } from './services/device.service';
+import { DeviceDetailComponent } from './device-detail/device-detail.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './jwt.inceptor';
+import {ErrorInterceptor } from './error.inceptor';
+
+export function tokenGetter() {
+  return sessionStorage.getItem('token');
+}
 
 @NgModule({
   declarations: [
@@ -23,7 +33,8 @@ import { HomeComponent } from './home/home.component';
     NavigationComponent,
     DevicesComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    DeviceDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -34,9 +45,19 @@ import { HomeComponent } from './home/home.component';
     ReactiveFormsModule,
     FormsModule,
     LayoutModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ['localhost:3000'],
+        blacklistedRoutes: ['localhost:3000/login']
+      }
+    })
     
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, AuthGuard, DeviceService, 
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

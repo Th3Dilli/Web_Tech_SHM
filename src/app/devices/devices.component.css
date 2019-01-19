@@ -3,15 +3,19 @@ mat-card{
     padding-top:0;
     padding-left:0;
     padding-right:0;
-    border-radius: 5px;
-
+    border-radius: 0px;
+    min-width: 350px;
+    min-height: 100px;
+    margin-bottom: 50px;
+    float:left;
 }
 
 mat-card-title{
-    background:rgba(0,0,0,.06); 
+    background: crimson;
+    background-image: url("https://static.wixstatic.com/media/7ad1f8_ae79566e9dc24f16987c7fe261edc952~mv2.png/v1/fill/w_1400,h_980,al_c,q_90/file.jpg");
+    background-size: auto;
     padding:20px 20px;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
+
 }
 
 mat-card-content{
@@ -24,4 +28,9 @@ mat-tab-group{
 
 .example-tab-icon {
     margin-right: 8px;
+  }
+
+  #btn_details{
+      margin-top: 2em;
+      float: right;
   }

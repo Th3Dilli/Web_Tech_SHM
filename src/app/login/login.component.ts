@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import {MatSnackBar} from '@angular/material';
 
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   form: FormGroup;
   private formSubmitAttempt: boolean;
-  private failed: boolean;
+  private failedLoginAttempt: boolean; 
 
   constructor(private fb: FormBuilder, private _auth: AuthService, private _router: Router, public snackBar: MatSnackBar ) { }
 
@@ -22,28 +23,29 @@ export class LoginComponent implements OnInit {
     this.form = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
+      
     });
-  
   }
+
   isFieldInvalid(field: string) { 
   return (
     (!this.form.get(field).valid && this.form.get(field).touched) ||
     (this.form.get(field).untouched && this.formSubmitAttempt)
   );
 }
+
 onSubmit() {
   if (this.form.valid) {
+    console.log(this.form.value)
     this._auth.loginUser(this.form.value)
     .subscribe( res => { 
-      sessionStorage.setItem("token", res.token)
-      localStorage.setItem('currentUser', res.username)
       this._router.navigate(['/home'])
       this.loginSuccess();
     }, err => {
-      this.failed = true;
+      this.failedLoginAttempt = true  // login failed msg
     });
   }
-  this.formSubmitAttempt = true;             
+    this.formSubmitAttempt = true;             
 }
 
 loginSuccess(){
