@@ -3,6 +3,7 @@ const router = express.Router();
 const checkAuth = require('../check_auth')
 const getDb = require('../controller').getDb
 const _db = getDb();
+const modulesArray = require("../config_modules").modules;
 
 router.get('/all', checkAuth, (req, res) => {   
 	let query = "SELECT * FROM device";
@@ -11,6 +12,7 @@ router.get('/all', checkAuth, (req, res) => {
 		if (error) {
 			res.status(400).json({message: "Error"});
 		} else{
+			results[0].module_type = modulesArray[results[0].module_type - 1];
 			res.status(200).json(results);
 		}
 	});
@@ -29,6 +31,7 @@ router.get('/detail/:id', checkAuth, (req, res) => {
                 message: "Device not found"
             });
 		}else{
+			results[0].module_type = modulesArray[results[0].module_type - 1];
 			res.status(200).json(results);
 		}
 	});

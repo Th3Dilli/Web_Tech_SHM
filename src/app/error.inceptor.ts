@@ -7,16 +7,16 @@ import { AuthService } from './auth.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-    constructor(private _authService: AuthService) {}
+    constructor(private _authService: AuthService) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(request).pipe(catchError(err => {
             if (err.status === 401) {
                 // Backend says token is invalid, logout the user
                 this._authService.logoutSessionExpired();
-            } 
+            }
             const error = err.error.message || err.statusText;
             return throwError(error);
-        }))
+        }));
     }
 }

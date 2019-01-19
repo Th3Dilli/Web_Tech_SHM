@@ -19,6 +19,7 @@ USE `smarthome` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `smarthome`.`users` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `role` VARCHAR(45) NOT NULL,
   `username` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
   `last_login` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -74,7 +75,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `smarthome`;
-INSERT INTO `smarthome`.`users` (`id`, `username`, `password`, `last_login`, `created`) VALUES (DEFAULT, 'admin', '1234', DEFAULT, DEFAULT);
+INSERT INTO `smarthome`.`users` (`id`, `role`, `username`, `password`, `last_login`, `created`) VALUES (DEFAULT, 'admin', 'admin', '1234', DEFAULT, DEFAULT);
 
 COMMIT;
 
