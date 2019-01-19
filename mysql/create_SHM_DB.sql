@@ -21,12 +21,11 @@ CREATE TABLE IF NOT EXISTS `smarthome`.`users` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
-  `token` VARCHAR(45) NOT NULL,
   `last_login` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `idusers_UNIQUE` (`id` ASC) VISIBLE,
-  UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE,
-  UNIQUE INDEX `token_UNIQUE` (`token` ASC) VISIBLE)
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
@@ -38,7 +37,9 @@ CREATE TABLE IF NOT EXISTS `smarthome`.`device` (
   `module_type` VARCHAR(45) NOT NULL,
   `name` VARCHAR(45) NOT NULL,
   `ip` VARCHAR(15) NOT NULL,
-  PRIMARY KEY (`id`))
+  `mac` VARCHAR(17) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `mac_UNIQUE` (`mac` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
@@ -73,7 +74,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `smarthome`;
-INSERT INTO `smarthome`.`users` (`id`, `username`, `password`, `token`, `last_login`) VALUES (DEFAULT, 'admin', '1234', DEFAULT, DEFAULT);
+INSERT INTO `smarthome`.`users` (`id`, `username`, `password`, `last_login`, `created`) VALUES (DEFAULT, 'admin', '1234', DEFAULT, DEFAULT);
 
 COMMIT;
 
