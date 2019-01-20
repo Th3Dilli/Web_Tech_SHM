@@ -18,7 +18,7 @@
           </mat-error>
         </mat-form-field>
         <button mat-button>Login</button>
-        <mat-error id="login-error" *ngIf="failed">
+        <mat-error id="login-error" *ngIf="failedLoginAttempt">
           Login failed, wrong User or Password!
         </mat-error>
       </form>

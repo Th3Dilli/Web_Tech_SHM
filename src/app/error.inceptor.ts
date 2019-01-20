@@ -13,7 +13,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         return next.handle(request).pipe(catchError(err => {
             if (err.status === 401) {
                 // Backend says token is invalid, logout the user
-                this._authService.logoutSessionExpired();
+                this._authService.logoutAuthenticationError();
             }
             const error = err.error.message || err.statusText;
             return throwError(error);

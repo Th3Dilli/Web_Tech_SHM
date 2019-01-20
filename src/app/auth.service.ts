@@ -49,13 +49,20 @@ export class AuthService {
     localStorage.clear();
   }
 
+  logoutAuthenticationError(){
+    this.router.navigate(["/login"]);
+    this.authUser.next(false);
+    this.snackBar.open('Authentication Error', "OK", { duration: 8000 });
+    sessionStorage.clear();
+    localStorage.clear();
+  }
+
   // checks token is expired 
   isTokenExpired() {
     const token = sessionStorage.getItem('token');
     if (this.jwtHelper.isTokenExpired(token) === true) {
       return true;
     } else {
-      console.log(this.jwtHelper.getTokenExpirationDate(token));
       this.authUser.next(true);
       return false;
     }

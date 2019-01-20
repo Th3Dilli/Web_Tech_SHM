@@ -23,6 +23,7 @@ export class DevicesComponent implements OnInit {
     this.device_service.getAllDevices()
       .subscribe(
         res => {
+          console.log(res);
           this.typesOfdevices = res;
         }, err => {
 
