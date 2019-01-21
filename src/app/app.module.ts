@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {Material} from './material-module';
+import { Material } from './material-module';
 import { AuthService } from './auth.service';
 
 import { NgModule } from '@angular/core';
@@ -21,7 +21,8 @@ import { DeviceService } from './services/device.service';
 import { DeviceDetailComponent } from './device-detail/device-detail.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './jwt.inceptor';
-import {ErrorInterceptor } from './error.inceptor';
+import { ErrorInterceptor } from './error.inceptor';
+import { FilterPipe } from './filter.pipe';
 
 export function tokenGetter() {
   return sessionStorage.getItem('token');
@@ -34,7 +35,8 @@ export function tokenGetter() {
     DevicesComponent,
     LoginComponent,
     HomeComponent,
-    DeviceDetailComponent
+    DeviceDetailComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
@@ -52,10 +54,10 @@ export function tokenGetter() {
         blacklistedRoutes: ['localhost:3000/login']
       }
     })
-    
+
   ],
-  providers: [AuthService, AuthGuard, DeviceService, 
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+  providers: [AuthService, AuthGuard, DeviceService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

@@ -5,14 +5,17 @@
         <p>
           <mat-icon id="logicon">assignment_ind</mat-icon> Login
         </p>
-        <mat-form-field class="full-width-input">
-          <input matInput placeholder="User" formControlName="username" required>
+        <div id="logininputs">
+        <mat-form-field appearance="outline" class="full-width-input">
+            <mat-label>Username</mat-label>
+          <input matInput formControlName="username" required>
           <mat-error *ngIf="isFieldInvalid('username')">
             Please enter a valid Username!
           </mat-error>
         </mat-form-field>
-        <mat-form-field class="full-width-input">
-          <input matInput type="password" placeholder="Password" formControlName="password" required>
+        <mat-form-field appearance="outline" class="full-width-input">
+            <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" required>
           <mat-error *ngIf="isFieldInvalid('password')">
             Please enter a valid Password!
           </mat-error>
@@ -21,6 +24,7 @@
         <mat-error id="login-error" *ngIf="failedLoginAttempt">
           Login failed, wrong User or Password!
         </mat-error>
+      </div>
       </form>
     </mat-card-content>
   </mat-card>

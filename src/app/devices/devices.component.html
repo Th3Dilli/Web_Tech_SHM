@@ -1,17 +1,67 @@
-<div class="maincontent">
-  
+<div *ngIf="typesOfdevices$ | async as typesOfdevices" class="maincontent">
+  <!-- Light -->
   <mat-tab-group mat-align-tabs="start">
-    <mat-tab label="Room 1">
-      <mat-card *ngFor="let device of typesOfdevices">
-        <mat-card-title>{{device.name}}</mat-card-title>
+    <mat-tab label="Lights">
+      <mat-card *ngFor="let device of typesOfdevices | filterByName:'Light'">
+        <mat-card-title>{{device.device_name}}</mat-card-title>
         <mat-card-content>
-         <mat-list>ID: {{device.id}}</mat-list>
-         <mat-list>ModuleType: {{device.module_type}}</mat-list>
-         <mat-list> IP: {{device.ip}}</mat-list>
-         <button id="btn_details" mat-stroked-button routerLink="/detail/{{device.id}}">Info</button>
+          <mat-list>
+            <mat-list-item><strong>ID:</strong>&nbsp;{{device.id}}</mat-list-item>
+            <mat-list-item><strong>IP</strong>&nbsp;{{device.ip}}</mat-list-item>
+            <mat-list-item><strong>ModuleType:</strong>&nbsp;{{device.module_type}}</mat-list-item>
+            <mat-list-item><strong>MAC-Adresse:</strong>&nbsp;{{device.mac}}</mat-list-item>
+          </mat-list>
+          <button id="btn_details" mat-stroked-button routerLink="/detail/{{device.id}}">Info</button>
         </mat-card-content>
       </mat-card>
     </mat-tab>
-    <mat-tab label="All Devices">Bla Bla Bla </mat-tab>
+    <!-- Speaker -->
+    <mat-tab label="Speaker">
+      <mat-card *ngFor="let device of typesOfdevices | filterByName:'Speaker'">
+        <mat-card-title>{{device.device_name}}</mat-card-title>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item><strong>ID:</strong>&nbsp;{{device.id}}</mat-list-item>
+            <mat-list-item><strong>IP</strong>&nbsp;{{device.ip}}</mat-list-item>
+            <mat-list-item><strong>ModuleType:</strong>&nbsp;{{device.module_type}}</mat-list-item>
+            <mat-list-item><strong>MAC-Adresse:</strong>&nbsp;{{device.mac}}</mat-list-item>
+          </mat-list>
+          <button id="btn_details" mat-stroked-button routerLink="/detail/{{device.id}}">Info</button>
+        </mat-card-content>
+      </mat-card>
+    </mat-tab>
+    <mat-tab label="Controller">
+      <mat-card *ngFor="let device of typesOfdevices| filterByName:'Controller'">
+        <mat-card-title>{{device.device_name}}</mat-card-title>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item><strong>ID:</strong>&nbsp;{{device.id}}</mat-list-item>
+            <mat-list-item><strong>IP</strong>&nbsp;{{device.ip}}</mat-list-item>
+            <mat-list-item><strong>ModuleType:</strong>&nbsp;{{device.module_type}}</mat-list-item>
+            <mat-list-item><strong>MAC-Adresse:</strong>&nbsp;{{device.mac}}</mat-list-item>
+          </mat-list>
+          <button id="btn_details" mat-stroked-button routerLink="/detail/{{device.id}}">Info</button>
+        </mat-card-content>
+      </mat-card>
+    </mat-tab>
+    <!-- Tab All Devices -->
+    <mat-tab label="All Devices">
+      <mat-card *ngFor="let device of typesOfdevices">
+        <mat-card-title>{{device.device_name}}</mat-card-title>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item><strong>ID:</strong>&nbsp;{{device.id}}</mat-list-item>
+            <mat-list-item><strong>IP</strong>&nbsp;{{device.ip}}</mat-list-item>
+            <mat-list-item><strong>ModuleType:</strong>&nbsp;{{device.module_type}}</mat-list-item>
+            <mat-list-item><strong>MAC-Adresse:</strong>&nbsp;{{device.mac}}</mat-list-item>
+            <div *ngIf="getRole() === 'admin'">
+              <mat-list-item><strong>Position:</strong>&nbsp;{{device.room_name}}</mat-list-item>
+              <mat-list-item><strong>User:</strong>&nbsp;{{device.username}}</mat-list-item>
+            </div>
+          </mat-list>
+          <button id="btn_details" mat-stroked-button routerLink="/detail/{{device.id}}">Info</button>
+        </mat-card-content>
+      </mat-card>
+    </mat-tab>
   </mat-tab-group>
 </div>

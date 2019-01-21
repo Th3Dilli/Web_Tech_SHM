@@ -3,5 +3,6 @@ export interface Device {
     module_type: string;
     name: string;
     ip: string;
+    room_name: string; 
   }
   
