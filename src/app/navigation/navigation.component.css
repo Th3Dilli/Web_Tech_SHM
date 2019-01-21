@@ -20,3 +20,11 @@
 
 }
 
+.mat-tab-body-content, .ng-trigger, .ng-trigger-translateTab, .mat-tab-list{
+  transform: none !important;
+}
+
+.content{
+  position:relative;
+  z-index:0;
+}
