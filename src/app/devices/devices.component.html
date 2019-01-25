@@ -1,8 +1,8 @@
 <div *ngIf="typesOfdevices$ | async as typesOfdevices" class="maincontent">
   <!-- Light -->
   <mat-tab-group mat-align-tabs="start">
-    <mat-tab label="Lights">
-      <mat-card *ngFor="let device of typesOfdevices | filterByName:'Light'">
+    <mat-tab label="Kitchen">
+      <mat-card *ngFor="let device of typesOfdevices | filterByName:'kitchen'">
         <mat-card-title>{{device.device_name}}</mat-card-title>
         <mat-card-content>
           <mat-list>
@@ -16,8 +16,8 @@
       </mat-card>
     </mat-tab>
     <!-- Speaker -->
-    <mat-tab label="Speaker">
-      <mat-card *ngFor="let device of typesOfdevices | filterByName:'Speaker'">
+    <mat-tab label="Living Room">
+      <mat-card *ngFor="let device of typesOfdevices | filterByName:'livingroom'">
         <mat-card-title>{{device.device_name}}</mat-card-title>
         <mat-card-content>
           <mat-list>
@@ -26,12 +26,27 @@
             <mat-list-item><strong>ModuleType:</strong>&nbsp;{{device.module_type}}</mat-list-item>
             <mat-list-item><strong>MAC-Adresse:</strong>&nbsp;{{device.mac}}</mat-list-item>
           </mat-list>
-          <button id="btn_details" mat-stroked-button routerLink="/detail/{{device.id}}">Info</button>
+          <button id="btn_details" mat-stroked-button routerLink="/detail/{{device.device_id}}">Info</button>
         </mat-card-content>
       </mat-card>
     </mat-tab>
-    <mat-tab label="Controller">
-      <mat-card *ngFor="let device of typesOfdevices| filterByName:'Controller'">
+    <mat-tab label="Entrance">
+      <mat-card *ngFor="let device of typesOfdevices| filterByName:'entrance'">
+        <mat-card-title>{{device.device_name}}</mat-card-title>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item><strong>ID:</strong>&nbsp;{{device.device_id}}</mat-list-item>
+            <mat-list-item><strong>IP</strong>&nbsp;{{device.ip}}</mat-list-item>
+            <mat-list-item><strong>ModuleType:</strong>&nbsp;{{device.module_type}}</mat-list-item>
+            <mat-list-item><strong>MAC-Adresse:</strong>&nbsp;{{device.mac}}</mat-list-item>
+          </mat-list>
+          <button id="btn_details" mat-stroked-button routerLink="/detail/{{device.device_id}}">Info</button>
+        </mat-card-content>
+      </mat-card>
+    </mat-tab>
+    <!-- MyRoom -->
+    <mat-tab label="My Room">
+      <mat-card *ngFor="let device of typesOfdevices| filterByName: '_room'">
         <mat-card-title>{{device.device_name}}</mat-card-title>
         <mat-card-content>
           <mat-list>
@@ -54,6 +69,7 @@
             <mat-list-item><strong>IP</strong>&nbsp;{{device.ip}}</mat-list-item>
             <mat-list-item><strong>ModuleType:</strong>&nbsp;{{device.module_type}}</mat-list-item>
             <mat-list-item><strong>MAC-Adresse:</strong>&nbsp;{{device.mac}}</mat-list-item>
+            <mat-list-item><strong>Room:</strong>&nbsp;{{device.name}}</mat-list-item>
             <div *ngIf="getRole() === 'admin'">
               <mat-list-item><strong>Position:</strong>&nbsp;{{device.name}}</mat-list-item>
               <mat-list-item><strong>User:</strong>&nbsp;{{device.username}}</mat-list-item>
