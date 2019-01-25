@@ -1,6 +1,32 @@
+<div class="container">
+<mat-card id="homecard">
 <div id="container">
-<p>Welcome {{username}}</p>
-<p>Role: {{role}}</p>
+<mat-card-title>USER</mat-card-title>
+<mat-divider></mat-divider>
+<br>
+<mat-icon>account_box</mat-icon>
 <p>UserID: {{userid}}</p>
+<p>Logged in as: {{ username | uppercase }}</p>
+<p>Role: {{ role | uppercase }}</p>
 </div>
-
+</mat-card>
+</div>
+<div class="container">
+<mat-card id="actualDate">
+    <mat-card-title style="color:white">TIME</mat-card-title>
+    <mat-divider></mat-divider>
+    <br>
+    <mat-icon>access_time</mat-icon>
+    <div id="date">{{date_now}}</div>
+    <div id="time">{{time_now}}</div>
+</mat-card>
+</div>
+<div class="container">
+<mat-card id="deviceCount" [routerLink]="['/devices']">
+    <mat-card-title style="color:white">DEVICES </mat-card-title>
+    <mat-divider></mat-divider>
+    <br>
+    <mat-icon>devices_other</mat-icon>
+   <div id="resultlength">{{resultlength}}</div> 
+</mat-card>
+</div>

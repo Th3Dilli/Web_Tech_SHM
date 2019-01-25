@@ -19,12 +19,12 @@ export class DeviceDetailComponent implements OnInit {
   }
 
   getDevice(): void {
-    let id = +this.route.snapshot.paramMap.get('id');
+    let id = +this.route.snapshot.paramMap.get('id'); //+ cast to number
     console.log(id)
     this.device_service.getDeviceById(id)
     .subscribe(res => {
       console.log(res)
-      this.device = res[0]
+      this.device = res[0];
       console.log(this.device)
     }, err => {
     

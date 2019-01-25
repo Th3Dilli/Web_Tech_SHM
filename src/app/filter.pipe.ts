@@ -7,7 +7,7 @@ export class FilterPipe implements PipeTransform {
 
   transform(devices: any, term: any): any {
     return devices.filter(device => {
-      return device.device_name.toLowerCase().includes(term.toLowerCase());
+      return device.category.toLowerCase().includes(term.toLowerCase());
     })
   }
 

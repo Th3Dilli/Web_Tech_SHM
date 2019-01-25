@@ -6,12 +6,12 @@
         <mat-card-title>{{device.device_name}}</mat-card-title>
         <mat-card-content>
           <mat-list>
-            <mat-list-item><strong>ID:</strong>&nbsp;{{device.id}}</mat-list-item>
+            <mat-list-item><strong>ID:</strong>&nbsp;{{device.device_id}}</mat-list-item>
             <mat-list-item><strong>IP</strong>&nbsp;{{device.ip}}</mat-list-item>
             <mat-list-item><strong>ModuleType:</strong>&nbsp;{{device.module_type}}</mat-list-item>
             <mat-list-item><strong>MAC-Adresse:</strong>&nbsp;{{device.mac}}</mat-list-item>
           </mat-list>
-          <button id="btn_details" mat-stroked-button routerLink="/detail/{{device.id}}">Info</button>
+          <button id="btn_details" mat-stroked-button routerLink="/detail/{{device.device_id}}">Info</button>
         </mat-card-content>
       </mat-card>
     </mat-tab>
@@ -21,7 +21,7 @@
         <mat-card-title>{{device.device_name}}</mat-card-title>
         <mat-card-content>
           <mat-list>
-            <mat-list-item><strong>ID:</strong>&nbsp;{{device.id}}</mat-list-item>
+            <mat-list-item><strong>ID:</strong>&nbsp;{{device.device_id}}</mat-list-item>
             <mat-list-item><strong>IP</strong>&nbsp;{{device.ip}}</mat-list-item>
             <mat-list-item><strong>ModuleType:</strong>&nbsp;{{device.module_type}}</mat-list-item>
             <mat-list-item><strong>MAC-Adresse:</strong>&nbsp;{{device.mac}}</mat-list-item>
@@ -35,12 +35,12 @@
         <mat-card-title>{{device.device_name}}</mat-card-title>
         <mat-card-content>
           <mat-list>
-            <mat-list-item><strong>ID:</strong>&nbsp;{{device.id}}</mat-list-item>
+            <mat-list-item><strong>ID:</strong>&nbsp;{{device.device_id}}</mat-list-item>
             <mat-list-item><strong>IP</strong>&nbsp;{{device.ip}}</mat-list-item>
             <mat-list-item><strong>ModuleType:</strong>&nbsp;{{device.module_type}}</mat-list-item>
             <mat-list-item><strong>MAC-Adresse:</strong>&nbsp;{{device.mac}}</mat-list-item>
           </mat-list>
-          <button id="btn_details" mat-stroked-button routerLink="/detail/{{device.id}}">Info</button>
+          <button id="btn_details" mat-stroked-button routerLink="/detail/{{device.device_id}}">Info</button>
         </mat-card-content>
       </mat-card>
     </mat-tab>
@@ -50,16 +50,16 @@
         <mat-card-title>{{device.device_name}}</mat-card-title>
         <mat-card-content>
           <mat-list>
-            <mat-list-item><strong>ID:</strong>&nbsp;{{device.id}}</mat-list-item>
+            <mat-list-item><strong>ID:</strong>&nbsp;{{device.device_id}}</mat-list-item>
             <mat-list-item><strong>IP</strong>&nbsp;{{device.ip}}</mat-list-item>
             <mat-list-item><strong>ModuleType:</strong>&nbsp;{{device.module_type}}</mat-list-item>
             <mat-list-item><strong>MAC-Adresse:</strong>&nbsp;{{device.mac}}</mat-list-item>
             <div *ngIf="getRole() === 'admin'">
-              <mat-list-item><strong>Position:</strong>&nbsp;{{device.room_name}}</mat-list-item>
+              <mat-list-item><strong>Position:</strong>&nbsp;{{device.name}}</mat-list-item>
               <mat-list-item><strong>User:</strong>&nbsp;{{device.username}}</mat-list-item>
             </div>
           </mat-list>
-          <button id="btn_details" mat-stroked-button routerLink="/detail/{{device.id}}">Info</button>
+          <button id="btn_details" mat-stroked-button routerLink="/detail/{{device.device_id}}">Info</button>
         </mat-card-content>
       </mat-card>
     </mat-tab>

@@ -2,3 +2,67 @@
 {
     margin-left: 1em;
 }
+
+mat-card{
+    float: left;
+    margin: 2em;
+    max-width: 400px;
+    min-width: 320px;
+    height: 150px;
+}
+
+mat-icon{
+    position:absolute;
+    right:111px;
+    font-size: 120px;
+    opacity: 0.1;
+    z-index: 0;
+}
+
+mat-card-title{
+    font-size: 18px;
+    margin: 0px;
+    margin-bottom: 10px;
+    text-align: left;
+    
+}
+
+p{
+    font-size: 14px;
+}
+
+#actualDate{
+    text-align: center;
+    background-image: linear-gradient(to top left, rgb(49, 43, 43) , darkgrey);
+}
+
+#time{
+    position: relative;
+    margin-top: 0.3em;
+    font-size: 45px;
+    color: white;
+    z-index: 1;
+}
+
+#date{
+    color: white;
+    font-size: 20px;
+}
+
+#deviceCount{
+    text-align: center;
+    background-color: crimson;
+    background-image: linear-gradient(to top left, rgb(92, 26, 26) , crimson);
+
+}
+
+#resultlength{
+    color: white;
+    font-size: 45px;
+    margin-top: 0.5em;
+}
+
+.container:hover{
+    position: relative;
+    bottom: 12px;
+}

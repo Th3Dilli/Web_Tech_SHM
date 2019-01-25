@@ -10,7 +10,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
-
+// Importing all necessary Material Modules API Reference - https://material.angular.io
 @NgModule({
   imports: [MatToolbarModule, MatButtonModule, MatCardModule, MatSidenavModule, 
     MatSlideToggleModule, MatTableModule, MatExpansionModule, MatProgressSpinnerModule,

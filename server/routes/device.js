@@ -8,13 +8,15 @@ const jwt = require('jsonwebtoken');
 
 router.get('/all', checkAuth, (req, res) => {
 
-  let query = `SELECT d.id, d.module_type, d.device_name, d.ip, d.mac, r.room_name
-	FROM users u, device d, rooms r, room_devices rd 
-	WHERE u.id = ? and r.id = u.room_id and rd.room_id = r.id and rd.device_id = d.id;
+  let query = `SELECT d.category, device_id, d.device_name, d.ip, d.mac,
+   d.module_type, r.name 
+   FROM users u, users_has_rooms uhr, rooms r, rooms_has_device rhd, device d  
+   WHERE u.users_id = ? and uhr.users_users_id = u.users_id and r.rooms_id = uhr.rooms_rooms_id 
+   and rhd.rooms_rooms_id = uhr.rooms_rooms_id and d.device_id = rhd.device_device_id;
 	`;
-  let queryAll = `SELECT d.id, d.module_type, d.device_name, d.ip, d.mac, r.room_name, u.username 
-	FROM users u, device d, rooms r, room_devices rd 
-	WHERE d.id = rd.device_id and rd.room_id = r.id and u.room_id = r.id;
+  let queryAll = `SELECT d.category, device_id, d.device_name, d.ip, d.mac, d.module_type, r.name, u.users_id, u.username FROM users u, users_has_rooms uhr, rooms r, rooms_has_device rhd, device d  
+  WHERE uhr.users_users_id = u.users_id and r.rooms_id = uhr.rooms_rooms_id 
+  and rhd.rooms_rooms_id = uhr.rooms_rooms_id and d.device_id = rhd.device_device_id;
 	`;
   let token = jwt.decode(req.headers.authorization.split(" ")[1]);
   if (token.role === "admin") {
@@ -43,7 +45,7 @@ router.get('/all', checkAuth, (req, res) => {
 router.get('/detail/:id', checkAuth, (req, res) => {
 
   let id = req.params.id;
-  let query = "SELECT * FROM device where id=?";
+  let query = "SELECT * FROM device where device_id = ?";
 
   _db.query(query, [id], (error, results) => {
     if (error) {
@@ -55,7 +57,6 @@ router.get('/detail/:id', checkAuth, (req, res) => {
         message: "Device not found"
       });
     } else {
-      results[0].module_type = modulesArray[results[0].module_type - 1];
       res.status(200).json(results);
     }
   });

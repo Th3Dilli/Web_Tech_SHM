@@ -15,12 +15,14 @@ export class AuthService {
   // checks if user is logged in
   private authUser: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private _loginUrl = "http://localhost:3000/login"
+  private refreshLogin = "http://localhost:3000/login/refresh"
 
   constructor(private http: HttpClient, private router: Router, public jwtHelper: JwtHelperService, public snackBar: MatSnackBar) { }
 
   // navigation will be displayed on true
   get userLoggedIn() {
     return this.authUser.asObservable();
+    
   }
 
   loginUser(user: Object): Observable<boolean> {
@@ -28,6 +30,7 @@ export class AuthService {
     return this.http.post<User>(this._loginUrl, user)
       .pipe(
         map(result => {
+          console.log("test")
           sessionStorage.setItem("token", result.token);
           return true;
         }),
@@ -70,6 +73,10 @@ export class AuthService {
 
   getToken() {
     return (sessionStorage.getItem('token'));
+  }
+
+  refreshToken(){
+    return this.http.get<any>(this.refreshLogin)
   }
 
 
