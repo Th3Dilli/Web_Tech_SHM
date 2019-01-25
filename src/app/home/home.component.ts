@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
     this.getDeviceLength();
     setInterval(() => {
       this.getTime();
-    }, 1000);
+    }, 120);
   }
 
   getTime() {
