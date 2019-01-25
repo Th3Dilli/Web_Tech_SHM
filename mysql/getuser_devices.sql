@@ -1,0 +1,2 @@
+use `smarthome`;
+SELECT * From `users` u,`users_has_rooms` uhr,`rooms` r,`rooms_has_device` rhd, `device` d  where u.users_id = 3 and uhr.users_users_id = u.users_id and r.rooms_id = uhr.rooms_rooms_id and rhd.rooms_rooms_id = uhr.rooms_rooms_id and d.device_id = rhd.device_device_id;
