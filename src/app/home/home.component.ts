@@ -9,38 +9,40 @@ import { DeviceService } from '../services/device.service';
 })
 export class HomeComponent implements OnInit {
 
-  username:String;
-  userid : number;
-  role :String;
+  username: String;
+  email: String;
+  userid: number;
+  role: String;
   date_now: String;
   time_now: String;
   resultlength: Number;
   constructor(public jwtHelper: JwtHelperService, private device_service: DeviceService) { }
 
   ngOnInit() {
-    let token = sessionStorage.getItem("token");
-    let payload = this.jwtHelper.decodeToken(token);
+    const token = sessionStorage.getItem('token');
+    const payload = this.jwtHelper.decodeToken(token);
     this.username = payload.user;
+    this.email = payload.email;
     this.userid = payload.userid;
     this.role = payload.role;
     this.getDeviceLength();
-    setInterval( () =>{
+    setInterval(() => {
       this.getTime();
-    },1000);
+    }, 1000);
   }
 
-  getTime(){                     
-   this.time_now = new Date().toLocaleTimeString()
-   this.date_now = new Date().toLocaleDateString()
+  getTime() {
+    this.time_now = new Date().toLocaleTimeString();
+    this.date_now = new Date().toLocaleDateString();
   }
 
-  getDeviceLength(){
+  getDeviceLength() {
     this.device_service.getAllDevices()
-    .subscribe(
-      res => this.resultlength = res.length
-    );
+      .subscribe(
+        res => this.resultlength = res.length
+      );
   }
 
 
-  
+
 }

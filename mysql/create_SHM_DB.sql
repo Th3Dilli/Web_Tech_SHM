@@ -21,11 +21,13 @@ CREATE TABLE IF NOT EXISTS `smarthome`.`users` (
   `users_id` INT NOT NULL AUTO_INCREMENT,
   `role` VARCHAR(45) NULL,
   `username` VARCHAR(45) NULL,
+  `email` VARCHAR(255) NULL,
   `password` VARCHAR(45) NULL,
   `last_login` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`users_id`),
-  UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE)
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE,
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
@@ -109,10 +111,10 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `smarthome`;
-INSERT INTO `smarthome`.`users` (`users_id`, `role`, `username`, `password`, `last_login`, `created`) VALUES (DEFAULT, 'admin', 'admin', '1234', NULL, NULL);
-INSERT INTO `smarthome`.`users` (`users_id`, `role`, `username`, `password`, `last_login`, `created`) VALUES (DEFAULT, 'user', 'markus', '1234', NULL, NULL);
-INSERT INTO `smarthome`.`users` (`users_id`, `role`, `username`, `password`, `last_login`, `created`) VALUES (DEFAULT, 'user', 'dilli', '1234', NULL, NULL);
-INSERT INTO `smarthome`.`users` (`users_id`, `role`, `username`, `password`, `last_login`, `created`) VALUES (DEFAULT, 'user', 'phillip', '1234', NULL, NULL);
+INSERT INTO `smarthome`.`users` (`users_id`, `role`, `username`, `email`, `password`, `last_login`, `created`) VALUES (DEFAULT, 'admin', 'admin', 'admin@mail.com', '1234', NULL, NULL);
+INSERT INTO `smarthome`.`users` (`users_id`, `role`, `username`, `email`, `password`, `last_login`, `created`) VALUES (DEFAULT, 'user', 'markus', 'markus@mail.com', '1234', NULL, NULL);
+INSERT INTO `smarthome`.`users` (`users_id`, `role`, `username`, `email`, `password`, `last_login`, `created`) VALUES (DEFAULT, 'user', 'dilli', 'dilli.1822@gmx.at', '1234', NULL, NULL);
+INSERT INTO `smarthome`.`users` (`users_id`, `role`, `username`, `email`, `password`, `last_login`, `created`) VALUES (DEFAULT, 'user', 'phillip', 'phillip@mail.com', '1234', NULL, NULL);
 
 COMMIT;
 

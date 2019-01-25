@@ -1,0 +1,19 @@
+<mat-card>
+  <mat-toolbar style="background-color:white">
+    <mat-toolbar-row>
+      <mat-card-title>Profile</mat-card-title>
+      <span class="example-spacer"></span>
+      <button mat-stroked-button id="edit">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-divider></mat-divider>
+  <br>
+  <mat-icon>account_box</mat-icon>
+  <p>Username: {{ username }}</p>
+  <p>Email: {{ email }}</p>
+  <p *ngIf="role === 'admin'">Role: {{ role | uppercase }}</p>
+
+</mat-card>

@@ -23,6 +23,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './jwt.inceptor';
 import { ErrorInterceptor } from './error.inceptor';
 import { FilterPipe } from './filter.pipe';
+import { UserComponent } from './user/user.component';
 
 export function tokenGetter() {
   return sessionStorage.getItem('token');
@@ -36,7 +37,8 @@ export function tokenGetter() {
     LoginComponent,
     HomeComponent,
     DeviceDetailComponent,
-    FilterPipe
+    FilterPipe,
+    UserComponent
   ],
   imports: [
     BrowserModule,

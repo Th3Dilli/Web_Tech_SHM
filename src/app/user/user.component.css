@@ -1,0 +1,14 @@
+mat-card {
+    max-width: 380px;
+    min-width: 300px;
+    width: 30%;
+    margin: 1em;
+}
+#edit 
+{
+     float: right;
+     
+}
+.example-spacer {
+    flex: 1 1 auto;
+  }
