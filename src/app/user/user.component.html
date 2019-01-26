@@ -19,12 +19,18 @@
       <mat-form-field appearance="outline" autocomplete="off">
         <mat-label>Username</mat-label>
         <input matInput formControlName="username" value="{{form.value.username}}" >
+        <mat-error *ngIf="isFieldInvalid('username')">
+          Please enter a valid Username!
+        </mat-error>
       </mat-form-field><br>
       <mat-form-field appearance="outline" autocomplete="off">
           <mat-label>Email</mat-label>
           <input matInput formControlName="email" value="{{form.value.email}}" >
+          <mat-error *ngIf="isFieldInvalid('email')">
+          Please enter a valid Email! <br>
+        </mat-error>
       </mat-form-field>
-      <p></p>
+      <p></p><br>
       <button type="submit" id="accept" mat-stroked-button><strong>ACCEPT</strong></button>
       <button type="button" id="cancel" (click)="showEdit=false" mat-stroked-button><strong>CANCEL</strong></button>
       </form>
