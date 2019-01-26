@@ -1,0 +1,8 @@
+<mat-card *ngIf="showInfo">
+    <mat-card-title>{{device.name}}</mat-card-title>
+    <mat-card-content><br>
+        <mat-list><b>ID:</b> {{device.device_id}}</mat-list><br>
+        <mat-list><b>ModuleType:</b> {{device.module_type}}</mat-list><br>
+        <mat-list><b>IP:</b> {{device.ip}}</mat-list><br>
+    </mat-card-content>
+</mat-card>

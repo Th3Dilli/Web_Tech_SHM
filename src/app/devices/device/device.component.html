@@ -6,7 +6,8 @@
       <button mat-raised-button [ngClass]="{ 'statusBtnOn': isOn, 'statusBtnOff': !isOn  }" (click)="buttonToggle()">
         ON
       </button>
+      <button mat-stroked-button [ngClass]="{ 'infoBtnOn': showInfo, 'infoBtnOff': !showInfo  }" (click)="infoToggle()">Info</button>
     </mat-list-item>
   </mat-list>
-  <button id="btn_details" mat-stroked-button routerLink="/detail/{{device.device_id}}">Info</button>
 </mat-card-content>
+<app-device-detail [device]="device" [showInfo]="showInfo"></app-device-detail>

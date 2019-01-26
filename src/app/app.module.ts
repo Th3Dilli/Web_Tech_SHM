@@ -18,7 +18,7 @@ import { DevicesComponent } from './devices/devices.component';
 import { HomeComponent } from './home/home.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { DeviceService } from './services/device.service';
-import { DeviceDetailComponent } from './device-detail/device-detail.component';
+import { DeviceDetailComponent } from './devices/device-detail/device-detail.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './jwt.inceptor';
 import { ErrorInterceptor } from './error.inceptor';

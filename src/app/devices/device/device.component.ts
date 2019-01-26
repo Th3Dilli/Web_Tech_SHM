@@ -9,6 +9,8 @@ import { DevicesComponent } from '../devices.component';
 export class DeviceComponent implements OnInit {
 
   @Input() device: DevicesComponent;
+  isOn: Boolean;
+  showInfo: Boolean;
 
   constructor() { }
 
@@ -17,5 +19,8 @@ export class DeviceComponent implements OnInit {
   buttonToggle() {
     this.isOn = !this.isOn;
     console.log(this.isOn);
+  }
+  infoToggle() {
+    this.showInfo = !this.showInfo;
   }
 }

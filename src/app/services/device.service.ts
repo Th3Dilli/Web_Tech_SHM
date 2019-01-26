@@ -20,12 +20,6 @@ export class DeviceService {
 
   }
 
-  getDeviceById(id: number): Observable<Device> {
-    const url = this._deviceRouteGetById + id;
-    console.log(url);
-    return this.http.get<Device>(url);
-  }
-
 }
 
 

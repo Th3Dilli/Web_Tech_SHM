@@ -2,11 +2,11 @@
   <!-- Light -->
   <mat-tab-group mat-align-tabs="start">
     <mat-tab *ngFor="let tab of rooms" label="{{tab}}">
-        <div *ngIf="devices" class="maincontent">
-            <mat-card *ngFor="let device of devices | filterByName: tab">
-              <app-device [device]="device"></app-device>
-            </mat-card>
-        </div>
+      <div *ngIf="devices" class="maincontent">
+        <mat-card *ngFor="let device of devices | filterByName: tab">
+          <app-device [device]="device"></app-device>
+        </mat-card>
+      </div>
     </mat-tab>
   </mat-tab-group>
 </div>
