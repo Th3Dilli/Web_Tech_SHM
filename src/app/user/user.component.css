@@ -1,14 +1,54 @@
 mat-card {
-    max-width: 380px;
-    min-width: 300px;
-    width: 30%;
-    margin: 1em;
+  max-width: 380px;
+  min-width: 300px;
+  width: 30%;
+  margin: 1em;
+  float: left;
 }
-#edit 
-{
-     float: right;
-     
+
+#edit {
+  float: right;
+
 }
-.example-spacer {
-    flex: 1 1 auto;
+mat-divider{
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+
+}
+
+#accept{
+    position: absolute;
+    bottom: 0px;
+    right: 6em;
+    color: green;
+
+}
+#cancel{
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    color: red;
+}
+
+/* use prefix -webkit- for Safari */
+#editcard {
+    animation-name: editcard;
+    animation-duration: 1s;
+    -webkit-animation-name: editcard;
+    -webkit-animation-duration: 1s;
+  }
+@keyframes editcard {
+  from {
+    transform: rotateX(180deg)
+  }
+  to {
+    transform: rotateX(0deg)  }
+}
+/* use prefix -webkit- for Safari */
+@-webkit-keyframes editcard {
+    from {
+    -webkit-transform: rotateX(180deg)
+    }
+    to {
+    -webkit-transform: rotateX(0deg)  }
   }

@@ -1,19 +1,31 @@
 <mat-card>
-  <mat-toolbar style="background-color:white">
-    <mat-toolbar-row>
-      <mat-card-title>Profile</mat-card-title>
-      <span class="example-spacer"></span>
-      <button mat-stroked-button id="edit">
+      <mat-card-title>Profile 
+        <button mat-stroked-button (click)="showEdit=true" id="edit">
         <mat-icon>edit</mat-icon>
-      </button>
-    </mat-toolbar-row>
-  </mat-toolbar>
-
-  <mat-divider></mat-divider>
-  <br>
+        </button>
+      </mat-card-title>
+  <mat-divider></mat-divider><br>
   <mat-icon>account_box</mat-icon>
   <p>Username: {{ username }}</p>
   <p>Email: {{ email }}</p>
   <p *ngIf="role === 'admin'">Role: {{ role | uppercase }}</p>
-
 </mat-card>
+
+<div id="editcard" *ngIf="showEdit">
+  <mat-card>
+      <mat-card-title>Edit</mat-card-title>
+      <mat-divider></mat-divider><br>
+      <form [formGroup]="form" (ngSubmit)="showEdit=false; changeUser()" autocomplete="off">
+      <mat-form-field appearance="outline" autocomplete="off">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username" value="{{username}}" >
+      </mat-form-field><br>
+      <mat-form-field appearance="outline" autocomplete="off">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" value="{{email}}" >
+      </mat-form-field>
+      <button type="submit" id="accept" mat-button><strong>ACCEPT</strong></button>
+      <button type="button" id="cancel" (click)="showEdit=false" mat-button><strong>CANCEL</strong></button>
+      </form>
+  </mat-card>
+</div>
