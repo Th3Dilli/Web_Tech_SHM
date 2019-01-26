@@ -10,9 +10,7 @@ export class DeviceDetailComponent implements OnInit {
 
   @Input() showInfo: DeviceComponent;
   @Input() device: DeviceComponent;
-
-
-
+  
   constructor() { }
 
   ngOnInit() {

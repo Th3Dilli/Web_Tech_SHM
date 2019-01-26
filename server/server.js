@@ -24,10 +24,12 @@ app.use(function (req, res, next) {
 let loginRoutes = require('./routes/login');
 let deviceRoutes = require('./routes/device');
 let userRoutes = require('./routes/updateUser');
+let toggleDevice = require('./routes/toggleDevice');
 
 app.use('/login', loginRoutes);
 app.use('/devices', deviceRoutes);
 app.use('/user', userRoutes);
+app.use('/toggleDevice', toggleDevice);
 
 db.initDb.then(() => {
     app.listen(PORT, function () {
