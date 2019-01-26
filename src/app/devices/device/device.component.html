@@ -1,0 +1,12 @@
+<mat-card-title>{{device.device_name}}</mat-card-title>
+<mat-card-content>
+  <mat-list>
+    <mat-list-item><strong>ModuleType:</strong>&nbsp;{{device.module_type}}</mat-list-item>
+    <mat-list-item>
+      <button mat-raised-button [ngClass]="{ 'statusBtnOn': isOn, 'statusBtnOff': !isOn  }" (click)="buttonToggle()">
+        ON
+      </button>
+    </mat-list-item>
+  </mat-list>
+  <button id="btn_details" mat-stroked-button routerLink="/detail/{{device.device_id}}">Info</button>
+</mat-card-content>

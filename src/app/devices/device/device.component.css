@@ -1,0 +1,46 @@
+mat-card-title {
+    background: crimson;
+    background-image: url("https://static.wixstatic.com/media/7ad1f8_ae79566e9dc24f16987c7fe261edc952~mv2.png/v1/fill/w_1400,h_980,al_c,q_90/file.jpg");
+    background-size: auto;
+    padding: 20px 20px;
+  }
+  
+  mat-card-content {
+    padding: 1em;
+  }
+  
+  mat-tab-group {
+    margin: 1em;
+  }
+  
+  #btn_details {
+    margin-top: 2em;
+    float: right;
+  }
+  
+  .mat-list .mat-list-item {
+    height: 2em;
+    /* default is 72px */
+  }
+  
+  #progressData{
+      height: 100px;
+      width: 100px;
+      position: absolute;
+      left: 50%;
+      margin-left: -50px;
+      top: 100%;
+      margin-top: 150px;
+      size: 1500px;
+  }
+  
+  
+.statusBtnOn
+{
+  background-color:  green;
+}
+
+.statusBtnOff
+{
+  background-color:  red;
+}

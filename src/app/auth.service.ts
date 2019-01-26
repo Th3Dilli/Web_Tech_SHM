@@ -30,7 +30,7 @@ export class AuthService {
     return this.http.post<User>(this._loginUrl, user)
       .pipe(
         map(result => {
-          console.log('test')
+          //console.log('test');
           sessionStorage.setItem('token', result.token);
           return true;
         }),

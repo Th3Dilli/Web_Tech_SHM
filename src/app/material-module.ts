@@ -12,17 +12,17 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 // Importing all necessary Material Modules API Reference - https://material.angular.io
 @NgModule({
-  imports: [MatToolbarModule, MatButtonModule, MatCardModule, MatSidenavModule, 
+  imports: [MatToolbarModule, MatButtonModule, MatCardModule, MatSidenavModule,
     MatSlideToggleModule, MatTableModule, MatExpansionModule, MatProgressSpinnerModule,
-    MatIconModule, MatListModule, MatInputModule, MatFormFieldModule, 
+    MatIconModule, MatListModule, MatInputModule, MatFormFieldModule,
     MatSnackBarModule, MatTabsModule, MatGridListModule
   ],
 
-  exports: [MatToolbarModule, MatButtonModule, MatCardModule, MatSidenavModule, 
+  exports: [MatToolbarModule, MatButtonModule, MatCardModule, MatSidenavModule,
     MatSlideToggleModule, MatTableModule, MatExpansionModule, MatProgressSpinnerModule,
      MatIconModule, MatListModule, MatInputModule, MatFormFieldModule, MatSnackBarModule,
       MatTabsModule, MatGridListModule
   ],
 })
- 
+
 export class Material { }

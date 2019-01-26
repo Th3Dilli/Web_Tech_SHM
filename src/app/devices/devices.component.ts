@@ -13,18 +13,20 @@ import { Observable } from 'rxjs';
 
 export class DevicesComponent implements OnInit {
 
-  typesOfdevices$: Observable<Device[]>
+  devices$: Observable<Device[]>;
+  rooms: Set<String> = new Set;
+  isOn: Boolean;
 
   constructor(private device_service: DeviceService, private _router: Router, public jwtHelper: JwtHelperService) { }
 
   ngOnInit() {
-    this.typesOfdevices$ = this.device_service.getAllDevices();
-  }
-
-  getRole() {
-    let token = sessionStorage.getItem("token");
-    let payload = this.jwtHelper.decodeToken(token);
-    return payload.role
+    this.devices$ = this.device_service.getAllDevices();
+    this.devices$.subscribe((res) => {
+      res.forEach(device => {
+        this.rooms.add(device.name);
+      });
+      // console.log(this.rooms);
+    });
   }
 
 }

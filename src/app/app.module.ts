@@ -24,6 +24,7 @@ import { JwtInterceptor } from './jwt.inceptor';
 import { ErrorInterceptor } from './error.inceptor';
 import { FilterPipe } from './filter.pipe';
 import { UserComponent } from './user/user.component';
+import { DeviceComponent } from './devices/device/device.component';
 
 export function tokenGetter() {
   return sessionStorage.getItem('token');
@@ -38,7 +39,8 @@ export function tokenGetter() {
     HomeComponent,
     DeviceDetailComponent,
     FilterPipe,
-    UserComponent
+    UserComponent,
+    DeviceComponent
   ],
   imports: [
     BrowserModule,
