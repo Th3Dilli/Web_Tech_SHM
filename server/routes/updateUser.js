@@ -17,7 +17,7 @@ router.patch('/userEdit', checkAuth, (req, res) => {
     let token = jwt.decode(req.headers.authorization.split(" ")[1]);
 
     const sql = 'UPDATE `users` SET email=?, username=? WHERE users_id = ?';
-
+    console.log(token);
     _db.query(sql, [emailN, usernameN, token.userid], (error, results) => {
           if (error) {
               if(error.sqlMessage.includes("Duplicate entry"))
@@ -37,15 +37,15 @@ router.patch('/userEdit', checkAuth, (req, res) => {
               message: "User not found"
             });
           } else {
-            let newToken = jwt.sign({
+             let newToken = jwt.sign({
                 user: usernameN,
-                userid: userid,
+                userid: token.userid,
                 email: emailN,
-                role: role
+                role: token.role
               }, privateKEY, {
                 expiresIn: "1h",
                 algorithm: "RS256"
-              });
+              }); 
         
               res.status(200).json({
                 token: newToken
