@@ -9,7 +9,7 @@ const path = require('path');
 
 const privateKEY = fs.readFileSync(path.join(__dirname, 'private.key'), 'utf8');
 
-router.get('/toggleDevice', checkAuth, (req, res) => {
+router.patch('/toggle', checkAuth, (req, res) => {
 
     res.status(200).json({
         message: "got em"

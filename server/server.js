@@ -29,7 +29,7 @@ let toggleDevice = require('./routes/toggleDevice');
 app.use('/login', loginRoutes);
 app.use('/devices', deviceRoutes);
 app.use('/user', userRoutes);
-app.use('/toggleDevice', toggleDevice);
+app.use('/device', toggleDevice);
 
 db.initDb.then(() => {
     app.listen(PORT, function () {

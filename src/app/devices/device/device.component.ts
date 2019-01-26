@@ -22,10 +22,12 @@ export class DeviceComponent implements OnInit {
   buttonToggle() {
     this.isOn = !this.isOn;
     console.log();
-    const params = new HttpParams().set('body', JSON.stringify({powerState: this.isOn, ip: this.device.ip}));
-    const url = 'http://localhost:3000/toggleDevice';
-    this.http.get(url, {params}).subscribe();
-    console.log(params);
+    const url = 'http://localhost:3000/device/toggle';
+    this.http.patch<any>(url, {powerState: this.isOn, ip: this.device.ip}).subscribe(response => {
+      console.log(response);
+    }, error => {
+      console.log(error);
+    });
   }
 
   infoToggle() {
