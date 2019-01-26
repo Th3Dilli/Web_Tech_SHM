@@ -18,14 +18,15 @@
       <form [formGroup]="form" (ngSubmit)="showEdit=false; changeUser()" autocomplete="off">
       <mat-form-field appearance="outline" autocomplete="off">
         <mat-label>Username</mat-label>
-        <input matInput formControlName="username" value="{{username}}" >
+        <input matInput formControlName="username" value="{{form.value.username}}" >
       </mat-form-field><br>
       <mat-form-field appearance="outline" autocomplete="off">
           <mat-label>Email</mat-label>
-          <input matInput formControlName="email" value="{{email}}" >
+          <input matInput formControlName="email" value="{{form.value.email}}" >
       </mat-form-field>
-      <button type="submit" id="accept" mat-button><strong>ACCEPT</strong></button>
-      <button type="button" id="cancel" (click)="showEdit=false" mat-button><strong>CANCEL</strong></button>
+      <p></p>
+      <button type="submit" id="accept" mat-stroked-button><strong>ACCEPT</strong></button>
+      <button type="button" id="cancel" (click)="showEdit=false" mat-stroked-button><strong>CANCEL</strong></button>
       </form>
   </mat-card>
 </div>

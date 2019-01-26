@@ -15,6 +15,7 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     res.header("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src'self'");
+    res.header("Access-Control-Allow-Methods", "POST, PATCH, GET, OPTIONS")
     next();
 });
 
@@ -22,9 +23,11 @@ app.use(function (req, res, next) {
 // Routes
 let loginRoutes = require('./routes/login');
 let deviceRoutes = require('./routes/device');
+let userRoutes = require('./routes/updateUser');
 
 app.use('/login', loginRoutes);
 app.use('/devices', deviceRoutes);
+app.use('/user', userRoutes);
 
 db.initDb.then(() => {
     app.listen(PORT, function () {
