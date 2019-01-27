@@ -18,17 +18,17 @@ export class DevicesComponent implements OnInit {
   form: FormGroup;
   devices$: Observable<Device[]>;
   rooms: Set<String> = new Set;
-  module_types: Array<String> = ['SONOFF_BASIC', 'SONOFF_RF', 'SONOFF_LED', 'SONOFF_4CH'];
+  module_types: Array<String> = ['SONOFF_BASIC', 'SONOFF_TOUCH', 'SONOFF_4CH'];
   isOn: Boolean;
   openAddBox: Boolean = false;
 
   constructor(
-                private device_service: DeviceService,
-                private _router: Router,
-                public jwtHelper: JwtHelperService,
-                private fb: FormBuilder,
-                private http: HttpClient
-              ) { }
+    private device_service: DeviceService,
+    private _router: Router,
+    public jwtHelper: JwtHelperService,
+    private fb: FormBuilder,
+    private http: HttpClient
+  ) { }
 
   ngOnInit() {
     this.devices$ = this.device_service.getAllDevices();
@@ -39,15 +39,12 @@ export class DevicesComponent implements OnInit {
       // console.log(this.rooms);
     });
 
-
     this.form = this.fb.group({
       device_name: ['', []],
       room_name: ['', []],
       module_type: ['', []],
       device_ip: ['', []],
       device_mac: ['', []],
-
-
     });
   }
 
@@ -69,17 +66,3 @@ export class DevicesComponent implements OnInit {
   }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

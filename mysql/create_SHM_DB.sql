@@ -40,7 +40,6 @@ CREATE TABLE IF NOT EXISTS `smarthome`.`device` (
   `device_name` VARCHAR(45) NULL,
   `ip` VARCHAR(15) NULL,
   `mac` VARCHAR(17) NULL,
-  `category` VARCHAR(45) NULL,
   PRIMARY KEY (`device_id`),
   UNIQUE INDEX `mac_UNIQUE` (`mac` ASC) VISIBLE,
   UNIQUE INDEX `ip_UNIQUE` (`ip` ASC) VISIBLE)
@@ -112,9 +111,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 START TRANSACTION;
 USE `smarthome`;
 INSERT INTO `smarthome`.`users` (`users_id`, `role`, `username`, `email`, `password`, `last_login`, `created`) VALUES (DEFAULT, 'admin', 'admin', 'admin@mail.com', '1234', NULL, NULL);
-INSERT INTO `smarthome`.`users` (`users_id`, `role`, `username`, `email`, `password`, `last_login`, `created`) VALUES (DEFAULT, 'user', 'markus', 'markus@mail.com', '1234', NULL, NULL);
-INSERT INTO `smarthome`.`users` (`users_id`, `role`, `username`, `email`, `password`, `last_login`, `created`) VALUES (DEFAULT, 'user', 'dilli', 'dilli.1822@gmx.at', '1234', NULL, NULL);
-INSERT INTO `smarthome`.`users` (`users_id`, `role`, `username`, `email`, `password`, `last_login`, `created`) VALUES (DEFAULT, 'user', 'phillip', 'phillip@mail.com', '1234', NULL, NULL);
+INSERT INTO `smarthome`.`users` (`users_id`, `role`, `username`, `email`, `password`, `last_login`, `created`) VALUES (DEFAULT, 'user', 'user', 'testuser@mail.com', '1234', NULL, NULL);
 
 COMMIT;
 
@@ -124,18 +121,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `smarthome`;
-INSERT INTO `smarthome`.`device` (`device_id`, `module_type`, `device_name`, `ip`, `mac`, `category`) VALUES (DEFAULT, 'SONOFF_BASIC', 'Light1', '10.0.0.101', 'mac1', 'light');
-INSERT INTO `smarthome`.`device` (`device_id`, `module_type`, `device_name`, `ip`, `mac`, `category`) VALUES (DEFAULT, 'SONOFF_BASIC', 'Light2', '10.0.0.102', 'mac2', 'light');
-INSERT INTO `smarthome`.`device` (`device_id`, `module_type`, `device_name`, `ip`, `mac`, `category`) VALUES (DEFAULT, 'SONOFF_BASIC', 'Light3', '10.0.0.103', 'mac3', 'light');
-INSERT INTO `smarthome`.`device` (`device_id`, `module_type`, `device_name`, `ip`, `mac`, `category`) VALUES (DEFAULT, 'SONOFF_BASIC', 'Light4', '10.0.0.104', 'mac4', 'light');
-INSERT INTO `smarthome`.`device` (`device_id`, `module_type`, `device_name`, `ip`, `mac`, `category`) VALUES (DEFAULT, 'SONOFF_4CH', 'Multi1', '10.0.0.105', 'mac5', 'controller');
-INSERT INTO `smarthome`.`device` (`device_id`, `module_type`, `device_name`, `ip`, `mac`, `category`) VALUES (DEFAULT, 'SONOFF_4CH', 'Multi2', '10.0.0.106', 'mac6', 'controller');
-INSERT INTO `smarthome`.`device` (`device_id`, `module_type`, `device_name`, `ip`, `mac`, `category`) VALUES (DEFAULT, 'SONOFF_4CH', 'Multi3', '10.0.0.107', 'mac7', 'controller');
-INSERT INTO `smarthome`.`device` (`device_id`, `module_type`, `device_name`, `ip`, `mac`, `category`) VALUES (DEFAULT, 'SONOFF_4CH', 'Multi4', '10.0.0.108', 'mac8', 'controller');
-INSERT INTO `smarthome`.`device` (`device_id`, `module_type`, `device_name`, `ip`, `mac`, `category`) VALUES (DEFAULT, 'SONOFF_BASIC', 'Light5', '10.0.0.109', 'mac9', 'light');
-INSERT INTO `smarthome`.`device` (`device_id`, `module_type`, `device_name`, `ip`, `mac`, `category`) VALUES (DEFAULT, 'SONOFF_BASIC', 'Light6', '10.0.0.110', 'mac10', 'light');
-INSERT INTO `smarthome`.`device` (`device_id`, `module_type`, `device_name`, `ip`, `mac`, `category`) VALUES (DEFAULT, 'SONOFF_BASIC', 'Light7', '10.0.0.111', 'mac11', 'light');
-INSERT INTO `smarthome`.`device` (`device_id`, `module_type`, `device_name`, `ip`, `mac`, `category`) VALUES (DEFAULT, 'SONOFF_BASIC', 'Light8', '10.0.0.112', 'mac12', 'light');
+INSERT INTO `smarthome`.`device` (`device_id`, `module_type`, `device_name`, `ip`, `mac`) VALUES (DEFAULT, 'SONOFF_BASIC', 'WZ_Licht', '10.0.0.3', 'mac1');
+INSERT INTO `smarthome`.`device` (`device_id`, `module_type`, `device_name`, `ip`, `mac`) VALUES (DEFAULT, 'SONOFF_4CH', 'Flur_Lichter', '10.0.0.11', 'mac2');
+INSERT INTO `smarthome`.`device` (`device_id`, `module_type`, `device_name`, `ip`, `mac`) VALUES (DEFAULT, 'SONOFF_BASIC', 'SZ_Licht', '10.0.0.27', 'mac3');
+INSERT INTO `smarthome`.`device` (`device_id`, `module_type`, `device_name`, `ip`, `mac`) VALUES (DEFAULT, 'SONOFF_TOUCH', 'BZ_Licht', '10.0.0.12', 'mac4');
 
 COMMIT;
 
@@ -145,13 +134,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `smarthome`;
-INSERT INTO `smarthome`.`rooms` (`rooms_id`, `name`) VALUES (DEFAULT, 'kitchen');
-INSERT INTO `smarthome`.`rooms` (`rooms_id`, `name`) VALUES (DEFAULT, 'bedroom');
-INSERT INTO `smarthome`.`rooms` (`rooms_id`, `name`) VALUES (DEFAULT, 'livingroom');
-INSERT INTO `smarthome`.`rooms` (`rooms_id`, `name`) VALUES (DEFAULT, 'entrance');
-INSERT INTO `smarthome`.`rooms` (`rooms_id`, `name`) VALUES (DEFAULT, 'dilli_rooms');
-INSERT INTO `smarthome`.`rooms` (`rooms_id`, `name`) VALUES (DEFAULT, 'markus_room');
-INSERT INTO `smarthome`.`rooms` (`rooms_id`, `name`) VALUES (DEFAULT, 'phillip_room');
+INSERT INTO `smarthome`.`rooms` (`rooms_id`, `name`) VALUES (DEFAULT, 'Flur');
+INSERT INTO `smarthome`.`rooms` (`rooms_id`, `name`) VALUES (DEFAULT, 'Schlafzimmer');
+INSERT INTO `smarthome`.`rooms` (`rooms_id`, `name`) VALUES (DEFAULT, 'Wohnzimmer');
+INSERT INTO `smarthome`.`rooms` (`rooms_id`, `name`) VALUES (DEFAULT, 'Badezimmer');
 
 COMMIT;
 
@@ -161,18 +147,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `smarthome`;
-INSERT INTO `smarthome`.`users_has_rooms` (`users_users_id`, `rooms_rooms_id`) VALUES (2, 6);
 INSERT INTO `smarthome`.`users_has_rooms` (`users_users_id`, `rooms_rooms_id`) VALUES (2, 1);
+INSERT INTO `smarthome`.`users_has_rooms` (`users_users_id`, `rooms_rooms_id`) VALUES (2, 2);
 INSERT INTO `smarthome`.`users_has_rooms` (`users_users_id`, `rooms_rooms_id`) VALUES (2, 3);
 INSERT INTO `smarthome`.`users_has_rooms` (`users_users_id`, `rooms_rooms_id`) VALUES (2, 4);
-INSERT INTO `smarthome`.`users_has_rooms` (`users_users_id`, `rooms_rooms_id`) VALUES (3, 1);
-INSERT INTO `smarthome`.`users_has_rooms` (`users_users_id`, `rooms_rooms_id`) VALUES (3, 3);
-INSERT INTO `smarthome`.`users_has_rooms` (`users_users_id`, `rooms_rooms_id`) VALUES (3, 4);
-INSERT INTO `smarthome`.`users_has_rooms` (`users_users_id`, `rooms_rooms_id`) VALUES (3, 5);
-INSERT INTO `smarthome`.`users_has_rooms` (`users_users_id`, `rooms_rooms_id`) VALUES (4, 1);
-INSERT INTO `smarthome`.`users_has_rooms` (`users_users_id`, `rooms_rooms_id`) VALUES (4, 3);
-INSERT INTO `smarthome`.`users_has_rooms` (`users_users_id`, `rooms_rooms_id`) VALUES (4, 4);
-INSERT INTO `smarthome`.`users_has_rooms` (`users_users_id`, `rooms_rooms_id`) VALUES (4, 7);
 
 COMMIT;
 
@@ -182,18 +160,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `smarthome`;
-INSERT INTO `smarthome`.`rooms_has_device` (`rooms_rooms_id`, `device_device_id`) VALUES (1, 9);
-INSERT INTO `smarthome`.`rooms_has_device` (`rooms_rooms_id`, `device_device_id`) VALUES (2, 10);
-INSERT INTO `smarthome`.`rooms_has_device` (`rooms_rooms_id`, `device_device_id`) VALUES (3, 11);
-INSERT INTO `smarthome`.`rooms_has_device` (`rooms_rooms_id`, `device_device_id`) VALUES (4, 12);
-INSERT INTO `smarthome`.`rooms_has_device` (`rooms_rooms_id`, `device_device_id`) VALUES (5, 1);
-INSERT INTO `smarthome`.`rooms_has_device` (`rooms_rooms_id`, `device_device_id`) VALUES (5, 5);
-INSERT INTO `smarthome`.`rooms_has_device` (`rooms_rooms_id`, `device_device_id`) VALUES (6, 2);
-INSERT INTO `smarthome`.`rooms_has_device` (`rooms_rooms_id`, `device_device_id`) VALUES (6, 6);
-INSERT INTO `smarthome`.`rooms_has_device` (`rooms_rooms_id`, `device_device_id`) VALUES (7, 3);
-INSERT INTO `smarthome`.`rooms_has_device` (`rooms_rooms_id`, `device_device_id`) VALUES (7, 7);
-INSERT INTO `smarthome`.`rooms_has_device` (`rooms_rooms_id`, `device_device_id`) VALUES (4, 8);
-INSERT INTO `smarthome`.`rooms_has_device` (`rooms_rooms_id`, `device_device_id`) VALUES (1, 4);
+INSERT INTO `smarthome`.`rooms_has_device` (`rooms_rooms_id`, `device_device_id`) VALUES (1, 2);
+INSERT INTO `smarthome`.`rooms_has_device` (`rooms_rooms_id`, `device_device_id`) VALUES (2, 3);
+INSERT INTO `smarthome`.`rooms_has_device` (`rooms_rooms_id`, `device_device_id`) VALUES (3, 1);
+INSERT INTO `smarthome`.`rooms_has_device` (`rooms_rooms_id`, `device_device_id`) VALUES (4, 4);
 
 COMMIT;
 

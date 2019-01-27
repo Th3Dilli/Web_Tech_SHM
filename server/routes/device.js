@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 
 router.get('/all', checkAuth, (req, res) => {
 
-  let query = `SELECT d.category, device_id, d.device_name, d.ip, d.mac,
+  let query = `SELECT  device_id, d.device_name, d.ip, d.mac,
    d.module_type, r.name 
    FROM users u, users_has_rooms uhr, rooms r, rooms_has_device rhd, device d  
    WHERE u.users_id = ? and uhr.users_users_id = u.users_id and r.rooms_id = uhr.rooms_rooms_id 
