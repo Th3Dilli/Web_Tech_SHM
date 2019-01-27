@@ -16,9 +16,9 @@
 
     <br>
     <mat-list-item>
-      <button mat-raised-button [ngClass]="{ 'statusBtnOn': isOn, 'statusBtnOff': !isOn  }" (click)="buttonToggle()">
-        {{buttonText}}
-      </button>
+      <ng-template appType></ng-template>
+    </mat-list-item>
+    <mat-list-item>
       <button mat-raised-button [ngClass]="{ 'infoBtnOn': showInfo, 'infoBtnOff': !showInfo  }" (click)="infoToggle()">Info</button>
     </mat-list-item>
   </mat-list>

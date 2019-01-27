@@ -18,13 +18,16 @@ import { DevicesComponent } from './devices/devices.component';
 import { HomeComponent } from './home/home.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { DeviceService } from './services/device.service';
-import { DeviceDetailComponent } from './devices/device-detail/device-detail.component';
+import { DeviceDetailComponent } from './devices/device/device-detail/device-detail.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './jwt.inceptor';
 import { ErrorInterceptor } from './error.inceptor';
 import { FilterPipe } from './filter.pipe';
 import { UserComponent } from './user/user.component';
 import { DeviceComponent } from './devices/device/device.component';
+import { Sonoff4chComponent } from './devices/device/type/sonoff4ch/sonoff4ch.component';
+import { SonoffbasicComponent } from './devices/device/type/sonoffbasic/sonoffbasic.component';
+import { TypeDirective } from './devices/device/type.directive';
 
 export function tokenGetter() {
   return sessionStorage.getItem('token');
@@ -40,7 +43,10 @@ export function tokenGetter() {
     DeviceDetailComponent,
     FilterPipe,
     UserComponent,
-    DeviceComponent
+    DeviceComponent,
+    Sonoff4chComponent,
+    SonoffbasicComponent,
+    TypeDirective
   ],
   imports: [
     BrowserModule,
@@ -64,6 +70,7 @@ export function tokenGetter() {
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ Sonoff4chComponent, SonoffbasicComponent ]
 })
 export class AppModule { }

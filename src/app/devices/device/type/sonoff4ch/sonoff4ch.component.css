@@ -1,0 +1,13 @@
+.statusBtnOn
+{
+  background-color:  crimson;
+  padding-right: 10px;
+  margin-right: 10px;
+}
+
+.statusBtnOff
+{
+  background-color:  white;
+  padding-right: 10px;
+  margin-right: 10px;
+}

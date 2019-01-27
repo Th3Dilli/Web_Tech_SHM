@@ -1,0 +1,12 @@
+<button mat-raised-button [ngClass]="{ 'statusBtnOn': power[0], 'statusBtnOff': !power[0]  }" (click)="buttonToggle(0)">
+  {{buttonText[0]}}
+</button>
+<button mat-raised-button [ngClass]="{ 'statusBtnOn': power[1], 'statusBtnOff': !power[1]  }" (click)="buttonToggle(1)">
+  {{buttonText[1]}}
+</button>
+<button mat-raised-button [ngClass]="{ 'statusBtnOn': power[2], 'statusBtnOff': !power[2]  }" (click)="buttonToggle(2)">
+  {{buttonText[2]}}
+</button>
+<button mat-raised-button [ngClass]="{ 'statusBtnOn': power[3], 'statusBtnOff': !power[3]  }" (click)="buttonToggle(3)">
+  {{buttonText[3]}}
+</button>

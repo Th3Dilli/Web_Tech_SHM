@@ -15,25 +15,17 @@ mat-card-content {
   /* default is 72px */
 }
 
-.statusBtnOn
-{
-  background-color:  crimson;
-}
 
-.statusBtnOff
-{
-  background-color:  white;
-}
 
 .infoBtnOn
 {
-  margin-left: 10px;
+  margin: 25px 10px 10px 0px;
   background-color:  lightgray;
 }
 
 .infoBtnOff
 {
-  margin-left: 10px;
+  margin: 25px 10px 10px 0px;
   background-color:  white;
 }
 

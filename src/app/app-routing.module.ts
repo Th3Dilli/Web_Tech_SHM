@@ -4,7 +4,7 @@ import { DevicesComponent } from './devices/devices.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
 import { HomeComponent } from './home/home.component';
-import { DeviceDetailComponent } from './devices/device-detail/device-detail.component';
+import { DeviceDetailComponent } from './devices/device/device-detail/device-detail.component';
 import { UserComponent } from './user/user.component';
 
 const routes: Routes = [

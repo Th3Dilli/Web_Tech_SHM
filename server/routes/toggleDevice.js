@@ -14,8 +14,9 @@ router.patch('/toggle', checkAuth, (req, res) => {
 
     const powerState = req.body.powerState;
     const ip = '10.0.0.11'; // req.body.ip;
+    const ch = req.body.channel;
 
-    const url = 'http://' + ip + "/cm?cmnd=Power1 " + powerState;
+    const url = 'http://' + ip + '/cm?cmnd=Power' + ch + ' ' + powerState;
 
     request.get(url, (error, response, body) => {
         if(error)

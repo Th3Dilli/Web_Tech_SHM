@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DeviceComponent } from '../device/device.component';
+import { DeviceComponent } from '../../device/device.component';
 
 @Component({
   selector: 'app-device-detail',
