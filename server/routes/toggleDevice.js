@@ -17,7 +17,7 @@ router.patch('/toggle', checkAuth, (req, res) => {
     const ch = req.body.channel;
 
     const url = 'http://' + ip + '/cm?cmnd=Power' + ch + ' ' + powerState;
-console.log(url);
+    console.log(url);
     request.get(url, (error, response, body) => {
         if(error)
         {

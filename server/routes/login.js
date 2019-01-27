@@ -19,7 +19,7 @@ let startSHDeviceStatusInterval= function(){
     countUsersLoggedIn++;
     const query = 'SELECT ip FROM device';
     
-    var ips = [];
+    var ips = {};
     
     _db.query(query, (error, results) => {
         if (error) {
@@ -47,9 +47,9 @@ let startSHDeviceStatusInterval= function(){
                         if(error){
                             console.log(ips[ip]+" Failed" );
                         }
-                        else if(bdy[ip]!=response.body){
+                        else if(ips[ip]!=response.body){
                             console.log(ips[ip]+" status changed");
-                            bdy[ip]=response.body;
+                            ips[ip]=response.body;
                         }
                     });
                 //})();
