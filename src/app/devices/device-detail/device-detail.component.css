@@ -8,3 +8,29 @@
 #btn_details {
     
   }
+
+  .lable
+{
+  font-size: 0.7em;
+  color: gray;
+  margin: 0px;
+  padding: 0px;
+  margin-bottom: 5px;
+}
+
+.detail
+{
+  margin: 0px;
+  padding: 0px;
+}
+
+ul{
+  padding: 0;
+  list-style-type: none;
+}
+
+.detailCard
+{
+    padding: 10px;
+    padding-left: 15px;
+}

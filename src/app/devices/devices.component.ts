@@ -19,11 +19,17 @@ export class DevicesComponent implements OnInit {
   devices$: Observable<Device[]>;
   rooms: Set<String> = new Set;
   category: Set<String> = new Set;
-  module_types: Array<String>  = ["SONOFF_BASIC","SONOFF_RF","SONOFF_LED", "SONOFF_4CH"];
+  module_types: Array<String> = ['SONOFF_BASIC', 'SONOFF_RF', 'SONOFF_LED', 'SONOFF_4CH'];
   isOn: Boolean;
   openAddBox: Boolean = false;
 
-  constructor(private device_service: DeviceService, private _router: Router, public jwtHelper: JwtHelperService, private fb: FormBuilder, private http: HttpClient) { }
+  constructor(
+                private device_service: DeviceService,
+                private _router: Router,
+                public jwtHelper: JwtHelperService,
+                private fb: FormBuilder,
+                private http: HttpClient
+              ) { }
 
   ngOnInit() {
     this.devices$ = this.device_service.getAllDevices();
@@ -33,8 +39,8 @@ export class DevicesComponent implements OnInit {
       });
       // console.log(this.rooms);
     });
-    
-    
+
+
     this.form = this.fb.group({
       device_name: ['', []],
       room_name: ['', []],
@@ -46,32 +52,22 @@ export class DevicesComponent implements OnInit {
     });
   }
 
-  openBox(){
-    console.log(this.openAddBox)
+  openBox() {
+    console.log(this.openAddBox);
     this.openAddBox = !this.openAddBox;
   }
 
-  addDevice(){
-    console.log( this.form.value);
+  addDevice() {
+    console.log(this.form.value);
     const url = 'http://localhost:3000/device/addDevice';
-    this.http.post<any>(url, this.form.value, )
-    .subscribe( res => {
+    this.http.post<any>(url, this.form.value)
+      .subscribe(res => {
 
-    }, err => {
+      }, err => {
 
 
-    });
+      });
   }
-
-
-
-
-
-  
-
-
-
-
 
 }
 

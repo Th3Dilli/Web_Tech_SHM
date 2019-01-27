@@ -1,13 +1,26 @@
 <mat-card-title>{{device.device_name}}</mat-card-title>
 <mat-card-content>
   <mat-list>
-    <mat-list-item><strong>ModuleType:</strong>&nbsp;{{device.module_type}}</mat-list-item>
+    <mat-list-item>
+      <ul>
+        <li>
+          <p class='lable'>ModuleType:</p>
+        </li>
+        <li>
+          <p class='detail'>
+            {{device.module_type}}
+          </p>
+        </li>
+      </ul>
+    </mat-list-item>
+
+    <br>
     <mat-list-item>
       <button mat-raised-button [ngClass]="{ 'statusBtnOn': isOn, 'statusBtnOff': !isOn  }" (click)="buttonToggle()">
-        ON
+        {{buttonText}}
       </button>
-      <button mat-stroked-button [ngClass]="{ 'infoBtnOn': showInfo, 'infoBtnOff': !showInfo  }" (click)="infoToggle()">Info</button>
+      <button mat-raised-button [ngClass]="{ 'infoBtnOn': showInfo, 'infoBtnOff': !showInfo  }" (click)="infoToggle()">Info</button>
     </mat-list-item>
   </mat-list>
+  <app-device-detail [device]="device" [showInfo]="showInfo"></app-device-detail>
 </mat-card-content>
-<app-device-detail [device]="device" [showInfo]="showInfo"></app-device-detail>

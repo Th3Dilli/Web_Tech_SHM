@@ -13,6 +13,7 @@ export class DeviceComponent implements OnInit {
   @Input() device: Device;
   isOn: Boolean;
   showInfo: Boolean;
+  buttonText: String = 'OFF';
 
   constructor(private http: HttpClient) { }
 
@@ -21,6 +22,7 @@ export class DeviceComponent implements OnInit {
 
   buttonToggle() {
     this.isOn = !this.isOn;
+    this.buttonText = (this.isOn) ? 'ON' : 'OFF';
     console.log();
     const url = 'http://localhost:3000/device/toggle';
     this.http.patch<any>(url, {powerState: this.isOn, ip: this.device.ip}).subscribe(response => {

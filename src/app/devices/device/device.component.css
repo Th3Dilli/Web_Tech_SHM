@@ -17,22 +17,41 @@ mat-card-content {
 
 .statusBtnOn
 {
-  background-color:  green;
+  background-color:  crimson;
 }
 
 .statusBtnOff
 {
-  background-color:  red;
+  background-color:  white;
 }
 
 .infoBtnOn
 {
   margin-left: 10px;
-  background-color:  green;
+  background-color:  lightgray;
 }
 
 .infoBtnOff
 {
   margin-left: 10px;
-  background-color:  red;
+  background-color:  white;
+}
+
+.lable
+{
+  font-size: 0.7em;
+  color: gray;
+  margin: 0px;
+  padding: 0px;
+}
+
+.detail
+{
+  margin: 0px;
+  padding: 0px;
+}
+
+ul{
+  padding: 0;
+  list-style-type: none;
 }
