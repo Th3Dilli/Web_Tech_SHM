@@ -6,15 +6,41 @@ const _db = getDb();
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const path = require('path');
+const request = require('request');
 
 const privateKEY = fs.readFileSync(path.join(__dirname, 'private.key'), 'utf8');
 
 router.patch('/toggle', checkAuth, (req, res) => {
 
-    res.status(200).json({
-        message: "got em"
-      });
-      console.log("got em");
+    const powerState = req.body.powerState;
+    const ip = '10.0.0.11'; // req.body.ip;
+
+    const url = 'http://' + ip + "/cm?cmnd=Power1 " + powerState;
+
+    request.get(url, (error, response, body) => {
+        if(error)
+        {
+            res.status(404).json({
+                message: "Device Not Found",
+                error: error
+            });
+        } else if (response.statusCode != 200) {
+            console.log('error: ' + response.statusCode);
+            console.log(error);
+            console.log(body);
+            res.status(500).json({
+                message: "Failed to toggle",
+                error: error
+            });
+        } else if (response.statusCode == 200) {
+            console.log('ok: ' + response);
+            res.status(200).json({
+                message: "Success toggeling",
+                params: req.body
+            })
+        }
+    
+    });
 
 });
 
