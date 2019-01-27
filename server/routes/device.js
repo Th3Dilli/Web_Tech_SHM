@@ -85,7 +85,7 @@ router.post('/addDevice', checkAuth, (req, res) => {
             });
           } else {
             res.status(200).json({
-              message: "all good"
+              message: "Success adding device"
             });
           }
         });

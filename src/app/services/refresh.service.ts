@@ -11,7 +11,7 @@ export class RefreshService {
   constructor(private http: HttpClient) { }
   refresh() {
     this.http.get(this._url).subscribe(res => {
-      let devices = res.body.devices;
+      // let devices = res.body.devices;
     }, error => {
 
     });
