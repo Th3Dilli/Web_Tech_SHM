@@ -33,14 +33,7 @@
       </mat-select>
     </mat-form-field><br>
     <mat-form-field>
-      <mat-select formControlName="category" placeholder="Select Category">
-        <mat-option *ngFor="let cat of category" [value]="cat">
-          {{cat}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field><br>
-    <mat-form-field>
-      <mat-select formControlName="category" placeholder="Select Module Type">
+      <mat-select formControlName="module_type" placeholder="Select Module Type">
         <mat-option *ngFor="let module of module_types" [value]="module">
           {{module}}
         </mat-option>

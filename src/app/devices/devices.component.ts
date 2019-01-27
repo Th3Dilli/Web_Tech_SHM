@@ -18,7 +18,6 @@ export class DevicesComponent implements OnInit {
   form: FormGroup;
   devices$: Observable<Device[]>;
   rooms: Set<String> = new Set;
-  category: Set<String> = new Set;
   module_types: Array<String> = ['SONOFF_BASIC', 'SONOFF_RF', 'SONOFF_LED', 'SONOFF_4CH'];
   isOn: Boolean;
   openAddBox: Boolean = false;
@@ -44,7 +43,7 @@ export class DevicesComponent implements OnInit {
     this.form = this.fb.group({
       device_name: ['', []],
       room_name: ['', []],
-      category: ['', []],
+      module_type: ['', []],
       device_ip: ['', []],
       device_mac: ['', []],
 
@@ -59,13 +58,13 @@ export class DevicesComponent implements OnInit {
 
   addDevice() {
     console.log(this.form.value);
-    const url = 'http://localhost:3000/device/addDevice';
+    const url = 'http://localhost:3000/devices/addDevice';
     this.http.post<any>(url, this.form.value)
       .subscribe(res => {
-
-      }, err => {
-
-
+        console.log(res);
+        this.devices$ = this.device_service.getAllDevices();
+      }, error => {
+        console.log(error);
       });
   }
 

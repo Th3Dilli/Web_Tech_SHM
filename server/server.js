@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const checkAuth = require('./check_auth')
 const db = require('./controller');
+const cors = require('cors');
 const PORT = 3000
 const app = express();
 const router = express.Router();
@@ -18,6 +19,7 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Methods", "POST, PATCH, GET, OPTIONS")
     next();
 });
+app.use(cors());
 
 
 // Routes
