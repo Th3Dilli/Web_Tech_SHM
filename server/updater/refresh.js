@@ -8,7 +8,7 @@ let ips = new Array;
 let devices = new Array;
 
 // TODO remove test stuff begin
-let testIps = new Array;
+/*let testIps = new Array;
 let lelRes = new Array;
 lelRes.push({ "StatusSTS": { "Time": "2019-01-27T22:48:22", "Uptime": 3, "Vcc": 3.117, "POWER1": "ON", "POWER2": "OFF", "POWER3": "OFF", "POWER4": "OFF", "Wifi": { "AP": 1, "SSId": "Freislich-Wlan", "RSSI": 50, "APMac": "C4:EA:1D:0C:D4:31" } } });
 lelRes.push({ "StatusSTS": { "Time": "2019-01-27T22:48:41", "Uptime": 4, "Vcc": 3.194, "POWER": "OFF", "Wifi": { "AP": 1, "SSId": "Freislich-Wlan", "RSSI": 72, "APMac": "58:6D:8F:4A:7C:36" } } });
@@ -32,30 +32,33 @@ for (let i = 0; i < lelRes.length; i++) {
             POWER4: lelRes[i].StatusSTS.POWER4 
          }
     }
-}
+}*/
 // TODO remove test stuff end
 
 console.log(devices);
 function refreshStat() {
     for (let i in ips) {
-        const url = 'http://' + ips[i] + '/cm?cmnd=Status' + "11";
+        const url = 'http://' + ips[i] + '/cm?cmnd=Status ' + "11";
         request.get(url, (error, response, body) => {
+            //console.log(response.body.split("=")[1]);
             if (error) {
                 // TODO add logging
                 //console.log(ips[i] + " Failed");
             }
             else if (response.statusCode == 200) {
                 console.log(ips[i] + " status changed");
-                if (response.body.POWER) {
+                let res= JSON.parse(response.body.split("=")[1]);
+                
+                if (res.StatusSTS.POWER) {
                     devices[i] = { ip: ips[i],
-                                    POWER: response.body.StatusSTS.POWER    
+                                    POWER: res.StatusSTS.POWER    
                                  }
-                } else if (response.body.POWER1) {
+                } else if (res.StatusSTS.POWER1) {
                     devices[i] = { ip: ips[i],
-                        POWER1: response.body.StatusSTS.POWER1,
-                        POWER2: response.body.StatusSTS.POWER2,
-                        POWER3: response.body.StatusSTS.POWER3,
-                        POWER4: response.body.StatusSTS.POWER4 
+                        POWER1: res.StatusSTS.POWER1,
+                        POWER2: res.StatusSTS.POWER2,
+                        POWER3: res.StatusSTS.POWER3,
+                        POWER4: res.StatusSTS.POWER4 
                      }
                 }
 
