@@ -10,3 +10,48 @@
     </mat-tab>
   </mat-tab-group>
 </div>
+<div id="addButton"><strong>Add Device </strong> <button mat-mini-fab (click)="openBox()">
+    <mat-icon>add</mat-icon>
+  </button></div>
+<div id="AddBox" *ngIf="openAddBox">
+  <button (click)="openBox()" mat-mini-fab id="close">X</button>
+  <h2 style="margin:1em; text-align:left">Add new Device</h2>
+  <mat-divider></mat-divider>
+  <form [formGroup]="form" (ngSubmit)="addDevice()" autocomplete="off">
+    <mat-form-field autocomplete="off">
+      <mat-label>Device Name</mat-label>
+      <input matInput formControlName="device_name">
+    </mat-form-field><br>
+    <mat-form-field>
+      <mat-select formControlName="room_name" placeholder="Select Room">
+        <mat-option *ngFor="let tab of rooms" [value]="tab">
+          {{tab}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field><br>
+    <mat-form-field>
+      <mat-select formControlName="category" placeholder="Select Category">
+        <mat-option *ngFor="let cat of category" [value]="cat">
+          {{cat}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field><br>
+    <mat-form-field>
+      <mat-select formControlName="category" placeholder="Select Module Type">
+        <mat-option *ngFor="let module of module_types" [value]="module">
+          {{module}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field><br>
+    <mat-form-field autocomplete="off">
+      <mat-label>IP</mat-label>
+      <input matInput formControlName="device_ip">
+    </mat-form-field><br>
+    <mat-form-field autocomplete="off">
+      <mat-label>MAC</mat-label>
+      <input matInput formControlName="device_mac">
+    </mat-form-field><br>
+    <button type="submit" id="accept" mat-stroked-button><strong>ACCEPT</strong></button>
+    <button type="button" id="cancel" (click)="openBox()" mat-stroked-button><strong>CANCEL</strong></button>
+  </form>
+</div>

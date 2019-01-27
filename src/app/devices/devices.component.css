@@ -10,3 +10,60 @@ mat-card {
   float: left;
 }
 
+#addButton{
+  margin: 1em;
+  position: fixed;
+  bottom: 0px;
+  right: 0px; 
+}
+
+#AddBox{
+  margin: 2em;
+  min-width: 320px;
+  min-height: 550px;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 2px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  border: 1px solid;
+  border-radius: 15px 0px 50px 10px;
+  border-color: rgba(0, 0, 0, 0.164);
+  background-color: white;
+  position: fixed;
+  bottom: 0px;
+  right: 0px; 
+  z-index: 1;
+}
+
+#close{
+  top: -12px;
+  right: -12px; 
+  float: right;
+}
+
+form{
+  text-align: center;
+  margin: 2em;
+  color: black;
+
+}
+
+#AddBox {
+  animation-name: AddBox;
+  animation-duration: 1s;
+  -webkit-animation-name: AddBox;
+  -webkit-animation-duration: 1s;
+}
+@keyframes AddBox {
+from {
+  bottom: -500px;
+
+}
+to {
+  bottom: 0;  }
+}
+/* use prefix -webkit- for Safari */
+@-webkit-keyframes AddBox {
+  from {
+    bottom: -500px;
+  }
+  to {
+    bottom: 0;  }
+}
