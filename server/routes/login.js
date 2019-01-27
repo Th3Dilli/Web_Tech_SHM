@@ -8,55 +8,11 @@ const router = express.Router();
 const fs = require('fs');
 const path = require('path');
 const request = require("request");
+const interval = require('../updater/refresh');
 
 const privateKEY = fs.readFileSync(path.join(__dirname, 'private.key'), 'utf8');
 console.log(fs.readFileSync(path.join(__dirname, 'private.key'), 'utf8'))
-let countUsersLoggedIn=0;
-let usersLoggedIn=false;
 
-
-let startSHDeviceStatusInterval= function(){
-    countUsersLoggedIn++;
-    const query = 'SELECT ip FROM device';
-    
-    var ips = {};
-    
-    _db.query(query, (error, results) => {
-        if (error) {
-          Console.log("fail");
-        } else if (results.length < 1) {
-          console.log("no dev found");
-        } else {
-            for(let i in results){
-                ips.push(results[i].ip);
-            }
-            console.log(ips);
-        }
-    });
-
-    if(countUsersLoggedIn>0&&!usersLoggedIn){
-        usersLoggedIn=true;
-        var statChanged = setInterval(refreshStat, 1000);
-        function refreshStat() {
-            
-            for(let ip in ips){
-                const url = 'http://' + ips[ip] + '/cm?cmnd=Status' + "11";
-                //(async () => {
-                    request.get(url, (error, response, body) => {
-
-                        if(error){
-                            console.log(ips[ip]+" Failed" );
-                        }
-                        else if(ips[ip]!=response.body){
-                            console.log(ips[ip]+" status changed");
-                            ips[ip]=response.body;
-                        }
-                    });
-                //})();
-            }
-        }
-    }
-};
 router.post('/', (req, res) => {
 
   let username = req.body.username;
@@ -74,7 +30,8 @@ router.post('/', (req, res) => {
         message: "Authentication error"
       });
     } else {
-      startSHDeviceStatusInterval();
+      interval.getIps();
+      interval.interval();
         
       let userid = results[0].users_id;
       let username = results[0].username;
