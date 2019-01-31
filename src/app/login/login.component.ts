@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   private formSubmitAttempt: boolean;
   private failedLoginAttempt: boolean;
+  private hide = true;
+
 
   constructor(private fb: FormBuilder, private _auth: AuthService, private _router: Router, public snackBar: MatSnackBar) { }
 
@@ -51,6 +53,5 @@ export class LoginComponent implements OnInit {
   loginSuccess() {
     this.snackBar.open('Successfully Logged In', 'Okay', { duration: 3000 });
   }
-
 
 }

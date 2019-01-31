@@ -39,3 +39,7 @@ p{
 #logininputs{
   margin-top: 30px;
 }
+
+#passwordToggle{
+  opacity: 0.3;
+}
