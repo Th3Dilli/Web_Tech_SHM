@@ -17,8 +17,12 @@
   </button>
 </div>
 <div id="AddBox" *ngIf="openAddBox">
-  <button (click)="openBox()" mat-mini-fab id="close">X</button>
-  <h2 style="margin:1em; text-align:left">Add new Device</h2>
+  <button (click)="openBox(); formSubmitAttempt=false" mat-mini-fab id="close">
+    <mat-icon>close</mat-icon>
+  </button>
+  <h2>
+    <mat-icon>add</mat-icon>Add new Device
+  </h2>
   <mat-divider></mat-divider>
   <form [formGroup]="form" (ngSubmit)="addDevice()" autocomplete="off">
     <mat-form-field autocomplete="off">
@@ -42,12 +46,19 @@
     <mat-form-field autocomplete="off">
       <mat-label>IP</mat-label>
       <input matInput formControlName="device_ip">
-    </mat-form-field><br>
+    </mat-form-field>
+    <br>
     <mat-form-field autocomplete="off">
       <mat-label>MAC</mat-label>
       <input matInput formControlName="device_mac">
-    </mat-form-field><br>
+    </mat-form-field>
+    <br>
     <button type="submit" id="accept" mat-stroked-button><strong>ACCEPT</strong></button>
-    <button type="button" id="cancel" (click)="openBox()" mat-stroked-button><strong>CANCEL</strong></button>
+    <button type="button" id="cancel" (click)="openBox(); formSubmitAttempt=false" mat-stroked-button><strong>CANCEL</strong></button>
   </form>
+  <div *ngIf="formSubmitAttempt">
+    <mat-error>Please enter all required information!</mat-error>
+    <mat-error *ngIf="isFieldInvalid('device_ip')">Please enter a valid IP with maxLength: 15</mat-error>
+    <mat-error *ngIf="isFieldInvalid('device_mac')">Please enter a valid MAC with maxLength: 17</mat-error>
+  </div>
 </div>

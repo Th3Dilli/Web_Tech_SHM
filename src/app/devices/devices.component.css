@@ -15,12 +15,13 @@ mat-card {
   position: fixed;
   bottom: 0px;
   right: 0px; 
+  z-index: 1;
 }
 
 #AddBox{
   margin: 2em;
   min-width: 320px;
-  min-height: 550px;
+  min-height: 570px;
   box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 2px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
   border: 1px solid;
   border-radius: 15px 0px 50px 10px;
@@ -66,4 +67,30 @@ to {
   }
   to {
     bottom: 0;  }
+}
+
+#accept{
+  margin: 2px;
+  color: green;
+}
+#cancel{
+  margin: 2px;
+  color: red;
+}
+
+h2 {
+  font-size: 16px;
+  margin:1em; 
+  text-align:left;
+}
+
+h2 mat-icon{
+  position: relative;
+  top: 5.5px;
+}
+
+mat-error{
+  font-size: 14px;
+  margin: 0.5px;
+  text-align: center;
 }
