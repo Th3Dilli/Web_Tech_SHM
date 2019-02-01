@@ -24,7 +24,7 @@
     <mat-icon>add</mat-icon>Add new Device
   </h2>
   <mat-divider></mat-divider>
-  <form [formGroup]="form" (ngSubmit)="addDevice()" autocomplete="off">
+  <form [formGroup]="addDeviceForm" (ngSubmit)="addDevice()" autocomplete="off">
     <mat-form-field autocomplete="off">
       <mat-label>Device Name</mat-label>
       <input matInput formControlName="device_name">
@@ -74,20 +74,20 @@
   <div id="editBox">
     <h1>Edit Device</h1>
     <mat-divider></mat-divider>
-    <form>
+    <form [formGroup]="editDeviceForm" (ngSubmit)="editDeviceUpdate()">
       <mat-form-field autocomplete="off">
         <mat-label>Device Name</mat-label>
-        <input matInput value={{deviceEdit.device_name}}>
+        <input formControlName="editDevice_name" matInput value={{deviceEdit.device_name}}>
       </mat-form-field><br>
       <mat-form-field autocomplete="off">
         <mat-label>Device IP</mat-label>
-        <input matInput value={{deviceEdit.ip}}>
+        <input formControlName="editDevice_ip" matInput value={{deviceEdit.ip}}>
       </mat-form-field><br>
       <mat-form-field autocomplete="off">
         <mat-label>Device MAC</mat-label>
-        <input matInput value={{deviceEdit.mac}}>
+        <input formControlName="editDevice_mac" matInput value={{deviceEdit.mac}}>
       </mat-form-field><br>
-      <button id="accept" (click)="edit=false" mat-stroked-button>Save</button>
-      <button id="cancel" (click)="edit=false" mat-stroked-button>Cancel</button> <br>
+      <button  type="submit" id="accept"  mat-stroked-button>Save</button>
+      <button  type="cancle" id="cancel" (click)="edit=false" mat-stroked-button>Cancel</button> <br>
     </form>
   </div>

@@ -1,9 +1,10 @@
 export interface Device {
-    id: number;
+    device_id: number;
     module_type: string;
-    name: string;
+    device_name: string;
     ip: string;
     room_name: string;
+    mac: String;
   }
 export interface Room {
   rooms_id: Number;

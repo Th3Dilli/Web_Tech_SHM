@@ -41,28 +41,28 @@ export class UserComponent implements OnInit {
    *TODO form value when nothing change = "", "" , accept button must be disabled when user do no changes
    *make an http req to the server with new data and update db + refresh the token
  */
-isFieldInvalid(field: string) {
-  return (
-    (!this.form.get(field).valid && this.form.get(field).touched) ||
-    (this.form.get(field).untouched && this.formSubmitAttempt)
-  );
-}
+  isFieldInvalid(field: string) {
+    return (
+      (!this.form.get(field).valid && this.form.get(field).touched) ||
+      (this.form.get(field).untouched && this.formSubmitAttempt)
+    );
+  }
 
 
   changeUser() {
-    if(this.form.valid){
-    const userChangeUrl = 'http://localhost:3000/user/userEdit';
-    this.http.patch<any>(userChangeUrl, this.form.value)
-      .subscribe(response => {
-        this.email = this.form.value.email;
-        this.username = this.form.value.username;
-        sessionStorage.setItem('token', response.token);
-        this.snackBar.open('Sucessfully changed', 'Okay', { duration: 3000 });
-      }, error => {
-        this.snackBar.open('Failed to update: ' + error, 'Okay', { duration: 3000 });
-      });
+    if (this.form.valid) {
+      const userChangeUrl = 'http://localhost:3000/user/userEdit';
+      this.http.patch<any>(userChangeUrl, this.form.value)
+        .subscribe(response => {
+          this.email = this.form.value.email;
+          this.username = this.form.value.username;
+          sessionStorage.setItem('token', response.token);
+          this.snackBar.open('Sucessfully changed', 'Okay', { duration: 3000 });
+        }, error => {
+          this.snackBar.open('Failed to update: ' + error, 'Okay', { duration: 3000 });
+        });
     }
-      this.formSubmitAttempt = true;
+    this.formSubmitAttempt = true;
   }
 
 }
