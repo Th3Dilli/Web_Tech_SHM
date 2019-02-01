@@ -40,9 +40,7 @@ CREATE TABLE IF NOT EXISTS `smarthome`.`device` (
   `device_name` VARCHAR(45) NULL,
   `ip` VARCHAR(15) NULL,
   `mac` VARCHAR(17) NULL,
-  PRIMARY KEY (`device_id`),
-  UNIQUE INDEX `mac_UNIQUE` (`mac` ASC) VISIBLE,
-  UNIQUE INDEX `ip_UNIQUE` (`ip` ASC) VISIBLE)
+  PRIMARY KEY (`device_id`))
 ENGINE = InnoDB;
 
 
@@ -54,28 +52,6 @@ CREATE TABLE IF NOT EXISTS `smarthome`.`rooms` (
   `name` VARCHAR(45) NULL,
   PRIMARY KEY (`rooms_id`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `smarthome`.`users_has_rooms`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `smarthome`.`users_has_rooms` (
-  `users_users_id` INT NOT NULL,
-  `rooms_rooms_id` INT NOT NULL,
-  PRIMARY KEY (`users_users_id`, `rooms_rooms_id`),
-  INDEX `fk_users_has_rooms_rooms1_idx` (`rooms_rooms_id` ASC) VISIBLE,
-  INDEX `fk_users_has_rooms_users_idx` (`users_users_id` ASC) VISIBLE,
-  CONSTRAINT `fk_users_has_rooms_users`
-    FOREIGN KEY (`users_users_id`)
-    REFERENCES `smarthome`.`users` (`users_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_users_has_rooms_rooms1`
-    FOREIGN KEY (`rooms_rooms_id`)
-    REFERENCES `smarthome`.`rooms` (`rooms_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -94,6 +70,28 @@ CREATE TABLE IF NOT EXISTS `smarthome`.`rooms_has_device` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_rooms_has_device_device1`
+    FOREIGN KEY (`device_device_id`)
+    REFERENCES `smarthome`.`device` (`device_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `smarthome`.`users_has_device`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `smarthome`.`users_has_device` (
+  `users_users_id` INT NOT NULL,
+  `device_device_id` INT NOT NULL,
+  PRIMARY KEY (`users_users_id`, `device_device_id`),
+  INDEX `fk_users_has_device_device1_idx` (`device_device_id` ASC) VISIBLE,
+  INDEX `fk_users_has_device_users1_idx` (`users_users_id` ASC) VISIBLE,
+  CONSTRAINT `fk_users_has_device_users1`
+    FOREIGN KEY (`users_users_id`)
+    REFERENCES `smarthome`.`users` (`users_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_users_has_device_device1`
     FOREIGN KEY (`device_device_id`)
     REFERENCES `smarthome`.`device` (`device_id`)
     ON DELETE NO ACTION
@@ -138,19 +136,6 @@ INSERT INTO `smarthome`.`rooms` (`rooms_id`, `name`) VALUES (DEFAULT, 'Flur');
 INSERT INTO `smarthome`.`rooms` (`rooms_id`, `name`) VALUES (DEFAULT, 'Schlafzimmer');
 INSERT INTO `smarthome`.`rooms` (`rooms_id`, `name`) VALUES (DEFAULT, 'Wohnzimmer');
 INSERT INTO `smarthome`.`rooms` (`rooms_id`, `name`) VALUES (DEFAULT, 'Badezimmer');
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `smarthome`.`users_has_rooms`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `smarthome`;
-INSERT INTO `smarthome`.`users_has_rooms` (`users_users_id`, `rooms_rooms_id`) VALUES (2, 1);
-INSERT INTO `smarthome`.`users_has_rooms` (`users_users_id`, `rooms_rooms_id`) VALUES (2, 2);
-INSERT INTO `smarthome`.`users_has_rooms` (`users_users_id`, `rooms_rooms_id`) VALUES (2, 3);
-INSERT INTO `smarthome`.`users_has_rooms` (`users_users_id`, `rooms_rooms_id`) VALUES (2, 4);
 
 COMMIT;
 
