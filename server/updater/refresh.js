@@ -38,23 +38,25 @@ for (let i = 0; i < lelRes.length; i++) {
 console.log(devices);
 function refreshStat() {
     for (let i in ips) {
-        const url = 'http://' + ips[i] + '/cm?cmnd=Status ' + "11";
+        const url = 'http://' + ips[i].ip + '/cm?cmnd=Status ' + "11";
         request.get(url, (error, response, body) => {
             //console.log(response.body.split("=")[1]);
             if (error) {
                 // TODO add logging
-                //console.log(ips[i] + " Failed");
+                //console.log(ips[i].ip + " Failed");
             }
             else if (response.statusCode == 200) {
-                console.log(ips[i] + " status changed");
+                console.log(ips[i].ip + " status changed");
                 let res= JSON.parse(response.body.split("=")[1]);
                 
                 if (res.StatusSTS.POWER) {
-                    devices[i] = { ip: ips[i],
+                    devices[i] = { module_type: ips[i].module_type,
+                                    ip: ips[i].ip,
                                     POWER: res.StatusSTS.POWER    
                                  }
                 } else if (res.StatusSTS.POWER1) {
-                    devices[i] = { ip: ips[i],
+                    devices[i] = { module_type: ips[i].module_type,
+                        ip: ips[i].ip,
                         POWER1: res.StatusSTS.POWER1,
                         POWER2: res.StatusSTS.POWER2,
                         POWER3: res.StatusSTS.POWER3,
@@ -64,7 +66,7 @@ function refreshStat() {
 
             } else {
                 // TODO if !error and !200 OK
-                console.log(ips[i] + response.statusCode);
+                console.log(ips[i].ip + response.statusCode);
             }
         });
     }
@@ -83,7 +85,7 @@ module.exports = {
     },
     getIps: function () {
         countUsersLoggedIn++;
-        const query = 'SELECT ip FROM device';
+        const query = 'SELECT ip, module_type  FROM device';
 
         _db.query(query, (error, results) => {
             if (error) {
@@ -92,7 +94,9 @@ module.exports = {
                 console.log("404 no device found");
             } else {
                 for (let i in results) {
-                    ips.push(results[i].ip);
+                    ips.push({ ip: results[i].ip,
+                                module_type: results[i].module_type
+                            });
                 }
                 console.log(ips);
             }

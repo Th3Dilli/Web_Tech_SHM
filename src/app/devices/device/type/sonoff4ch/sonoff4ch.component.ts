@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Device } from '../../../../services/device';
 import { IntervalService } from '../../../../services/interval.service';
+import {  Device_4CH, Device_Basic, DevicesStats } from '../../../../services/interval';
 
 @Component({
   selector: 'app-sonoff4ch',
@@ -25,10 +26,10 @@ export class Sonoff4chComponent implements OnInit {
   }
   UpdateDeviceState(){
     this.interval.DeviceStateAll().subscribe(data =>{
-      this.deviceStateAll=data;
-      console.log(this.deviceStateAll.message[0]);
-      if(this.device.ip===this.deviceStateAll.message[0].ip){
-        if(this.deviceStateAll.message[0].POWER1==="OFF"){
+      
+      console.log(data);
+      if(this.device.ip===this.deviceStateAll.devices[0].ip){
+        if(this.deviceStateAll.devices[0].POWER1==="OFF"){
           this.power[0]=false;
           this.buttonText[0]='OFF';
         }else{
