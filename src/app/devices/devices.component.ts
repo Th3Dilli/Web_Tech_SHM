@@ -3,10 +3,11 @@ import { DeviceService } from '../services/device.service';
 import { Device, DeviceData, Room } from '../services/device';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Observable } from 'rxjs';
+import { Observable, interval } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material';
+import { IntervalService } from '../services/interval.service';
 
 @Component({
   selector: 'app-devices',
@@ -41,7 +42,7 @@ export class DevicesComponent implements OnInit {
 
   ngOnInit() {
     this.getDeviceData();
-    this.DeviceStateAll();
+
 
     this.form = this.fb.group({
       device_name: ['', [Validators.required, Validators.maxLength(45)]],
@@ -82,14 +83,16 @@ export class DevicesComponent implements OnInit {
   // intervalStart() {
   //   setInterval(this.DeviceStateAll, 1000);
   // }
-  DeviceStateAll() {
+
+  /*DeviceStateAll() {
     const url = 'http://localhost:3000/deviceState/ip';
     this.http.get<any>(url).subscribe(response => {
-      console.log(response);
+      //console.log(response);
     }, error => {
       console.log(error);
     });
-  }
+    
+  }*/
 
   deleteDevice(device) {
     this.delete = !this.delete;

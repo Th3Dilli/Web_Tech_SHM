@@ -31,7 +31,7 @@ router.post('/', (req, res) => {
       });
     } else {
       interval.getIps();
-      //interval.interval();
+      interval.interval();
         
       let userid = results[0].users_id;
       let username = results[0].username;

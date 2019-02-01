@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Device } from '../../../../services/device';
+import { IntervalService } from '../../../../services/interval.service';
 
 @Component({
   selector: 'app-sonoff4ch',
@@ -10,12 +11,34 @@ import { Device } from '../../../../services/device';
 export class Sonoff4chComponent implements OnInit {
 
   @Input() device: Device;
+  deviceStateAll : Object;
   power: Boolean[] = [false, false, false, false];
   showInfo: Boolean = false;
   buttonText: String[] = ['OFF', 'OFF', 'OFF', 'OFF'];
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private interval : IntervalService
+    ) { }
 
   ngOnInit() {
+    this.UpdateDeviceState();
+  }
+  UpdateDeviceState(){
+    this.interval.DeviceStateAll().subscribe(data =>{
+      this.deviceStateAll=data;
+      console.log(this.deviceStateAll.message[0]);
+      if(this.device.ip===this.deviceStateAll.message[0].ip){
+        if(this.deviceStateAll.message[0].POWER1==="OFF"){
+          this.power[0]=false;
+          this.buttonText[0]='OFF';
+        }else{
+          this.power[0]=true;
+          this.buttonText[0]='ON';
+        }
+      }
+
+    });
+
   }
   buttonToggle(index) {
     this.power[index] = !this.power[index];
