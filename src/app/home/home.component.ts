@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
   getDeviceLength() {
     this.device_service.getAllDevices()
       .subscribe(
-        res => this.resultlength = res.length
+        res => this.resultlength = res.devices.length
       );
   }
 

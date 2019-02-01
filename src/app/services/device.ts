@@ -5,3 +5,12 @@ export interface Device {
     ip: string;
     room_name: string;
   }
+export interface Room {
+  rooms_id: Number;
+  name: String;
+}
+
+export interface DeviceData {
+  devices: Device[];
+  rooms: Room[];
+}

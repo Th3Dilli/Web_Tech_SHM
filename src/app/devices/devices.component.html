@@ -1,4 +1,4 @@
-<div *ngIf="devices$ | async as devices" class="maincontent">
+<div *ngIf="deviceData$ | async as deviceData" class="maincontent">
   <!-- Light -->
   <mat-tab-group mat-align-tabs="start">
     <mat-tab *ngFor="let tab of rooms" label="{{tab}}">

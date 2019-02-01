@@ -8,38 +8,41 @@ const jwt = require('jsonwebtoken');
 
 router.get('/all', checkAuth, (req, res) => {
 
-  let query = `SELECT  device_id, d.device_name, d.ip, d.mac,
-   d.module_type, r.name 
-   FROM users u, users_has_rooms uhr, rooms r, rooms_has_device rhd, device d  
-   WHERE u.users_id = ? and uhr.users_users_id = u.users_id and r.rooms_id = uhr.rooms_rooms_id 
-   and rhd.rooms_rooms_id = uhr.rooms_rooms_id and d.device_id = rhd.device_device_id;
-	`;
-  let queryAll = `SELECT distinct d.*, rhs.rooms_rooms_id, r.name 
-  from device d, users u, rooms_has_device rhs, rooms r 
-  where d.device_id = rhs.device_device_id and r.rooms_id = rhs.rooms_rooms_id;
-	`;
+  // OLD query for users with rooms restriction
+  // let query = `SELECT  device_id, d.device_name, d.ip, d.mac,
+  //  d.module_type, r.name 
+  //  FROM users u, users_has_rooms uhr, rooms r, rooms_has_device rhd, device d  
+  //  WHERE u.users_id = ? and uhr.users_users_id = u.users_id and r.rooms_id = uhr.rooms_rooms_id 
+  //  and rhd.rooms_rooms_id = uhr.rooms_rooms_id and d.device_id = rhd.device_device_id;
+	// `;
+  let queryDevice = `SELECT distinct d.*, rhs.rooms_rooms_id, r.name 
+  from device d, rooms_has_device rhs, rooms r 
+  where d.device_id = rhs.device_device_id and r.rooms_id = rhs.rooms_rooms_id;`;
+  
+  let queryRooms = `SELECT * from rooms;`;
+
   let token = jwt.decode(req.headers.authorization.split(" ")[1]);
-  if (token.role === "admin") {
-    _db.query(queryAll, (error, results) => {
+  
+    _db.query(queryDevice, (error, results) => {
       if (error) {
         res.status(400).json({
           message: "Error"
         });
       } else {
-        res.status(200).json(results);
-      }
-    });
-  } else {
-    _db.query(query, [token.userid], (error, results) => {
-      if (error) {
-        res.status(400).json({
-          message: "Error"
+        _db.query(queryRooms, (error2, results2) => {
+          if (error) {
+            res.status(400).json({
+              message: "Error"
+            });
+          } else {
+            let data = { "devices": results,
+                          "rooms": results2
+                        }
+            res.status(200).json(data);
+          }
         });
-      } else {
-        res.status(200).json(results);
       }
     });
-  }
 });
 
 router.post('/addDevice', checkAuth, (req, res) => {

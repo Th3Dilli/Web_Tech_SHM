@@ -1,6 +1,6 @@
 import { Component, OnInit, ErrorHandler } from '@angular/core';
 import { DeviceService } from '../services/device.service';
-import { Device } from '../services/device';
+import { Device, DeviceData, Room } from '../services/device';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
@@ -17,8 +17,9 @@ import { MatSnackBar } from '@angular/material';
 export class DevicesComponent implements OnInit {
 
   form: FormGroup;
-  devices$: Observable<Device[]>;
-  rooms: Set<String> = new Set;
+  deviceData$: Observable<DeviceData>;
+  devices: Device[];
+  rooms: Array<String> = new Array<String>();
   module_types: Array<String> = ['SONOFF_BASIC', 'SONOFF_TOUCH', 'SONOFF_4CH'];
   isOn: Boolean;
   openAddBox: Boolean = false;
@@ -38,12 +39,12 @@ export class DevicesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.devices$ = this.device_service.getAllDevices();
-    this.devices$.subscribe((res) => {
-      res.forEach(device => {
-        this.rooms.add(device.name);
+    this.deviceData$ = this.device_service.getAllDevices();
+    this.deviceData$.subscribe((res) => {
+      this.devices = res.devices;
+      res.rooms.forEach(room => {
+        this.rooms.push(room.name);
       });
-      console.log("test");
       this.DeviceStateAll();
     });
 
@@ -80,8 +81,8 @@ export class DevicesComponent implements OnInit {
           this.snackBar.open('Failed to Add Device', 'Okay', { duration: 3000 });
         });
     }
-      this.formSubmitAttempt = true;
-    
+    this.formSubmitAttempt = true;
+
   }
   intervalStart() {
     setInterval(this.DeviceStateAll, 1000);
@@ -99,21 +100,21 @@ export class DevicesComponent implements OnInit {
     this.delete = !this.delete;
     this.deviceName = device.device_name;
     this.deviceId = device.device_id;
-}
+  }
 
-  confirmDelete(confirm){
-    if(confirm === true){
-      let url = `http://localhost:3000/devices/deleteDevice/${this.deviceId}`
+  confirmDelete(confirm) {
+    if (confirm === true) {
+      const url = `http://localhost:3000/devices/deleteDevice/${this.deviceId}`
       this.http.delete<any>(url)
-      .subscribe(res => {
-        console.log(res)
-        this.snackBar.open('Device successfully deleted', 'Okay', { duration: 3000 });
-        this.devices$ = this.device_service.getAllDevices();
-      }, error => {
-        console.log(error);
-      })
+        .subscribe(res => {
+          console.log(res);
+          this.snackBar.open('Device successfully deleted', 'Okay', { duration: 3000 });
+          this.devices$ = this.device_service.getAllDevices();
+        }, error => {
+          console.log(error);
+        });
       this.delete = !this.delete;
-    }else if(confirm === false){
+    } else if (confirm === false) {
       this.delete = !this.delete;
     }
   }
