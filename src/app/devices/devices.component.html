@@ -4,7 +4,7 @@
     <mat-tab *ngFor="let tab of rooms" label="{{tab}}">
       <div *ngIf="devices" class="maincontent">
         <mat-card *ngFor="let device of devices | filterByName: tab">
-          <app-device (getId)="deleteDevice($event)" [device]="device"></app-device>
+          <app-device (getId)="deleteDevice($event)" (getDevice)="editDevice($event)" [device]="device"></app-device>
         </mat-card>
       </div>
     </mat-tab>
@@ -62,11 +62,32 @@
     <mat-error *ngIf="isFieldInvalid('device_mac')">Please enter a valid MAC with maxLength: 17</mat-error>
   </div>
 </div>
-<div id="overlay" *ngIf="delete">
-<div id="deleteConfirmation">
-  <p>Are you sure to delete {{deviceName}} ?</p>
-  <mat-divider></mat-divider>
-  <button class="confirmBtn"(click)="confirmDelete(true)" mat-button>Yes</button>
-  <button class="confirmBtn" (click)="confirmDelete(false)" mat-button>No</button>
+<div class="overlay" *ngIf="delete">
+  <div id="deleteConfirmation">
+    <p>Are you sure to delete {{deviceName}} ?</p>
+    <mat-divider></mat-divider>
+    <button class="confirmBtn" (click)="confirmDelete(true)" mat-button>Yes</button>
+    <button class="confirmBtn" (click)="confirmDelete(false)" mat-button>No</button>
+  </div>
 </div>
-</div>
+<div class="overlay" *ngIf="edit">
+  <div id="editBox">
+    <h1>Edit Device</h1>
+    <mat-divider></mat-divider>
+    <form>
+      <mat-form-field autocomplete="off">
+        <mat-label>Device Name</mat-label>
+        <input matInput value={{deviceEdit.device_name}}>
+      </mat-form-field><br>
+      <mat-form-field autocomplete="off">
+        <mat-label>Device IP</mat-label>
+        <input matInput value={{deviceEdit.ip}}>
+      </mat-form-field><br>
+      <mat-form-field autocomplete="off">
+        <mat-label>Device MAC</mat-label>
+        <input matInput value={{deviceEdit.mac}}>
+      </mat-form-field><br>
+      <button id="accept" (click)="edit=false" mat-stroked-button>Save</button>
+      <button id="cancel" (click)="edit=false" mat-stroked-button>Cancel</button> <br>
+    </form>
+  </div>

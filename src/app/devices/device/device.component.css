@@ -51,6 +51,14 @@ ul{
   bottom: 5px;
   background-color: crimson;
   color: white;
+  margin-left: 3px;
 }
 
 
+#editButton{
+  float: right;
+  bottom: 5px;
+  background-color: crimson;
+  color: white;
+  margin-left: 3px;
+}
