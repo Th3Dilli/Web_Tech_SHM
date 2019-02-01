@@ -97,5 +97,8 @@ module.exports = {
                 console.log(ips);
             }
         });
+    },
+    getDevices: function() {
+        return devices;
     }
 }
