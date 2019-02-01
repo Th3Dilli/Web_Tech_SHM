@@ -14,6 +14,7 @@ import { Sonoff4chComponent } from './type/sonoff4ch/sonoff4ch.component';
 export class DeviceComponent implements OnInit {
   @Input() device: Device;
   @Output() getId = new EventEmitter<Device>();
+  @Output() getDevice = new EventEmitter<Device>();
 
   showInfo: Boolean;
   buttonText: String = 'OFF';
@@ -29,6 +30,10 @@ export class DeviceComponent implements OnInit {
 
   deleteDevice(device){
     this.getId.emit(device);
+  }
+
+  editDevice(device){
+    this.getDevice.emit(device);
   }
 
   infoToggle() {

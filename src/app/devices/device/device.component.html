@@ -1,6 +1,9 @@
 <mat-card-title>{{device.device_name}}
   <button id="deleteButton" mat-icon-button (click)="deleteDevice(device)">
-    <mat-icon>delete</mat-icon>
+  <mat-icon>delete</mat-icon>
+  </button>
+  <button id="editButton" mat-icon-button (click)="editDevice(device)">
+  <mat-icon>edit</mat-icon>
   </button>
 </mat-card-title>
 <mat-card-content>

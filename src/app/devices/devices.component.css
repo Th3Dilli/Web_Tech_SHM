@@ -111,7 +111,7 @@ mat-error{
   background-color: white;
 }
 
-#overlay{
+.overlay{
   position: fixed; /* Sit on top of the page content */
   width: 100%; /* Full width (cover the whole page) */
   height: 100%; /* Full height (cover the whole page) */
@@ -138,4 +138,20 @@ mat-error{
   color: white;
   display: inline-block;
   text-align: center;
+}
+
+#editBox{
+  width: 50%;
+  min-width: 40%;
+  text-align: center;
+  color: red;
+  border: 1px solid;
+  border-radius: 10px;
+  border-color: black;
+  font-weight: 100;
+  display: table;
+  margin: 0 auto;
+  position: relative;
+  top: 20%;
+  background-color: white;
 }
