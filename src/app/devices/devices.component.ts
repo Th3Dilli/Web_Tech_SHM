@@ -39,7 +39,8 @@ export class DevicesComponent implements OnInit {
       res.forEach(device => {
         this.rooms.add(device.name);
       });
-      // console.log(this.rooms);
+      console.log("test");
+      this.DeviceStateAll();
     });
 
     this.form = this.fb.group({
@@ -78,6 +79,16 @@ export class DevicesComponent implements OnInit {
       this.formSubmitAttempt = true;
     
   }
-
+  intervalStart() {
+    setInterval(this.DeviceStateAll, 1000);
+  }
+  DeviceStateAll() {
+    const url = 'http://localhost:3000/deviceState/ip';
+    this.http.get<any>(url).subscribe(response => {
+      console.log(response);
+    }, error => {
+      console.log(error);
+    });
+  }
 
 }
