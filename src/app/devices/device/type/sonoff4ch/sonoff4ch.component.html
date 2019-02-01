@@ -1,12 +1,43 @@
-<button mat-raised-button [ngClass]="{ 'statusBtnOn': power[0], 'statusBtnOff': !power[0]  }" (click)="buttonToggle(0)">
-  {{buttonText[0]}}
-</button>
-<button mat-raised-button [ngClass]="{ 'statusBtnOn': power[1], 'statusBtnOff': !power[1]  }" (click)="buttonToggle(1)">
-  {{buttonText[1]}}
-</button>
-<button mat-raised-button [ngClass]="{ 'statusBtnOn': power[2], 'statusBtnOff': !power[2]  }" (click)="buttonToggle(2)">
-  {{buttonText[2]}}
-</button>
-<button mat-raised-button [ngClass]="{ 'statusBtnOn': power[3], 'statusBtnOff': !power[3]  }" (click)="buttonToggle(3)">
-  {{buttonText[3]}}
-</button>
+<!--
+  <button mat-raised-button [ngClass]="{ 'statusBtnOn': power[0], 'statusBtnOff': !power[0]  }" (click)="buttonToggle(0)">
+    {{buttonText[0]}}
+  </button>
+  <button mat-raised-button [ngClass]="{ 'statusBtnOn': power[1], 'statusBtnOff': !power[1]  }" (click)="buttonToggle(1)">
+    {{buttonText[1]}}
+  </button>
+  <button mat-raised-button [ngClass]="{ 'statusBtnOn': power[2], 'statusBtnOff': !power[2]  }" (click)="buttonToggle(2)">
+    {{buttonText[2]}}
+  </button>
+  <button mat-raised-button [ngClass]="{ 'statusBtnOn': power[3], 'statusBtnOff': !power[3]  }" (click)="buttonToggle(3)">
+    {{buttonText[3]}}
+  </button> -->
+<div class="compContainer">
+  <div>
+    <p>Power 1</p>
+    <button mat-raised-button class="statusBtn" [ngClass]="{ 'statusBtnOn': power[0], 'statusBtnOff': !power[0]  }"
+      (click)="buttonToggle(0)">
+      {{buttonText[0]}}
+    </button>
+  </div>
+  <div>
+    <p>Power 2</p>
+    <button mat-raised-button class="statusBtn" [ngClass]="{ 'statusBtnOn': power[1], 'statusBtnOff': !power[1]  }"
+      (click)="buttonToggle(1)">
+      {{buttonText[1]}}
+    </button>
+  </div>
+  <div>
+    <p>Power 3</p>
+    <button mat-raised-button class="statusBtn" [ngClass]="{ 'statusBtnOn': power[2], 'statusBtnOff': !power[2]  }"
+      (click)="buttonToggle(2)">
+      {{buttonText[2]}}
+    </button>
+  </div>
+  <div>
+    <p>Power 4</p>
+    <button mat-raised-button class="statusBtn" [ngClass]="{ 'statusBtnOn': power[3], 'statusBtnOff': !power[3]  }"
+      (click)="buttonToggle(3)">
+      {{buttonText[3]}}
+    </button>
+  </div>
+</div>

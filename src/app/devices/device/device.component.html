@@ -1,26 +1,20 @@
 <mat-card-title>{{device.device_name}}</mat-card-title>
 <mat-card-content>
   <mat-list>
-    <mat-list-item>
-      <ul>
-        <li>
-          <p class='lable'>ModuleType:</p>
-        </li>
-        <li>
-          <p class='detail'>
-            {{device.module_type}}
-          </p>
-        </li>
-      </ul>
+    <mat-list-item class='lable'>
+      ModuleType:
     </mat-list-item>
-
-    <br>
+    <mat-list-item class='detail'>
+      {{device.module_type}}
+    </mat-list-item>
     <mat-list-item>
       <ng-template appType></ng-template>
     </mat-list-item>
     <mat-list-item>
       <button mat-raised-button [ngClass]="{ 'infoBtnOn': showInfo, 'infoBtnOff': !showInfo  }" (click)="infoToggle()">Info</button>
     </mat-list-item>
+    <mat-list-item>
+      <app-device-detail [device]="device" [showInfo]="showInfo"></app-device-detail>
+    </mat-list-item>
   </mat-list>
-  <app-device-detail [device]="device" [showInfo]="showInfo"></app-device-detail>
 </mat-card-content>
