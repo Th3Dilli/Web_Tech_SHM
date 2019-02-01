@@ -29,7 +29,7 @@ export class DevicesComponent implements OnInit {
   deviceName: String;
   deviceId: number;
   deviceEdit: Device;
-  edit:boolean;
+  edit: boolean;
   constructor(
     private device_service: DeviceService,
     private _router: Router,
@@ -40,14 +40,8 @@ export class DevicesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.deviceData$ = this.device_service.getAllDevices();
-    this.deviceData$.subscribe((res) => {
-      this.devices = res.devices;
-      res.rooms.forEach(room => {
-        this.rooms.push(room.name);
-      });
-      this.DeviceStateAll();
-    });
+    this.getDeviceData();
+    this.DeviceStateAll();
 
     this.form = this.fb.group({
       device_name: ['', [Validators.required, Validators.maxLength(45)]],
@@ -76,7 +70,7 @@ export class DevicesComponent implements OnInit {
       this.http.post<any>(url, this.form.value)
         .subscribe(res => {
           this.snackBar.open('Device successfully added', 'Okay', { duration: 3000 });
-          this.devices$ = this.device_service.getAllDevices();
+          this.getDeviceData();
           this.formSubmitAttempt = false;
         }, error => {
           this.snackBar.open('Failed to Add Device', 'Okay', { duration: 3000 });
@@ -110,7 +104,7 @@ export class DevicesComponent implements OnInit {
         .subscribe(res => {
           console.log(res);
           this.snackBar.open('Device successfully deleted', 'Okay', { duration: 3000 });
-          this.devices$ = this.device_service.getAllDevices();
+          this.getDeviceData();
         }, error => {
           console.log(error);
         });
@@ -124,5 +118,15 @@ export class DevicesComponent implements OnInit {
     this.edit = !this.edit;
     this.deviceEdit = device;
     console.log(this.deviceEdit);
-}
+  }
+
+  getDeviceData() {
+    this.deviceData$ = this.device_service.getAllDevices();
+    this.deviceData$.subscribe((res) => {
+      this.devices = res.devices;
+      res.rooms.forEach(room => {
+        this.rooms.push(room.name);
+      });
+    });
+  }
 }

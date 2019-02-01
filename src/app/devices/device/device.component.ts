@@ -21,18 +21,18 @@ export class DeviceComponent implements OnInit {
   component: any;
 
   @ViewChild(TypeDirective) appType: TypeDirective;
-  
+
   constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
 
   ngOnInit() {
     this.loadComponent();
   }
 
-  deleteDevice(device){
+  deleteDevice(device) {
     this.getId.emit(device);
   }
 
-  editDevice(device){
+  editDevice(device) {
     this.getDevice.emit(device);
   }
 
