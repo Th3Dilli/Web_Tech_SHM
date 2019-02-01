@@ -1,4 +1,8 @@
-<mat-card-title>{{device.device_name}}</mat-card-title>
+<mat-card-title>{{device.device_name}}
+  <button id="deleteButton" mat-icon-button (click)="deleteDevice(device)">
+    <mat-icon>delete</mat-icon>
+  </button>
+</mat-card-title>
 <mat-card-content>
   <mat-list>
     <mat-list-item>
@@ -13,7 +17,6 @@
         </li>
       </ul>
     </mat-list-item>
-
     <br>
     <mat-list-item>
       <ng-template appType></ng-template>
@@ -24,3 +27,4 @@
   </mat-list>
   <app-device-detail [device]="device" [showInfo]="showInfo"></app-device-detail>
 </mat-card-content>
+

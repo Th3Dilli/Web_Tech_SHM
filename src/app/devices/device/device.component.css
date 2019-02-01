@@ -9,13 +9,10 @@ mat-card-content {
   padding: 1em;
 }
 
-
 .mat-list .mat-list-item {
   height: 2em;
   /* default is 72px */
 }
-
-
 
 .infoBtnOn
 {
@@ -47,3 +44,12 @@ ul{
   padding: 0;
   list-style-type: none;
 }
+
+#deleteButton{
+  float: right;
+  bottom: 5px;
+  background-color: crimson;
+  color: white;
+}
+
+

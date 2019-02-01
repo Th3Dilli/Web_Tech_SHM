@@ -4,7 +4,7 @@
     <mat-tab *ngFor="let tab of rooms" label="{{tab}}">
       <div *ngIf="devices" class="maincontent">
         <mat-card *ngFor="let device of devices | filterByName: tab">
-          <app-device [device]="device"></app-device>
+          <app-device (getId)="deleteDevice($event)" [device]="device"></app-device>
         </mat-card>
       </div>
     </mat-tab>
@@ -61,4 +61,12 @@
     <mat-error *ngIf="isFieldInvalid('device_ip')">Please enter a valid IP with maxLength: 15</mat-error>
     <mat-error *ngIf="isFieldInvalid('device_mac')">Please enter a valid MAC with maxLength: 17</mat-error>
   </div>
+</div>
+<div id="overlay" *ngIf="delete">
+<div id="deleteConfirmation">
+  <p>Are you sure to delete {{deviceName}} ?</p>
+  <mat-divider></mat-divider>
+  <button class="confirmBtn"(click)="confirmDelete(true)" mat-button>Yes</button>
+  <button class="confirmBtn" (click)="confirmDelete(false)" mat-button>No</button>
+</div>
 </div>

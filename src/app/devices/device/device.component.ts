@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ComponentFactoryResolver } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ComponentFactoryResolver, EventEmitter, Output } from '@angular/core';
 import { Device } from '../../services/device';
 import { TypeDirective } from './type.directive';
 import { SonoffbasicComponent } from './type/sonoffbasic/sonoffbasic.component';
@@ -12,20 +12,24 @@ import { Sonoff4chComponent } from './type/sonoff4ch/sonoff4ch.component';
 })
 
 export class DeviceComponent implements OnInit {
-
   @Input() device: Device;
+  @Output() getId = new EventEmitter<Device>();
+
   showInfo: Boolean;
   buttonText: String = 'OFF';
   component: any;
 
   @ViewChild(TypeDirective) appType: TypeDirective;
-
+  
   constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
 
   ngOnInit() {
     this.loadComponent();
   }
 
+  deleteDevice(device){
+    this.getId.emit(device);
+  }
 
   infoToggle() {
     this.showInfo = !this.showInfo;

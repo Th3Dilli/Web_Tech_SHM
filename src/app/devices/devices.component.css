@@ -94,3 +94,48 @@ mat-error{
   margin: 0.5px;
   text-align: center;
 }
+
+#deleteConfirmation{
+  width: 50%;
+  min-width: 40%;
+  text-align: center;
+  color: red;
+  border: 1px solid;
+  border-radius: 10px;
+  border-color: black;
+  font-weight: 100;
+  display: table;
+  margin: 0 auto;
+  position: relative;
+  top: 50%;
+  background-color: white;
+}
+
+#overlay{
+  position: fixed; /* Sit on top of the page content */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0; 
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  cursor: pointer; /* Add a pointer on hover */
+}
+
+.confirmBtn  {
+  width: 30%;
+  margin: 1%; 
+  background-color: crimson;
+  color: white;
+  display: inline-block;
+  text-align: center;
+}
+.confirmBtn:nth-child(2n)  {
+  width: 30%;
+  margin: 1%; 
+  background-color: rgb(189, 189, 189);
+  color: white;
+  display: inline-block;
+  text-align: center;
+}

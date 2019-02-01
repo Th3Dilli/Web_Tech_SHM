@@ -96,26 +96,39 @@ router.post('/addDevice', checkAuth, (req, res) => {
   });
 });
 
+router.delete('/deleteDevice/:id', checkAuth, (req, res) => {
+  
+  let device_id = req.params.id;
+  console.log(device_id);
+  let queryRoom = `DELETE FROM rooms_has_device WHERE (device_device_id = ?)`
+  _db.query(queryRoom, [device_id], (error, result) => {
 
-// router.get('/detail/:id', checkAuth, (req, res) => {
+    if (error) {
+      console.log(error)
+      res.status(400).json({
+        message: "Error Insert 2",
+      });
+    } else {
+      let queryDevice = `DELETE FROM device WHERE (device_id = ?)`
+      _db.query(queryDevice, [device_id], (error, result) => {
 
-//   let id = req.params.id;
-//   let query = "SELECT * FROM device where device_id = ?";
+        if (error) {
+          console.log(error)
+          res.status(400).json({
+            message: "Error Insert 2",
+          });
+        } else {
+          res.status(200).json({
+            message: "Device sucessful deleted"
+          });
+        }
 
-//   _db.query(query, [id], (error, results) => {
-//     if (error) {
-//       res.status(400).json({
-//         message: "Error"
-//       });
-//     } else if (results.length < 1) {
-//       res.status(404).json({
-//         message: "Device not found"
-//       });
-//     } else {
-//       res.status(200).json(results);
-//     }
-//   });
+      });
 
-// });
+    }
+
+  });
+
+});
 
 module.exports = router;

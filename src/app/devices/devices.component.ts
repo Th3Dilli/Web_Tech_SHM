@@ -23,6 +23,10 @@ export class DevicesComponent implements OnInit {
   isOn: Boolean;
   openAddBox: Boolean = false;
   private formSubmitAttempt: boolean;
+  delete: Boolean;
+  deleteConfirm: Boolean;
+  deviceName: String;
+  deviceId: number;
 
   constructor(
     private device_service: DeviceService,
@@ -77,6 +81,29 @@ export class DevicesComponent implements OnInit {
     }
       this.formSubmitAttempt = true;
     
+  }
+
+  deleteDevice(device) {
+    this.delete = !this.delete;
+    this.deviceName = device.device_name;
+    this.deviceId = device.device_id;
+}
+
+  confirmDelete(confirm){
+    if(confirm === true){
+      let url = `http://localhost:3000/devices/deleteDevice/${this.deviceId}`
+      this.http.delete<any>(url)
+      .subscribe(res => {
+        console.log(res)
+        this.snackBar.open('Device successfully deleted', 'Okay', { duration: 3000 });
+        this.devices$ = this.device_service.getAllDevices();
+      }, error => {
+        console.log(error);
+      })
+      this.delete = !this.delete;
+    }else if(confirm === false){
+      this.delete = !this.delete;
+    }
   }
 
 
