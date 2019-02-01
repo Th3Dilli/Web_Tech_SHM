@@ -17,7 +17,8 @@ import { IntervalService } from '../services/interval.service';
 
 export class DevicesComponent implements OnInit {
 
-  form: FormGroup;
+  addDeviceForm: FormGroup;
+  editDeviceForm: FormGroup;
   deviceData$: Observable<DeviceData>;
   devices: Device[];
   rooms: Array<String> = new Array<String>();
@@ -30,7 +31,7 @@ export class DevicesComponent implements OnInit {
   deviceName: String;
   deviceId: number;
   deviceEdit: Device;
-  edit: boolean;
+  edit: Boolean = false;
   constructor(
     private device_service: DeviceService,
     private _router: Router,
@@ -44,7 +45,7 @@ export class DevicesComponent implements OnInit {
     this.getDeviceData();
 
 
-    this.form = this.fb.group({
+    this.addDeviceForm = this.fb.group({
       device_name: ['', [Validators.required, Validators.maxLength(45)]],
       room_name: ['', [Validators.required, Validators.maxLength(45)]],
       module_type: ['', [Validators.required, Validators.maxLength(45)]],
@@ -54,21 +55,20 @@ export class DevicesComponent implements OnInit {
   }
 
   openBox() {
-    console.log(this.openAddBox);
     this.openAddBox = !this.openAddBox;
   }
 
   isFieldInvalid(field: string) {
     return (
-      (!this.form.get(field).valid && this.form.get(field).touched) ||
-      (this.form.get(field).untouched && this.formSubmitAttempt)
+      (!this.addDeviceForm.get(field).valid && this.addDeviceForm.get(field).touched) ||
+      (this.addDeviceForm.get(field).untouched && this.formSubmitAttempt)
     );
   }
 
   addDevice() {
-    if (this.form.valid) {
+    if (this.addDeviceForm.valid) {
       const url = 'http://localhost:3000/devices/addDevice';
-      this.http.post<any>(url, this.form.value)
+      this.http.post<any>(url, this.addDeviceForm.value)
         .subscribe(res => {
           this.snackBar.open('Device successfully added', 'Okay', { duration: 3000 });
           this.getDeviceData();
@@ -131,6 +131,7 @@ export class DevicesComponent implements OnInit {
     } else {
       this.editDeviceForm = null;
     }
+
   }
 
   editDeviceUpdate() {

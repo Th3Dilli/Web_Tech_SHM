@@ -40,6 +40,7 @@ CREATE TABLE IF NOT EXISTS `smarthome`.`device` (
   `device_name` VARCHAR(45) NULL,
   `ip` VARCHAR(15) NULL,
   `mac` VARCHAR(17) NULL,
+  PRIMARY KEY (`device_id`))
 ENGINE = InnoDB;
 
 
