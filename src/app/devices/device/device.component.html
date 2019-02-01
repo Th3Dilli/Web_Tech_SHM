@@ -1,4 +1,8 @@
-<mat-card-title>{{device.device_name}}</mat-card-title>
+<mat-card-title>{{device.device_name}}
+  <button id="deleteButton" mat-icon-button (click)="deleteDevice(device)">
+    <mat-icon>delete</mat-icon>
+  </button>
+</mat-card-title>
 <mat-card-content>
   <mat-list>
     <mat-list-item class='lable'>
