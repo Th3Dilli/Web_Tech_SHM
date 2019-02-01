@@ -134,4 +134,22 @@ router.delete('/deleteDevice/:id', checkAuth, (req, res) => {
 
 });
 
+router.patch('/edit', checkAuth, (req, res) => {
+
+  const sql = 'UPDATE `device` SET device_name = ?, ip = ?, mac = ? WHERE device_id = ?;';
+  
+  _db.query(sql, [req.body.editDevice_name, req.body.editDevice_ip, req.body.editDevice_mac,req.body.editDevice_id], (error, results) => {
+    if(error)
+    {
+      res.status(404).json({
+        message: error.message,
+      });
+    } else {
+      res.status(200).json({
+        message: "Update Successful",
+      });
+    }
+  });
+});
+
 module.exports = router;

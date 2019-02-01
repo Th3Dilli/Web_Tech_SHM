@@ -16,7 +16,8 @@ import { MatSnackBar } from '@angular/material';
 
 export class DevicesComponent implements OnInit {
 
-  form: FormGroup;
+  addDeviceForm: FormGroup;
+  editDeviceForm: FormGroup;
   deviceData$: Observable<DeviceData>;
   devices: Device[];
   rooms: Array<String> = new Array<String>();
@@ -29,7 +30,7 @@ export class DevicesComponent implements OnInit {
   deviceName: String;
   deviceId: number;
   deviceEdit: Device;
-  edit: boolean;
+  edit: Boolean = false;
   constructor(
     private device_service: DeviceService,
     private _router: Router,
@@ -43,7 +44,7 @@ export class DevicesComponent implements OnInit {
     this.getDeviceData();
     this.DeviceStateAll();
 
-    this.form = this.fb.group({
+    this.addDeviceForm = this.fb.group({
       device_name: ['', [Validators.required, Validators.maxLength(45)]],
       room_name: ['', [Validators.required, Validators.maxLength(45)]],
       module_type: ['', [Validators.required, Validators.maxLength(45)]],
@@ -53,21 +54,20 @@ export class DevicesComponent implements OnInit {
   }
 
   openBox() {
-    console.log(this.openAddBox);
     this.openAddBox = !this.openAddBox;
   }
 
   isFieldInvalid(field: string) {
     return (
-      (!this.form.get(field).valid && this.form.get(field).touched) ||
-      (this.form.get(field).untouched && this.formSubmitAttempt)
+      (!this.addDeviceForm.get(field).valid && this.addDeviceForm.get(field).touched) ||
+      (this.addDeviceForm.get(field).untouched && this.formSubmitAttempt)
     );
   }
 
   addDevice() {
-    if (this.form.valid) {
+    if (this.addDeviceForm.valid) {
       const url = 'http://localhost:3000/devices/addDevice';
-      this.http.post<any>(url, this.form.value)
+      this.http.post<any>(url, this.addDeviceForm.value)
         .subscribe(res => {
           this.snackBar.open('Device successfully added', 'Okay', { duration: 3000 });
           this.getDeviceData();
@@ -82,6 +82,7 @@ export class DevicesComponent implements OnInit {
   // intervalStart() {
   //   setInterval(this.DeviceStateAll, 1000);
   // }
+
   DeviceStateAll() {
     const url = 'http://localhost:3000/deviceState/ip';
     this.http.get<any>(url).subscribe(response => {
@@ -99,7 +100,7 @@ export class DevicesComponent implements OnInit {
 
   confirmDelete(confirm) {
     if (confirm === true) {
-      const url = `http://localhost:3000/devices/deleteDevice/${this.deviceId}`
+      const url = `http://localhost:3000/devices/deleteDevice/${this.deviceId}`;
       this.http.delete<any>(url)
         .subscribe(res => {
           console.log(res);
@@ -117,13 +118,39 @@ export class DevicesComponent implements OnInit {
   editDevice(device) {
     this.edit = !this.edit;
     this.deviceEdit = device;
-    console.log(this.deviceEdit);
+    if (this.edit) {
+      console.log(this.deviceEdit);
+      this.editDeviceForm = this.fb.group({
+        editDevice_id: [this.deviceEdit.device_id, [Validators.required]],
+        editDevice_name: [this.deviceEdit.device_name, [Validators.required, Validators.maxLength(45)]],
+        editDevice_ip: [this.deviceEdit.ip, [Validators.required, Validators.maxLength(45)]],
+        editDevice_mac: [this.deviceEdit.mac, [Validators.required, Validators.maxLength(45)]]
+      });
+    } else {
+      this.editDeviceForm = null;
+    }
+
+  }
+
+  editDeviceUpdate() {
+    this.edit = !this.edit;
+    const url = `http://localhost:3000/devices/edit`;
+    this.http.patch<any>(url, this.editDeviceForm.value)
+      .subscribe(res => {
+        console.log(res);
+        this.snackBar.open('Device successfully updated', 'Okay', { duration: 3000 });
+        this.getDeviceData();
+      }, error => {
+        console.log(error);
+        this.snackBar.open(error, 'Okay', { duration: 3000 });
+      });
   }
 
   getDeviceData() {
     this.deviceData$ = this.device_service.getAllDevices();
     this.deviceData$.subscribe((res) => {
       this.devices = res.devices;
+      this.rooms = new Array<String>();
       res.rooms.forEach(room => {
         this.rooms.push(room.name);
       });
