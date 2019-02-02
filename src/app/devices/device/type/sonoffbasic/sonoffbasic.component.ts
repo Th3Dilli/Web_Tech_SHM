@@ -30,5 +30,9 @@ export class SonoffbasicComponent implements OnInit {
       console.log(error);
     });
   }
-
+  checkState() {
+    this.isOn = this.device.stat.POWER1;
+    this.buttonText = (this.isOn) ? 'ON' : 'OFF';
+    console.log(this.device);
+  }
 }

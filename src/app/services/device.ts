@@ -5,7 +5,7 @@ export interface Device {
     ip: string;
     room_name: string;
     mac: String;
-    stat: Object;
+    stat: any;
   }
 export interface Room {
   rooms_id: Number;

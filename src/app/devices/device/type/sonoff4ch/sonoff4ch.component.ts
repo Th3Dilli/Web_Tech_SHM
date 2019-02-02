@@ -19,7 +19,8 @@ export class Sonoff4chComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    // this.power = [this.device.stat.POWER1, this.device.stat.POWER2, this.device.stat.POWER3, this.device.stat.POWER4];
+    console.log(this.device);
   }
 
   buttonToggle(index) {
@@ -31,5 +32,12 @@ export class Sonoff4chComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+  }
+  checkState() {
+    this.power = [this.device.stat.POWER1, this.device.stat.POWER2, this.device.stat.POWER3, this.device.stat.POWER4];
+    for (let i = 0; i < 4; i++) {
+      this.buttonText[i] = (this.power[i]) ? 'ON' : 'OFF';
+    }
+    console.log(this.device);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DeviceService } from '../services/device.service';
 import { Device, DeviceData } from '../services/device';
 import { Router } from '@angular/router';
@@ -16,7 +16,7 @@ import { DevicesStats } from '../services/interval';
   styleUrls: ['./devices.component.css'],
 })
 
-export class DevicesComponent implements OnInit, OnChanges {
+export class DevicesComponent implements OnInit {
 
   addDeviceForm: FormGroup;
   editDeviceForm: FormGroup;
@@ -62,10 +62,6 @@ export class DevicesComponent implements OnInit, OnChanges {
       device_ip: ['', [Validators.required, Validators.maxLength(15)]],
       device_mac: ['', [Validators.required, Validators.maxLength(17)]],
     });
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
   }
 
   openBox() {
@@ -164,16 +160,13 @@ export class DevicesComponent implements OnInit, OnChanges {
     this.deviceData$.subscribe(() => {
       this.intervalS.DeviceStateAll().subscribe(data => {
         this.deviceStats = data;
-        this.devices.forEach(device => {
-          for (let i = 0; i < data.devices.length; i++) {
-            if (device.ip === data.devices[i].ip) {
-              device.stat = data.devices[i];
+            for (let i = 0; i < this.devices.length; i++) {
+              this.devices[i].stat = data.devices[this.devices[i].ip];
             }
-          }
         });
-      });
     });
-
-
   }
+
+
 }
+
