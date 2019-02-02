@@ -40,7 +40,8 @@ CREATE TABLE IF NOT EXISTS `smarthome`.`device` (
   `device_name` VARCHAR(45) NULL,
   `ip` VARCHAR(15) NULL,
   `mac` VARCHAR(17) NULL,
-  PRIMARY KEY (`device_id`))
+  PRIMARY KEY (`device_id`),
+  UNIQUE INDEX `ip_UNIQUE` (`ip` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
@@ -149,6 +150,17 @@ INSERT INTO `smarthome`.`rooms_has_device` (`rooms_rooms_id`, `device_device_id`
 INSERT INTO `smarthome`.`rooms_has_device` (`rooms_rooms_id`, `device_device_id`) VALUES (2, 3);
 INSERT INTO `smarthome`.`rooms_has_device` (`rooms_rooms_id`, `device_device_id`) VALUES (3, 1);
 INSERT INTO `smarthome`.`rooms_has_device` (`rooms_rooms_id`, `device_device_id`) VALUES (4, 4);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `smarthome`.`users_has_device`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `smarthome`;
+INSERT INTO `smarthome`.`users_has_device` (`users_users_id`, `device_device_id`) VALUES (2, 2);
+INSERT INTO `smarthome`.`users_has_device` (`users_users_id`, `device_device_id`) VALUES (2, 4);
 
 COMMIT;
 
