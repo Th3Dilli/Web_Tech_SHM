@@ -8,6 +8,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material';
 import { IntervalService } from '../services/interval.service';
+import { DevicesStats } from '../services/interval';
+import { element } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-devices',
@@ -21,6 +23,7 @@ export class DevicesComponent implements OnInit {
   editDeviceForm: FormGroup;
   deviceData$: Observable<DeviceData>;
   devices: Device[];
+  deviceStats: DevicesStats;
   rooms: Array<String> = new Array<String>();
   module_types: Array<String> = ['SONOFF_BASIC', 'SONOFF_TOUCH', 'SONOFF_4CH'];
   isOn: Boolean;
@@ -38,12 +41,13 @@ export class DevicesComponent implements OnInit {
     public jwtHelper: JwtHelperService,
     private fb: FormBuilder,
     private http: HttpClient,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private intervalS: IntervalService
   ) { }
 
   ngOnInit() {
     this.getDeviceData();
-
+    this.getDevicesStats();
 
     this.addDeviceForm = this.fb.group({
       device_name: ['', [Validators.required, Validators.maxLength(45)]],
@@ -91,7 +95,6 @@ export class DevicesComponent implements OnInit {
     }, error => {
       console.log(error);
     });
-    
   }*/
 
   deleteDevice(device) {
@@ -157,5 +160,24 @@ export class DevicesComponent implements OnInit {
         this.rooms.push(room.name);
       });
     });
+  }
+
+  getDevicesStats() {
+    this.deviceData$.subscribe(deviceData => {
+      this.intervalS.DeviceStateAll().subscribe(data => {
+        this.deviceStats = data;
+        this.devices.forEach(device => {
+          for (let i = 0; i < data.length; i++) {
+            if (device.ip === data[i].ip) {
+              device.stat = data[i];
+            }
+          }
+
+        });
+        console.log(data);
+        console.log(this.devices);
+      });
+    });
+
   }
 }

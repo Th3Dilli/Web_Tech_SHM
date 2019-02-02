@@ -1,18 +1,15 @@
-export interface DevicesStats
-{
-    devices: Device_4CH[];
+export interface DevicesStats {
+    devices: Object[];
 }
 
-export interface Device_Basic
-{
+export interface DeviceBasic {
     ip: String;
     module_type: String;
     POWER: String;
 }
 
 
-export interface Device_4CH
-{
+export interface Device4CH {
     ip: String;
     module_type: String;
     POWER1: String;
