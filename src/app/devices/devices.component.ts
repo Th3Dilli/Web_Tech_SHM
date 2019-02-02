@@ -167,15 +167,14 @@ export class DevicesComponent implements OnInit {
       this.intervalS.DeviceStateAll().subscribe(data => {
         this.deviceStats = data;
         this.devices.forEach(device => {
-          for (let i = 0; i < data.length; i++) {
-            if (device.ip === data[i].ip) {
-              device.stat = data[i];
+          for (let i = 0; i < data.devices.length; i++) {
+            if (device.ip === data.devices[i].ip) {
+              device.stat = data.devices[i];
             }
           }
-
         });
-        console.log(data);
-        console.log(this.devices);
+        // console.log(data.devices.length);
+        console.log(this.devices[0].stat);
       });
     });
 

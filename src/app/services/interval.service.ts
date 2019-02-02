@@ -10,7 +10,7 @@ export class IntervalService {
     private http: HttpClient
   ) { }
 
-  DeviceStateAll(){
+  DeviceStateAll() {
     const url = 'http://localhost:3000/deviceState/ip';
     return this.http.get<any>(url);
   }

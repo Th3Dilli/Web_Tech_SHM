@@ -43,24 +43,24 @@ export class DeviceComponent implements OnInit {
   loadComponent() {
     switch (this.device.module_type) {
       case 'SONOFF_4CH':
-      {
-        this.component = Sonoff4chComponent;
-        break;
-      }
+        {
+          this.component = Sonoff4chComponent;
+          break;
+        }
       case 'SONOFF_BASIC':
-      {
-        this.component = SonoffbasicComponent;
-        break;
-      }
+        {
+          this.component = SonoffbasicComponent;
+          break;
+        }
       case 'SONOFF_TOUCH':
-      {
-        this.component = SonoffbasicComponent;
-        break;
-      }
+        {
+          this.component = SonoffbasicComponent;
+          break;
+        }
       default:
-      {
-        this.component = SonoffbasicComponent;
-      }
+        {
+          this.component = SonoffbasicComponent;
+        }
     }
 
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.component);
