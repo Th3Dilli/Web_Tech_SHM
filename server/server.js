@@ -28,12 +28,14 @@ let deviceRoutes = require('./routes/device');
 let userRoutes = require('./routes/updateUser');
 let toggleDevice = require('./routes/toggleDevice');
 let deviceState = require('././routes/deviceState');
+let roomRoutes = require('././routes/room');
 
 app.use('/login', loginRoutes);
 app.use('/devices', deviceRoutes);
 app.use('/user', userRoutes);
 app.use('/device', toggleDevice);
 app.use('/deviceState', deviceState);
+app.use('/room', roomRoutes);
 
 db.initDb.then(() => {
     app.listen(PORT, function () {

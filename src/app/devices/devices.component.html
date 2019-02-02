@@ -8,6 +8,13 @@
         </mat-card>
       </div>
     </mat-tab>
+    <mat-tab disabled>
+      <ng-template mat-tab-label>
+        <button mat-raised-button id="addButtonTab" (click)=" showRoomSettings()">
+          <mat-icon>settings</mat-icon> Rooms
+        </button>
+      </ng-template>
+    </mat-tab>
   </mat-tab-group>
 </div>
 <div id="addButton">
@@ -64,10 +71,9 @@
 </div>
 <div class="overlay" *ngIf="delete">
   <div id="deleteConfirmation">
-    <p>Are you sure to delete {{deviceName}} ?</p>
-    <mat-divider></mat-divider>
-    <button class="confirmBtn" (click)="confirmDelete(true)" mat-button>Yes</button>
-    <button class="confirmBtn" (click)="confirmDelete(false)" mat-button>No</button>
+    <p>Are you sure to delete <strong style="color:rgb(15, 231, 123)">{{deviceName}}</strong>?</p>
+    <button class="confirmBtn" (click)="confirmDelete(true)" mat-raised-button>Yes</button>
+    <button class="confirmBtn" (click)="confirmDelete(false)" mat-raised-button>No</button>
   </div>
 </div>
 <div class="overlay" *ngIf="edit">
@@ -87,7 +93,47 @@
         <mat-label>Device MAC</mat-label>
         <input formControlName="editDevice_mac" matInput value={{deviceEdit.mac}}>
       </mat-form-field><br>
-      <button  type="submit" id="accept"  mat-stroked-button>Save</button>
-      <button  type="cancle" id="cancel" (click)="edit=false" mat-stroked-button>Cancel</button> <br>
+      <button type="submit" id="accept" mat-stroked-button><strong>SAVE</strong></button>
+      <button type="cancel" id="cancel" (click)="edit=false" mat-stroked-button><strong>CANCEL</strong></button> <br>
     </form>
   </div>
+</div>
+<div class="overlay" *ngIf="showRoomSetting">
+  <div id="editBox">
+    <mat-tab-group mat-stretch-tabs>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>add</mat-icon>
+          Add Room
+        </ng-template><br>
+        <br><b>Enter Room Name for adding a new Room.</b>
+        <form [formGroup]="addRoomForm" (ngSubmit)="addRoom()" autocomplete="off">
+          <mat-form-field autocomplete="off">
+            <mat-label>Room Name</mat-label>
+            <input formControlName="room_name" matInput>
+          </mat-form-field><br>
+          <button type="submit" id="accept" mat-stroked-button><strong>SAVE</strong></button>
+          <button type="cancel" id="cancel" (click)="showRoomSetting=false" mat-stroked-button><strong>CANCEL</strong></button><br>
+        </form>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>delete</mat-icon>
+          Delete Room
+        </ng-template><br>
+        <br><b>Select Room Name you want to delete</b>
+        <form [formGroup]="deleteRoomForm" (ngSubmit)="deleteRoom()" autocomplete="off">
+          <mat-form-field>
+            <mat-select formControlName="room_name" placeholder="Select Room">
+              <mat-option *ngFor="let tab of rooms" [value]="tab">
+                {{tab}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field><br>
+          <button type="submit" id="accept" mat-stroked-button><strong>SAVE</strong></button>
+          <button type="cancel" id="cancel" (click)="showRoomSetting=false" mat-stroked-button><strong>CANCEL</strong></button><br>
+        </form>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

@@ -23,6 +23,8 @@ export class DevicesComponent implements OnInit, OnDestroy {
 
   addDeviceForm: FormGroup;
   editDeviceForm: FormGroup;
+  deleteRoomForm: FormGroup;
+  addRoomForm: FormGroup;
   deviceData$: Observable<DeviceData>;
   devices: Device[];
   deviceStats: DevicesStats;
@@ -39,6 +41,8 @@ export class DevicesComponent implements OnInit, OnDestroy {
   edit: Boolean = false;
 
   intervalHandle: any;
+
+  showRoomSetting: boolean;
 
   constructor(
     private device_service: DeviceService,
@@ -67,6 +71,15 @@ export class DevicesComponent implements OnInit, OnDestroy {
       device_ip: ['', [Validators.required, Validators.maxLength(15)]],
       device_mac: ['', [Validators.required, Validators.maxLength(17)]],
     });
+
+    this.deleteRoomForm = this.fb.group({
+      room_name: ['', [Validators.required, Validators.maxLength(45)]],
+    });
+
+    this.addRoomForm = this.fb.group({
+      room_name: ['', [Validators.required, Validators.maxLength(45)]],
+    });
+
   }
 
   ngOnDestroy() {
@@ -86,6 +99,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
 
   addDevice() {
     if (this.addDeviceForm.valid) {
+      this.openAddBox = !this.openAddBox;
       const url = 'http://localhost:3000/devices/addDevice';
       this.http.post<any>(url, this.addDeviceForm.value)
         .subscribe(res => {
@@ -97,7 +111,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
         });
     }
     this.formSubmitAttempt = true;
-
+    this.addDeviceForm.reset();
   }
 
   deleteDevice(device) {
@@ -141,17 +155,19 @@ export class DevicesComponent implements OnInit, OnDestroy {
   }
 
   editDeviceUpdate() {
-    this.edit = !this.edit;
-    const url = `http://localhost:3000/devices/edit`;
-    this.http.patch<any>(url, this.editDeviceForm.value)
-      .subscribe(res => {
-        console.log(res);
-        this.snackBar.open('Device successfully updated', 'Okay', { duration: 3000 });
-        this.getDeviceData();
-      }, error => {
-        console.log(error);
-        this.snackBar.open(error, 'Okay', { duration: 3000 });
-      });
+    if (this.editDeviceForm.valid) {
+      this.edit = !this.edit;
+      const url = `http://localhost:3000/devices/edit`;
+      this.http.patch<any>(url, this.editDeviceForm.value)
+        .subscribe(res => {
+          console.log(res);
+          this.snackBar.open('Device successfully updated', 'Okay', { duration: 3000 });
+          this.getDeviceData();
+        }, error => {
+          console.log(error);
+          this.snackBar.open(error, 'Okay', { duration: 3000 });
+        });
+    }
   }
 
   getDeviceData() {
@@ -174,6 +190,40 @@ export class DevicesComponent implements OnInit, OnDestroy {
         }
       });
     });
+  }
+
+  showRoomSettings() {
+    this.showRoomSetting = !this.showRoomSetting;
+  }
+
+  deleteRoom() {
+    if (this.deleteRoomForm.valid) {
+      this.showRoomSetting = !this.showRoomSetting;
+      let url = "http://localhost:3000/room/deleteRoom"
+      this.http.patch<any>(url, this.deleteRoomForm.value)
+        .subscribe(res => {
+          this.snackBar.open('Room deleted', 'Okay', { duration: 3000 });
+          this.getDeviceData();
+        }, err => {
+          this.snackBar.open(err, 'Okay', { duration: 3000 });
+        })
+    }
+    this.deleteRoomForm.reset();
+  }
+
+  addRoom() {
+    if (this.addRoomForm.valid) {
+      this.showRoomSetting = !this.showRoomSetting;
+      let url = "http://localhost:3000/room/addRoom"
+      this.http.post<any>(url, this.addRoomForm.value)
+        .subscribe(res => {
+          this.snackBar.open('Room added', 'Okay', { duration: 3000 });
+          this.getDeviceData();
+        }, err => {
+          this.snackBar.open(err, 'Okay', { duration: 3000 });
+        })
+    }
+    this.addRoomForm.reset();
   }
 
 
