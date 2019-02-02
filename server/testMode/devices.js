@@ -25,7 +25,8 @@ let devices = {
 }
 
 
-
+let time = new Date().getTime();
+console.log(time);
 
 
 module.exports = {
@@ -34,6 +35,14 @@ module.exports = {
     },
     setDevicesData: function (ip, power, state) {
         devices[ip][power] = state;
+        console.log("set device");
         console.log(devices[ip]);
+    },
+    getTimeN: function() {
+        return time;
+    },
+    setTimeN: function (timeNew) {
+        time = new Date().setTime(timeNew);
     }
+    
 };

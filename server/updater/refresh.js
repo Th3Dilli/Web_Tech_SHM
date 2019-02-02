@@ -4,11 +4,10 @@ const devicesData = require('../testMode/devices');
 
 const testMode = require("../config").testMode;
 
-let countUsersLoggedIn = 0;
-let usersLoggedIn = false;
 let statChanged;
 let ips = new Array;
 let devices = new Array;
+let time = new Date;
 
 if (testMode) {
     devices = devicesData.getDevicesData();
@@ -16,13 +15,20 @@ if (testMode) {
 }
 
 function refreshStat() {
+    if (devicesData.getTimeN() < new Date().getTime()) {
+        clearInterval(statChanged);
+        statChanged = null;
+        console.log("stop service");
+    }
+    console.log(devicesData.getTimeN());
+    console.log(new Date().getTime());
+    console.log(devicesData.getTimeN() < new Date().getTime());
     if (testMode) {
             devices = devicesData.getDevicesData();
     } else {
         for (let i in ips) {
             const url = 'http://' + ips[i].ip + '/cm?cmnd=Status ' + "11";
             request.get(url, (error, response, body) => {
-                //console.log(response.body.split("=")[1]);
                 if (error) {
                     // TODO add logging
                     //console.log(ips[i].ip + " Failed");
@@ -47,7 +53,6 @@ function refreshStat() {
                             POWER4: res.StatusSTS.POWER4
                         }
                     }
-
                 } else {
                     // TODO if !error and !200 OK
                     console.log(ips[i].ip + response.statusCode);
@@ -58,17 +63,7 @@ function refreshStat() {
 }
 
 module.exports = {
-    interval: function () {
-        if ((countUsersLoggedIn > 0) && !usersLoggedIn) {
-            usersLoggedIn = true;
-            statChanged = setInterval(refreshStat, 1000);
-        }
-    },
-    intervalStop: function () {
-        clearInterval(statChanged);
-    },
     getIps: function () {
-        countUsersLoggedIn++;
         const query = 'SELECT ip, module_type  FROM device';
 
         _db.query(query, (error, results) => {
@@ -87,7 +82,19 @@ module.exports = {
             }
         });
     },
+    intervalStart: function () {
+        if (!statChanged) {
+            statChanged = setInterval(refreshStat, 1000);
+        }
+    },
+    intervalStop: function () {
+        clearInterval(statChanged);
+        statChanged = null;
+    },
     getDevices: function () {
         return devices;
+    },
+    isRunning: function() {
+        return statChanged;
     }
 }

@@ -14,34 +14,30 @@
 <div class="compContainer">
   <div>
     <p>Power 1</p>
-    <button mat-raised-button class="statusBtn" [ngClass]="{ 'statusBtnOn': power[0], 'statusBtnOff': !power[0]  }"
-      (click)="buttonToggle(0)">
-      {{buttonText[0]}}
+    <button mat-raised-button class="statusBtn" [ngClass]="{ 'statusBtnOn': button1.power, 'statusBtnOff': !button1.power  }"
+      (click)="buttonToggle(button1)">
+      {{button1.text}}
     </button>
   </div>
   <div>
     <p>Power 2</p>
-    <button mat-raised-button class="statusBtn" [ngClass]="{ 'statusBtnOn': power[1], 'statusBtnOff': !power[1]  }"
-      (click)="buttonToggle(1)">
-      {{buttonText[1]}}
+    <button mat-raised-button class="statusBtn" [ngClass]="{ 'statusBtnOn': button2.power, 'statusBtnOff': !button2.power  }"
+      (click)="buttonToggle(button2)">
+      {{button2.text}}
     </button>
   </div>
   <div>
     <p>Power 3</p>
-    <button mat-raised-button class="statusBtn" [ngClass]="{ 'statusBtnOn': power[2], 'statusBtnOff': !power[2]  }"
-      (click)="buttonToggle(2)">
-      {{buttonText[2]}}
+    <button mat-raised-button class="statusBtn" [ngClass]="{ 'statusBtnOn': button3.power, 'statusBtnOff': !button3.power  }"
+      (click)="buttonToggle(button3)">
+      {{button3.text}}
     </button>
   </div>
   <div>
     <p>Power 4</p>
-    <button mat-raised-button class="statusBtn" [ngClass]="{ 'statusBtnOn': power[3], 'statusBtnOff': !power[3]  }"
-      (click)="buttonToggle(3)">
-      {{buttonText[3]}}
+    <button mat-raised-button class="statusBtn" [ngClass]="{ 'statusBtnOn': button4.power, 'statusBtnOff': !button4.power  }"
+      (click)="buttonToggle(button4)">
+      {{button4.text}}
     </button>
   </div>
 </div>
-<button mat-raised-button 
-      (click)="checkState()">
-      Test
-    </button>

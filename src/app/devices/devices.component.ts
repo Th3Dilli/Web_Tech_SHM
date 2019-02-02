@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DeviceService } from '../services/device.service';
 import { Device, DeviceData } from '../services/device';
 import { Router } from '@angular/router';
@@ -9,6 +9,9 @@ import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material';
 import { IntervalService } from '../services/interval.service';
 import { DevicesStats } from '../services/interval';
+import { DeviceComponent } from './device/device.component';
+import { Sonoff4chComponent } from './device/type/sonoff4ch/sonoff4ch.component';
+import { SonoffbasicComponent } from './device/type/sonoffbasic/sonoffbasic.component';
 
 @Component({
   selector: 'app-devices',
@@ -16,7 +19,7 @@ import { DevicesStats } from '../services/interval';
   styleUrls: ['./devices.component.css'],
 })
 
-export class DevicesComponent implements OnInit {
+export class DevicesComponent implements OnInit, OnDestroy {
 
   addDeviceForm: FormGroup;
   editDeviceForm: FormGroup;
@@ -34,6 +37,9 @@ export class DevicesComponent implements OnInit {
   deviceId: number;
   deviceEdit: Device;
   edit: Boolean = false;
+
+  intervalHandle: any;
+
   constructor(
     private device_service: DeviceService,
     private _router: Router,
@@ -50,8 +56,7 @@ export class DevicesComponent implements OnInit {
       this.getDevicesStats();
     });
 
-
-    setInterval(() => {
+    this.intervalHandle = setInterval(() => {
       this.getDevicesStats();
     }, 1000);
 
@@ -62,6 +67,10 @@ export class DevicesComponent implements OnInit {
       device_ip: ['', [Validators.required, Validators.maxLength(15)]],
       device_mac: ['', [Validators.required, Validators.maxLength(17)]],
     });
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.intervalHandle);
   }
 
   openBox() {
@@ -160,10 +169,10 @@ export class DevicesComponent implements OnInit {
     this.deviceData$.subscribe(() => {
       this.intervalS.DeviceStateAll().subscribe(data => {
         this.deviceStats = data;
-            for (let i = 0; i < this.devices.length; i++) {
-              this.devices[i].stat = data.devices[this.devices[i].ip];
-            }
-        });
+        for (let i = 0; i < this.devices.length; i++) {
+          this.devices[i].stat = data.devices[this.devices[i].ip];
+        }
+      });
     });
   }
 

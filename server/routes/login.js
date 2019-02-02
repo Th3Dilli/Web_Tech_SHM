@@ -30,9 +30,6 @@ router.post('/', (req, res) => {
         message: "Authentication error"
       });
     } else {
-      interval.getIps();
-      interval.interval();
-        
       let userid = results[0].users_id;
       let username = results[0].username;
       let email = results[0].email;

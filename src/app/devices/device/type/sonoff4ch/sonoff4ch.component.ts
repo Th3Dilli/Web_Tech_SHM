@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, DoCheck } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Device } from '../../../../services/device';
 
@@ -7,37 +7,56 @@ import { Device } from '../../../../services/device';
   templateUrl: './sonoff4ch.component.html',
   styleUrls: ['./sonoff4ch.component.css']
 })
-export class Sonoff4chComponent implements OnInit {
+export class Sonoff4chComponent implements OnInit, DoCheck {
 
   @Input() device: Device;
   deviceStateAll: Object;
-  power: Boolean[] = [false, false, false, false];
+
+  button1 = { power: true, text: 'OFF' , num: 1 };
+  button2 = { power: true, text: 'OFF' , num: 2 };
+  button3 = { power: true, text: 'OFF' , num: 3 };
+  button4 = { power: true, text: 'OFF' , num: 4 };
+
   showInfo: Boolean = false;
-  buttonText: String[] = ['OFF', 'OFF', 'OFF', 'OFF'];
   constructor(
     private http: HttpClient
   ) { }
 
   ngOnInit() {
-    // this.power = [this.device.stat.POWER1, this.device.stat.POWER2, this.device.stat.POWER3, this.device.stat.POWER4];
-    console.log(this.device);
+
+  }
+  ngDoCheck() {
+    if (this.device.stat !== undefined &&
+        this.device.stat.POWER2 !== undefined) {
+          if (
+              this.button1.power !== this.device.stat.POWER1 ||
+              this.button2.power !== this.device.stat.POWER2 ||
+              this.button3.power !== this.device.stat.POWER3 ||
+              this.button4.power !== this.device.stat.POWER4 ) {
+        this.checkState();
+        }
+    }
   }
 
-  buttonToggle(index) {
-    this.power[index] = !this.power[index];
-    this.buttonText[index] = (this.power[index]) ? 'ON' : 'OFF';
+  buttonToggle(button) {
+    // this[button].power = !this[button].power;
+    // this[button].text = (this[button].power) ? 'ON' : 'OFF';
+    console.log(button);
     const url = 'http://localhost:3000/device/toggle';
-    this.http.patch<any>(url, { powerState: this.power[index], ip: this.device.ip, channel: index + 1 }).subscribe(response => {
+    this.http.patch<any>(url, { powerState: !button.power, ip: this.device.ip, channel: button.num }).subscribe(response => {
       console.log(response);
     }, error => {
       console.log(error);
     });
   }
   checkState() {
-    this.power = [this.device.stat.POWER1, this.device.stat.POWER2, this.device.stat.POWER3, this.device.stat.POWER4];
-    for (let i = 0; i < 4; i++) {
-      this.buttonText[i] = (this.power[i]) ? 'ON' : 'OFF';
-    }
-    console.log(this.device);
+    this.button1.power = this.device.stat.POWER1;
+    this.button2.power = this.device.stat.POWER2;
+    this.button3.power = this.device.stat.POWER3;
+    this.button4.power = this.device.stat.POWER4;
+    this.button1.text = (this.button1.power) ? 'ON' : 'OFF';
+    this.button2.text = (this.button2.power) ? 'ON' : 'OFF';
+    this.button3.text = (this.button3.power) ? 'ON' : 'OFF';
+    this.button4.text = (this.button4.power) ? 'ON' : 'OFF';
   }
 }
