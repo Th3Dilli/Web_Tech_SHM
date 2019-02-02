@@ -1,15 +1,14 @@
-import { Component, OnInit, ErrorHandler } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { DeviceService } from '../services/device.service';
-import { Device, DeviceData, Room } from '../services/device';
+import { Device, DeviceData } from '../services/device';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Observable, interval } from 'rxjs';
+import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material';
 import { IntervalService } from '../services/interval.service';
 import { DevicesStats } from '../services/interval';
-import { element } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-devices',
@@ -17,7 +16,7 @@ import { element } from '@angular/core/src/render3';
   styleUrls: ['./devices.component.css'],
 })
 
-export class DevicesComponent implements OnInit {
+export class DevicesComponent implements OnInit, OnChanges {
 
   addDeviceForm: FormGroup;
   editDeviceForm: FormGroup;
@@ -47,7 +46,14 @@ export class DevicesComponent implements OnInit {
 
   ngOnInit() {
     this.getDeviceData();
-    this.getDevicesStats();
+    this.deviceData$.subscribe(() => {
+      this.getDevicesStats();
+    });
+
+
+    setInterval(() => {
+      this.getDevicesStats();
+    }, 1000);
 
     this.addDeviceForm = this.fb.group({
       device_name: ['', [Validators.required, Validators.maxLength(45)]],
@@ -56,6 +62,10 @@ export class DevicesComponent implements OnInit {
       device_ip: ['', [Validators.required, Validators.maxLength(15)]],
       device_mac: ['', [Validators.required, Validators.maxLength(17)]],
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes);
   }
 
   openBox() {
@@ -84,18 +94,6 @@ export class DevicesComponent implements OnInit {
     this.formSubmitAttempt = true;
 
   }
-  // intervalStart() {
-  //   setInterval(this.DeviceStateAll, 1000);
-  // }
-
-  /*DeviceStateAll() {
-    const url = 'http://localhost:3000/deviceState/ip';
-    this.http.get<any>(url).subscribe(response => {
-      //console.log(response);
-    }, error => {
-      console.log(error);
-    });
-  }*/
 
   deleteDevice(device) {
     this.delete = !this.delete;
@@ -163,7 +161,7 @@ export class DevicesComponent implements OnInit {
   }
 
   getDevicesStats() {
-    this.deviceData$.subscribe(deviceData => {
+    this.deviceData$.subscribe(() => {
       this.intervalS.DeviceStateAll().subscribe(data => {
         this.deviceStats = data;
         this.devices.forEach(device => {
@@ -173,10 +171,9 @@ export class DevicesComponent implements OnInit {
             }
           }
         });
-        // console.log(data.devices.length);
-        console.log(this.devices[0].stat);
       });
     });
+
 
   }
 }

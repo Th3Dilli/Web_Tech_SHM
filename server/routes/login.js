@@ -11,7 +11,7 @@ const request = require("request");
 const interval = require('../updater/refresh');
 
 const privateKEY = fs.readFileSync(path.join(__dirname, 'private.key'), 'utf8');
-console.log(fs.readFileSync(path.join(__dirname, 'private.key'), 'utf8'))
+//console.log(fs.readFileSync(path.join(__dirname, 'private.key'), 'utf8'))
 
 router.post('/', (req, res) => {
 
