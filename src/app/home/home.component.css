@@ -7,8 +7,9 @@ mat-card{
     float: left;
     margin: 2em;
     max-width: 400px;
-    min-width: 320px;
-    height: 150px;
+    min-width: 350px;
+    min-height: 155px;
+    max-height: 190px;
 }
 
 mat-icon{

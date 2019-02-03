@@ -145,8 +145,8 @@ export class DevicesComponent implements OnInit, OnDestroy {
       this.editDeviceForm = this.fb.group({
         editDevice_id: [this.deviceEdit.device_id, [Validators.required]],
         editDevice_name: [this.deviceEdit.device_name, [Validators.required, Validators.maxLength(45)]],
-        editDevice_ip: [this.deviceEdit.ip, [Validators.required, Validators.maxLength(45)]],
-        editDevice_mac: [this.deviceEdit.mac, [Validators.required, Validators.maxLength(45)]]
+        editDevice_ip: [this.deviceEdit.ip, [Validators.required, Validators.maxLength(15)]],
+        editDevice_mac: [this.deviceEdit.mac, [Validators.required, Validators.maxLength(17)]]
       });
     } else {
       this.editDeviceForm = null;
