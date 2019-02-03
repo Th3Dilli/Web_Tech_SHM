@@ -1,0 +1,6 @@
+{
+    "testMode": true,
+    "server": {
+        "port": 3000
+    }
+}

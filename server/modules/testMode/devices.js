@@ -24,10 +24,7 @@ let devices = {
     }
 }
 
-
 let time = new Date().getTime();
-console.log(time);
-
 
 let self = module.exports = {
     getDevicesData: function () {
@@ -35,8 +32,6 @@ let self = module.exports = {
     },
     setDevicesData: function (ip, power, state) {
         devices[ip][power] = state;
-        console.log("set device");
-        console.log(devices[ip]);
     },
     getTimeN: function () {
         return time;
@@ -82,20 +77,12 @@ let self = module.exports = {
                 }
             }
         }
-        console.log("adddevices");
-        console.log(devices);
-
     },
     removeDevice: function (ip) {
-        console.log("removedevices");
-        console.log(devices);
         devices[ip] = undefined;
-        console.log(devices);
     },
     editDevice: function (oldIp, oldModule_type, newIp) {
-        console.log("editdevices");
         delete devices[oldIp];
         self.addDevice(newIp, oldModule_type);
     }
-
 };

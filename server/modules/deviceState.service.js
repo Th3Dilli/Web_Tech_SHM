@@ -1,39 +1,35 @@
-const _db = require('../controller').getDb();
-const request = require("request");
-const devicesData = require('../testMode/devices');
+const _db = require('./database').getDb();
+const request = require('request');
+const devicesData = require('../modules/testMode/devices');
 
-const testMode = require("../config").testMode;
+const testMode = require('../config/config').testMode;
 
 let statChanged;
 let ips = new Array;
 let devices = new Array;
-let time = new Date;
 
 if (testMode) {
     devices = devicesData.getDevicesData();
-    console.log("TestMode is ON");
+    console.log('TestMode is ON');
 }
 
 function refreshStat() {
     if (devicesData.getTimeN() < new Date().getTime()) {
         clearInterval(statChanged);
         statChanged = null;
-        console.log("stop service");
+        console.log('Get device status service stopped');
     }
     if (testMode) {
-            devices = devicesData.getDevicesData();
+        devices = devicesData.getDevicesData();
     } else {
         for (let i in ips) {
-            const url = 'http://' + ips[i].ip + '/cm?cmnd=Status ' + "11";
+            const url = 'http://' + ips[i].ip + '/cm?cmnd=Status 11';
             request.get(url, (error, response, body) => {
                 if (error) {
-                    // TODO add logging
-                    //console.log(ips[i].ip + " Failed");
+                    console.log('Failed to get status for ' + ips[i].ip);
                 }
                 else if (response.statusCode == 200) {
-                    console.log(ips[i].ip + " status changed");
-                    let res = JSON.parse(response.body.split("=")[1]);
-
+                    let res = JSON.parse(response.body.split('=')[1]);
                     if (res.StatusSTS.POWER1) {
                         devices[i] = {
                             module_type: ips[i].module_type,
@@ -51,8 +47,7 @@ function refreshStat() {
                         }
                     }
                 } else {
-                    // TODO if !error and !200 OK
-                    console.log(ips[i].ip + response.statusCode);
+                    console.log('Error ' + response.statusCode + ' for ' + ips[i].ip);
                 }
             });
         }
@@ -65,9 +60,9 @@ module.exports = {
 
         _db.query(query, (error, results) => {
             if (error) {
-                Console.log("db request fail");
+                Console.log('db request fail');
             } else if (results.length < 1) {
-                console.log("404 no device found");
+                console.log('404 no device found');
             } else {
                 for (let i in results) {
                     ips.push({
@@ -75,7 +70,6 @@ module.exports = {
                         module_type: results[i].module_type
                     });
                 }
-                console.log(ips);
             }
         });
     },
@@ -91,7 +85,7 @@ module.exports = {
     getDevices: function () {
         return devices;
     },
-    isRunning: function() {
+    isRunning: function () {
         return statChanged;
     }
 }

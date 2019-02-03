@@ -1,4 +1,4 @@
-const cfg = require('./config_db')
+const cfg = require('../config/config_db')
 const mysql = require('mysql');
 
 let _db;
@@ -9,21 +9,19 @@ let initDb = new Promise((resolve, reject) => {
         user: cfg.database.user,
         password: cfg.database.password,
         database: cfg.database.db
-        
     });
     _db.connect((err) => {
         if (err) {
-
-            reject();
-
+            reject(console.log(err));
         } else {
-            resolve(console.log("Database is connected."));
+            resolve(console.log('Database is connected.'));
         }
     });
 });
+
 function getDb() {
     if (!_db) {
-        console.log("Db has not been initialized. Please call init first.");
+        console.log('Db has not been initialized. Please call init first.');
         return;
     } else {
         return _db;

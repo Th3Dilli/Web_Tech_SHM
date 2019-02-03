@@ -1,9 +1,8 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const checkAuth = require('../check_auth')
-const getDb = require('../controller').getDb
+const checkAuth = require('../modules/check_auth')
+const getDb = require('../modules/database').getDb
 const _db = getDb();
-
 
 router.post('/addRoom', checkAuth, (req, res) => {
   let roomname = req.body.room_name;
@@ -12,18 +11,18 @@ router.post('/addRoom', checkAuth, (req, res) => {
   _db.query(query, [roomname], (error, results) => {
 
     if (error) {
-      if (error.sqlMessage.includes("Duplicate entry")) {
+      if (error.sqlMessage.includes('Duplicate entry')) {
         res.status(400).json({
-          message: "Duplicate entry"
+          message: 'Duplicate entry'
         });
       } else {
         res.status(400).json({
-          message: "Error"
+          message: 'Error'
         });
       }
     } else {
       res.status(200).json({
-        message: "Room added"
+        message: 'Room added'
       });
     }
   });
@@ -34,23 +33,21 @@ router.patch('/deleteRoom', checkAuth, (req, res) => {
   let queryRoom = `DELETE FROM rooms WHERE (name = ?)`
   _db.query(queryRoom, [roomname], (error, result) => {
     if (error) {
-      console.log(error);
-      if (error.code.includes("ER_ROW_IS_REFERENCED")) {
+      if (error.code.includes('ER_ROW_IS_REFERENCED')) {
         res.status(400).json({
-          message: "Can't delete Room with Devices"
+          message: 'Can\'t delete Room with Devices in it'
         });
       } else {
         res.status(400).json({
-          message: "Error"
+          message: 'Error'
         });
       }
     } else {
       res.status(200).json({
-        message: "Room deleted"
+        message: 'Room deleted'
       });
     }
   });
-
 });
 
 module.exports = router;
