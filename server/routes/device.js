@@ -44,45 +44,49 @@ router.post('/addDevice', checkAuth, (req, res) => {
   const ip = req.body.device_ip;
   const mac = req.body.device_mac;
   const roomName = req.body.room_name;
-  let roomsID;
+  let roomsID = -1;
 
   if (testMode) {
     devices.addDevice(ip, module_type);
   }
 
-  const sql_insert = 'INSERT INTO `device` (module_type, device_name, ip, mac) VALUES (?, ?, ?, ?);';
-  _db.query(sql_insert, [module_type, device_name, ip, mac], (error_I_D, results_I_D) => {
+  const sql_insert_d = 'INSERT INTO `device` (module_type, device_name, ip, mac) VALUES (?, ?, ?, ?);';
+  _db.query(sql_insert_d, [module_type, device_name, ip, mac], (error_I_D, results_I_D) => {
     if (error_I_D) {
       res.status(400).json({
-        message: 'Error Insert 1',
-        error: error_I_D
+        message: 'Error adding Device '
       });
     } else {
-      const sql2 = 'SELECT rooms_id from rooms where name = ?';
-      _db.query(sql2, [roomName], (error_S_R, results_S_R) => {
+      const sql_select = 'SELECT rooms_id from rooms where name = ?';
+      _db.query(sql_select, [roomName], (error_S_R, results_S_R) => {
         if (error_S_R) {
           res.status(400).json({
-            message: 'Error Select',
-            error: error_S_R
+            message: 'Error adding Device '
           });
         } else {
           roomsID = results_S_R[0].rooms_id;
         }
-        const insertId = results_I_D.insertId;
-        const sql3 = 'INSERT INTO `rooms_has_device` (rooms_rooms_id, device_device_id) VALUES (?, ?);';
-        _db.query(sql3, [roomsID, insertId], (error_I_RHD, results_I_RHD) => {
-          if (error_I_RHD) {
-            console.log(error_I_RHD);
-            res.status(400).json({
-              message: 'Error Insert 2',
-              error: error_I_RHD
-            });
-          } else {
-            res.status(200).json({
-              message: 'Success adding device'
-            });
-          }
-        });
+        if (roomsID !== -1) {
+          const insertId = results_I_D.insertId;
+          const sql_insert_rhd = 'INSERT INTO `rooms_has_device` (rooms_rooms_id, device_device_id) VALUES (?, ?);';
+          _db.query(sql_insert_rhd, [roomsID, insertId], (error_I_RHD, results_I_RHD) => {
+            if (error_I_RHD) {
+              console.log(error_I_RHD);
+              res.status(400).json({
+                message: 'Error adding Device '
+              });
+            } else {
+              res.status(200).json({
+                message: 'Success adding device'
+              });
+            }
+          });
+        } else {
+          console.log("Error inserting room into Database");
+          res.status(400).json({
+            message: 'Error adding Device '
+          });
+        }
       });
     }
   });
@@ -93,9 +97,8 @@ router.delete('/deleteDevice/:id', checkAuth, (req, res) => {
   if (testMode) {
     _db.query('SELECT ip from `device` WHERE device_id = ?', [device_id], (error, result) => {
       if (error) {
-        console.log('failed to remove device in testMode');
+        console.log('Error failed to get data for testMode deleteDevice');
       } else {
-        console.log(result[0]);
         devices.removeDevice(result[0].ip);
       }
     });
@@ -105,7 +108,7 @@ router.delete('/deleteDevice/:id', checkAuth, (req, res) => {
     if (error) {
       console.log(error)
       res.status(400).json({
-        message: 'Error Insert 2',
+        message: 'Error deleting Device',
       });
     } else {
       let queryDevice = `DELETE FROM device WHERE (device_id = ?)`
@@ -113,7 +116,7 @@ router.delete('/deleteDevice/:id', checkAuth, (req, res) => {
         if (error) {
           console.log(error)
           res.status(400).json({
-            message: 'Error Insert 2',
+            message: 'Error deleting Device',
           });
         } else {
           res.status(200).json({
@@ -129,9 +132,8 @@ router.patch('/edit', checkAuth, (req, res) => {
   if (testMode) {
     _db.query('SELECT ip,module_type  from `device` WHERE device_id = ?', [req.body.editDevice_id], (error, result) => {
       if (error) {
-        console.log('failed to edit device in testMode');
+        console.log('Error failed to get data for testMode editDevice');
       } else {
-        console.log(result[0]);
         devices.editDevice(result[0].ip, result[0].module_type, req.body.editDevice_ip);
       }
     });

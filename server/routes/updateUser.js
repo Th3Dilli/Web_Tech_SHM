@@ -16,17 +16,15 @@ router.patch('/userEdit', checkAuth, (req, res) => {
   let token = jwt.decode(req.headers.authorization.split(' ')[1]);
 
   const sql = 'UPDATE `users` SET email=?, username=? WHERE users_id = ?';
-  console.log(token);
   _db.query(sql, [emailN, usernameN, token.userid], (error, results) => {
     if (error) {
       if (error.sqlMessage.includes('Duplicate entry')) {
-        console.log('Duplicate entry');
         res.status(400).json({
-          message: 'Duplicate entry'
+          message: 'Duplicate entry for users'
         });
       } else {
         res.status(400).json({
-          message: 'Error'
+          message: 'Error updating user'
         });
       }
     } else if (results.length < 1) {

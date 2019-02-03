@@ -27,9 +27,8 @@ function refreshStat() {
             request.get(url, (error, response, body) => {
                 if (error) {
                     console.log('Failed to get status for ' + ips[i].ip);
-                }
-                else if (response.statusCode == 200) {
-                    let res = JSON.parse(response.body.split('=')[1]);
+                } else if (response.statusCode == 200) {
+                    const res = JSON.parse(response.body.split('=')[1]);
                     if (res.StatusSTS.POWER1) {
                         devices[i] = {
                             module_type: ips[i].module_type,
@@ -56,13 +55,11 @@ function refreshStat() {
 
 module.exports = {
     getIps: function () {
-        const query = 'SELECT ip, module_type  FROM device';
-
-        _db.query(query, (error, results) => {
+        _db.query('SELECT ip, module_type  FROM device', (error, results) => {
             if (error) {
-                Console.log('db request fail');
+                Console.log('DeviceState service database request failed');
             } else if (results.length < 1) {
-                console.log('404 no device found');
+                console.log('DeviceState service 404 no device found in Database');
             } else {
                 for (let i in results) {
                     ips.push({

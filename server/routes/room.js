@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const checkAuth = require('../modules/check_auth')
-const getDb = require('../modules/database').getDb
+const checkAuth = require('../modules/check_auth');
+const getDb = require('../modules/database').getDb;
 const _db = getDb();
 
 router.post('/addRoom', checkAuth, (req, res) => {
@@ -13,7 +13,7 @@ router.post('/addRoom', checkAuth, (req, res) => {
     if (error) {
       if (error.sqlMessage.includes('Duplicate entry')) {
         res.status(400).json({
-          message: 'Duplicate entry'
+          message: 'Duplicate entry for rooom'
         });
       } else {
         res.status(400).json({
@@ -39,7 +39,7 @@ router.patch('/deleteRoom', checkAuth, (req, res) => {
         });
       } else {
         res.status(400).json({
-          message: 'Error'
+          message: 'Error deleting room'
         });
       }
     } else {

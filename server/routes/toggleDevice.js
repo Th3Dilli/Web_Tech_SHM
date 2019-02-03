@@ -1,13 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const checkAuth = require('../modules/check_auth')
-const fs = require('fs');
-const path = require('path');
+const checkAuth = require('../modules/check_auth');
 const request = require('request');
 const testMode = require('../config/config').testMode;
 const devicesData = require('../modules/testMode/devices');
-
-const privateKEY = fs.readFileSync(path.join(__dirname, 'private.key'), 'utf8');
 
 router.patch('/toggle', checkAuth, (req, res) => {
 
@@ -18,35 +14,27 @@ router.patch('/toggle', checkAuth, (req, res) => {
     if (testMode) {
         devicesData.setDevicesData(ip, 'POWER' + ch, powerState);
         res.status(200).json({
-            message: 'Success toggeling',
-            params: req.body
+            message: 'Success toggeling device testMode'
         })
     } else {
         const url = 'http://' + ip + '/cm?cmnd=Power' + ch + ' ' + powerState;
-        console.log(url);
         request.get(url, (error, response, body) => {
             if (error) {
                 res.status(404).json({
-                    message: 'Device Not Found',
-                    error: error
+                    message: 'Device Not Found'
                 });
             } else if (response.statusCode != 200) {
-                console.log('error: ' + response.statusCode);
-                console.log(error);
+                console.log('toggleDevice failed to toggle device: ' + response.statusCode);
                 res.status(500).json({
-                    message: 'Failed to toggle',
-                    error: error
+                    message: 'Failed to toggle device'
                 });
             } else if (response.statusCode == 200) {
                 res.status(200).json({
-                    message: 'Success toggeling'
+                    message: 'Success toggeling device'
                 });
             }
-
         });
     }
-
-
 });
 
 module.exports = router;

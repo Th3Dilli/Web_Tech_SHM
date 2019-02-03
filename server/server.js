@@ -34,15 +34,11 @@ app.use('/user', userRoutes);
 app.use('/device', toggleDevice);
 app.use('/deviceState', deviceState);
 app.use('/room', roomRoutes);
-app.use('*', (req, res) => {
-    res.status(404).send('Sorry, we cannot find that!');
-});
 
 db.initDb.then(() => {
     app.listen(PORT, function () {
         console.log('Server running on localhost ' + PORT)
     });
-}, (error) => {
-    console.log(error);
+}, () => {
     console.log('Failed to connect to DB!');
 });
