@@ -29,7 +29,7 @@ let time = new Date().getTime();
 console.log(time);
 
 
-module.exports = {
+let self = module.exports = {
     getDevicesData: function () {
         return devices;
     },
@@ -38,11 +38,64 @@ module.exports = {
         console.log("set device");
         console.log(devices[ip]);
     },
-    getTimeN: function() {
+    getTimeN: function () {
         return time;
     },
     setTimeN: function (timeNew) {
         time = new Date().setTime(timeNew);
+    },
+    addDevice: function (ip, module_type) {
+
+        switch (module_type) {
+            case 'SONOFF_4CH': {
+                devices[ip] = {
+                    module_type: module_type,
+                    ip: ip,
+                    POWER1: false,
+                    POWER2: false,
+                    POWER3: false,
+                    POWER4: false
+                }
+                break;
+            }
+            case 'SONOFF_BASIC': {
+                devices[ip] = {
+                    module_type: module_type,
+                    ip: ip,
+                    POWER1: false
+                }
+                break;
+            }
+            case 'SONOFF_TOUCH': {
+                devices[ip] = {
+                    module_type: module_type,
+                    ip: ip,
+                    POWER1: false
+                }
+                break;
+            }
+            default: {
+                devices[ip] = {
+                    module_type: 'SONOFF_BASIC',
+                    ip: ip,
+                    POWER1: false
+                }
+            }
+        }
+        console.log("adddevices");
+        console.log(devices);
+
+    },
+    removeDevice: function (ip) {
+        console.log("removedevices");
+        console.log(devices);
+        devices[ip] = undefined;
+        console.log(devices);
+    },
+    editDevice: function (oldIp, oldModule_type, newIp) {
+        console.log("editdevices");
+        delete devices[oldIp];
+        self.addDevice(newIp, oldModule_type);
     }
-    
+
 };

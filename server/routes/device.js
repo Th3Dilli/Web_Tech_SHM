@@ -5,6 +5,8 @@ const getDb = require('../controller').getDb
 const _db = getDb();
 const modulesArray = require("../config_modules").modules;
 const jwt = require('jsonwebtoken');
+const testMode = require('../config').testMode;
+const devices = require('../testMode/devices');
 
 router.get('/all', checkAuth, (req, res) => {
 
@@ -54,6 +56,10 @@ router.post('/addDevice', checkAuth, (req, res) => {
   const roomName = req.body.room_name;
   let roomsID;
 
+  if (testMode) {
+    devices.addDevice(ip, module_type);
+  }
+
   let token = jwt.decode(req.headers.authorization.split(" ")[1]);
   const sql = 'INSERT INTO `device` (module_type, device_name, ip, mac) VALUES (?, ?, ?, ?);';
 
@@ -100,8 +106,19 @@ router.post('/addDevice', checkAuth, (req, res) => {
 });
 
 router.delete('/deleteDevice/:id', checkAuth, (req, res) => {
-  
   let device_id = req.params.id;
+
+  if (testMode) {
+    _db.query('SELECT ip from `device` WHERE device_id = ?', [device_id], (error, result) => {
+      if(error) {
+        console.log("failed to remove device in testMode");
+      } else {
+        console.log(result[0]);
+        devices.removeDevice(result[0].ip);
+      }
+    });
+  }
+  
   console.log(device_id);
   let queryRoom = `DELETE FROM rooms_has_device WHERE (device_device_id = ?)`
   _db.query(queryRoom, [device_id], (error, result) => {
@@ -135,7 +152,17 @@ router.delete('/deleteDevice/:id', checkAuth, (req, res) => {
 });
 
 router.patch('/edit', checkAuth, (req, res) => {
+  if (testMode) {
 
+    _db.query('SELECT ip,module_type  from `device` WHERE device_id = ?', [req.body.editDevice_id], (error, result) => {
+      if(error) {
+        console.log("failed to edit device in testMode");
+      } else {
+        console.log(result[0]);
+        devices.editDevice(result[0].ip,result[0].module_type, req.body.editDevice_ip);
+      }
+    });
+  }
   const sql = 'UPDATE `device` SET device_name = ?, ip = ?, mac = ? WHERE device_id = ?;';
   
   _db.query(sql, [req.body.editDevice_name, req.body.editDevice_ip, req.body.editDevice_mac,req.body.editDevice_id], (error, results) => {

@@ -20,9 +20,6 @@ function refreshStat() {
         statChanged = null;
         console.log("stop service");
     }
-    console.log(devicesData.getTimeN());
-    console.log(new Date().getTime());
-    console.log(devicesData.getTimeN() < new Date().getTime());
     if (testMode) {
             devices = devicesData.getDevicesData();
     } else {
