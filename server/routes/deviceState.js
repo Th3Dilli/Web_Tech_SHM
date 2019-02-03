@@ -4,7 +4,7 @@
  * 
  * @Returns the status of all knowen devices to the client
  *  
- * @author Manuel Dielacher
+ * @author Manuel Dielacher, Philipp Freislich
  */
 
 const express = require('express');

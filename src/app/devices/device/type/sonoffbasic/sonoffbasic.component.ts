@@ -3,7 +3,7 @@
  * it has 4 channels so all those need to bee access able with a button and the button needs
  * to show the current state of that channel
  *
- * @author Manuel Dielacher
+ * @author Manuel Dielacher, Philipp Freislich
  */
 
  import { Component, OnInit, Input, DoCheck } from '@angular/core';
