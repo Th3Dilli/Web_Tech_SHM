@@ -1,6 +1,6 @@
 /**
  *  This module handles the add room and delete room requests
- *  adding and deleting rooms in the databse
+ *  adding and deleting rooms in the database. 
  * 
  * 
  * @author Markus Macher  

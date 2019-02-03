@@ -35,7 +35,7 @@ export class DevicesComponent implements OnInit, OnDestroy {
   module_types: Array<String> = ['SONOFF_BASIC', 'SONOFF_TOUCH', 'SONOFF_4CH'];
   isOn: Boolean;
   openAddBox: Boolean = false;
-  private formSubmitAttempt: boolean;
+  formSubmitAttempt: boolean;
   delete: Boolean;
   deleteConfirm: Boolean;
   deviceName: String;
@@ -59,9 +59,9 @@ export class DevicesComponent implements OnInit, OnDestroy {
 
   /**
    * get the devices info with the devices.service
-   * and get the device statues info
+   * and get the device statuses info
    *
-   * start the interval for updating the device statues every second
+   * start the interval for updating the device statuses every second
    */
   ngOnInit() {
     this.getDeviceData();
@@ -224,8 +224,8 @@ export class DevicesComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * get all devices statues infor ON/OFF
-   * and set the statues info foreach device in the stat property of the device
+   * get all devices statuses info ON/OFF
+   * and set the statuses info foreach device in the stat property of the device
    */
   getDevicesStats() {
     this.deviceData$.subscribe(() => {

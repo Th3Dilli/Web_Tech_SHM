@@ -1,21 +1,21 @@
 /**
- *  The username and the password is checked against the database
- *  if they are valid the user will be logged in and get a uniqe token that is created using JWT module
+ *  The username and the password is checked against the database.
+ *  If they are valid the user will be logged in and gets an unique JWT token as response.
+ *  This unique token is stored for a limited time on the client side and identifies the user on every request. 
+ *  The token is send as an authorization header to the backend on each request and gets verified with the checkAuth.js module
+ *  The token is generated with JWT.Sign(), using a private RSA key and RS256 algorithm. 
+ *  Only the backend knows the secret RSA keys. Every JWT Token and User Session expires in 1h.
  *  
- * the token is generted using a private and will be encrypted using the public key when the user request secure routes on the server
- * 
- * 
  * @author Markus Macher 
  */
 
- const getDb = require('../modules/database').getDb;
+const getDb = require('../modules/database').getDb;
 const jwt = require('jsonwebtoken');
 const _db = getDb();
 const express = require('express');
 const router = express.Router();
 const fs = require('fs');
 const path = require('path');
-
 const privateKEY = fs.readFileSync(path.join(__dirname, 'private.key'), 'utf8');
 
 router.post('/', (req, res) => {
@@ -46,9 +46,9 @@ router.post('/', (req, res) => {
         email: email,
         role: role
       }, privateKEY, {
-          expiresIn: '1h',
-          algorithm: 'RS256'
-        });
+        expiresIn: '1h',
+        algorithm: 'RS256'
+      });
 
       res.status(200).json({
         token: token

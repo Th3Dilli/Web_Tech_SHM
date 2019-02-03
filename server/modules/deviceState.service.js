@@ -1,9 +1,9 @@
 /**
- * This service can request from all devices that are in the databese the current statues. 
- * The statues is saved on the server and if a client requests it will send it back to the client
+ * This service can request from all devices that are in the databese the current statuses. 
+ * The statuses is saved on the server and if a client requests it will send it back to the client
  * If a client is logged in and visits the Devices page on the front-end a intervall is started on the client the 
- * requests the statues from the server the server than starts pulling the data from the devices and send the status back to the client
- * there is only one interval running on the server no matter how many users request statues data
+ * requests the statuses from the server the server than starts pulling the data from the devices and send the status back to the client
+ * there is only one interval running on the server no matter how many users request statuses data
  * 
  * @author Manuel Dielacher, Philipp Freislich
  */

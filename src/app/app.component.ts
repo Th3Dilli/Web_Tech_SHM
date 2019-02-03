@@ -1,5 +1,5 @@
 /**
- * Root component for the appp
+ * Root component for the app
  */
 
 

@@ -1,9 +1,9 @@
 /**
- * directive for the device component to load dynamicaly different child compenents on it
- * so you can load the SONOFF_4CH or SONOFF_BASIC component dynamicaly depending on the module_type
- * property of the devive
+ * Directive for the device component to load dynamicaly different child compenents on it
+ * so you can load the SONOFF_4CH or SONOFF_BASIC component dynamically depending on the module_type
+ * property of the device
  *
- * the appType selctor specifies where the component shoudl be inserted
+ * the appType selector specifies where the component should be inserted
  * <ng-template [appType]></ng-template>
  *
  * @author Manuel Dielacher

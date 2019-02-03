@@ -1,6 +1,6 @@
 /**
  * This is the emulated device module/service for testing purpose
- * contains a simple data (objekt) structure to save the device state
+ * contains a simple data (object) structure to save the device state
  * 
  * @author Manuel Dielacher
  */

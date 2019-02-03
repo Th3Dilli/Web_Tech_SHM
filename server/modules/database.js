@@ -1,5 +1,5 @@
 /**
- * Functions to initate the Database connection and to retrun the database to any other module
+ * Functions to initate the MySQL Database connection and to return the database to any other module.
  * 
  * @author Markus Macher
  */

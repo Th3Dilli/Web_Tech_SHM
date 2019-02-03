@@ -1,5 +1,7 @@
 /**
- * Checks the if the user is authenticated and has a valid token int he authorization header
+ * Checks if the user is authenticated and has a valid JWT token in the authorization header 
+ * jwt.verfiy uses the public RSA key for verfiy the token with the RS256 algorithm.
+ * all three parts of the jwt token header, payload, signature must be valid, else send 401 response
  * 
  * @author Markus Macher
  */

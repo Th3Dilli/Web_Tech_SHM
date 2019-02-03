@@ -1,5 +1,5 @@
 /**
- * Service for fetching the device statues from the back-end to the frond-end
+ * Service for fetching the device statuses from the back-end to the frond-end
  *
  * @author Philipp Freislich, Manuel Dielacher
  */

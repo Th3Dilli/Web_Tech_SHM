@@ -28,7 +28,7 @@ export class UserComponent implements OnInit {
   role: String;
 
   /**
-   * decodes the token of the user and displays the data in the UserComponent
+   * decodes the token payload of the user and displays the data in the UserComponent
    */
   ngOnInit() {
     const token = sessionStorage.getItem('token');

@@ -37,7 +37,7 @@ export class SonoffbasicComponent implements OnInit, DoCheck {
   }
 
   /**
-   * do a http patch reqest to update the device through the server
+   * do a http patch request to update the device through the server
    * the button state will update automaticaly when it was toggled successfully (interval.service) and ngDoCheck
    *
    * @param button the button that is pressend

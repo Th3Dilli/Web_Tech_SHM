@@ -22,7 +22,7 @@ export class NavigationComponent implements OnInit {
   @ViewChild('sidenav') sidenav;
 
 /**
- * Responsive sidnavigation with hamburger icon
+ * Responsive side nav with hamburger icon
  */
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(

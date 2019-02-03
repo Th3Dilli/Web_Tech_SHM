@@ -7,7 +7,7 @@ import { tap, catchError } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { MatSnackBar } from '@angular/material';
 
-/*
+/**
  * Comment for module 'auth.service.ts'.
  * provides the user authentication methods
  * login(), logout() and token check isTokenExpired()

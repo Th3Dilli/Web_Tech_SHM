@@ -1,6 +1,6 @@
 /**
  * Holds one device and all its information
- * it dynamicly check what child component to load SONOFF_4CH  || SONOFF_BASIC for example
+ * it dynamically check what child component to load SONOFF_4CH  || SONOFF_BASIC for example
  *
  * @author Manuel Dielacher, Markus Macher
  */

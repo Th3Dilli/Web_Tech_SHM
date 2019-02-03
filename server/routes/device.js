@@ -1,6 +1,6 @@
 /**
- * This function handles all requests for the devices like ADD, REMOVE, EDIT and GET all the devices
- * 
+ * This function handles all http requests for the devices like ADD, REMOVE, EDIT and GET all the DEVICES
+ *
  * ADD
  * adds a new device and inserts the correct connection to the room
  * 

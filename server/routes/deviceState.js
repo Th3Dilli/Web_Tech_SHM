@@ -1,8 +1,8 @@
 /**
- * Starts the interval to get the device statues every second if it is not running 
- * and updates the timer so the interval function keeps running while user/users request the device statues
+ * Starts the interval to get the device statuses every second if it is not running 
+ * and updates the timer so the interval function keeps running while user/users request the device statuses
  * 
- * @Returns the status of all knowen devices to the client
+ * @Returns the status of all known devices to the client
  *  
  * @author Manuel Dielacher, Philipp Freislich
  */

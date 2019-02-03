@@ -1,6 +1,6 @@
 /**
  * This holds all the relevant information for a specific device => SONOFF_4Ch
- * it has 4 channels so all those need to bee access able with a button and the button needs
+ * it has 4 channels so all those need to be accessible with a button and the button needs
  * to show the current state of that channel
  *
  * @author Manuel Dielacher, Philipp Freislich
@@ -55,7 +55,7 @@ export class Sonoff4chComponent implements OnInit, DoCheck {
    * do a http patch reqest to update the device through the server
    * the button state will update automaticaly when it was toggled successfully (interval.service) and ngDoCheck
    *
-   * @param button the button that is pressend
+   * @param button the button that is pressed
    */
   buttonToggle(button) {
     console.log(button);
