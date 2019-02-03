@@ -28,6 +28,7 @@ import { DeviceComponent } from './devices/device/device.component';
 import { Sonoff4chComponent } from './devices/device/type/sonoff4ch/sonoff4ch.component';
 import { SonoffbasicComponent } from './devices/device/type/sonoffbasic/sonoffbasic.component';
 import { TypeDirective } from './devices/device/type.directive';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 export function tokenGetter() {
   return sessionStorage.getItem('token');
@@ -46,7 +47,8 @@ export function tokenGetter() {
     DeviceComponent,
     Sonoff4chComponent,
     SonoffbasicComponent,
-    TypeDirective
+    TypeDirective,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
