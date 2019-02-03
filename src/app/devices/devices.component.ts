@@ -1,3 +1,9 @@
+/**
+ * Root component for the devices
+ *
+ * @author Markus Macher, Manuel Dielacher, Philipp Freislich
+ */
+
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DeviceService } from '../services/device.service';
 import { Device, DeviceData } from '../services/device';
@@ -9,9 +15,6 @@ import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material';
 import { IntervalService } from '../services/interval.service';
 import { DevicesStats } from '../services/interval';
-import { DeviceComponent } from './device/device.component';
-import { Sonoff4chComponent } from './device/type/sonoff4ch/sonoff4ch.component';
-import { SonoffbasicComponent } from './device/type/sonoffbasic/sonoffbasic.component';
 
 @Component({
   selector: 'app-devices',
@@ -54,6 +57,12 @@ export class DevicesComponent implements OnInit, OnDestroy {
     private intervalS: IntervalService
   ) { }
 
+  /**
+   * get the devices info with the devices.service
+   * and get the device statues info
+   *
+   * start the interval for updating the device statues every second
+   */
   ngOnInit() {
     this.getDeviceData();
     this.deviceData$.subscribe(() => {
@@ -82,10 +91,16 @@ export class DevicesComponent implements OnInit, OnDestroy {
 
   }
 
+  /**
+   * terminate the interval after leaving the device component
+   */
   ngOnDestroy() {
     clearInterval(this.intervalHandle);
   }
 
+  /**
+   * addDevice box toggle
+   */
   openBox() {
     this.openAddBox = !this.openAddBox;
   }
@@ -97,6 +112,12 @@ export class DevicesComponent implements OnInit, OnDestroy {
     );
   }
 
+  /**
+   * addDevice
+   * check if valid input and send a http post request to the server
+   * with the device data from the form as body
+   * updated with getDeviceData the displayed devices
+   */
   addDevice() {
     if (this.addDeviceForm.valid) {
       this.openAddBox = !this.openAddBox;
@@ -114,22 +135,32 @@ export class DevicesComponent implements OnInit, OnDestroy {
     this.addDeviceForm.reset();
   }
 
+  /**
+   * store the device info for the devie that should be deleted
+   *
+   * @param device device that should be deleted, will be emitted from the child component
+   */
   deleteDevice(device) {
     this.delete = !this.delete;
     this.deviceName = device.device_name;
     this.deviceId = device.device_id;
   }
 
+  /**
+   * After confirmation the device will be permanetly delete from the database
+   * getDeviceData is called to updated the displayed devices
+   *
+   * @param confirm bool that tell if the device should be deleted
+   */
   confirmDelete(confirm) {
     if (confirm === true) {
       const url = `http://localhost:3000/devices/deleteDevice/${this.deviceId}`;
       this.http.delete<any>(url)
         .subscribe(res => {
-          console.log(res);
           this.snackBar.open('Device successfully deleted', 'Okay', { duration: 3000 });
           this.getDeviceData();
         }, error => {
-          console.log(error);
+          this.snackBar.open('Failed to delete device', 'Okay', { duration: 3000 });
         });
       this.delete = !this.delete;
     } else if (confirm === false) {
@@ -137,11 +168,15 @@ export class DevicesComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Gets the device from the child component where the button was pressed
+   *
+   * @param device device data emitted form child component
+   */
   editDevice(device) {
     this.edit = !this.edit;
     this.deviceEdit = device;
     if (this.edit) {
-      console.log(this.deviceEdit);
       this.editDeviceForm = this.fb.group({
         editDevice_id: [this.deviceEdit.device_id, [Validators.required]],
         editDevice_name: [this.deviceEdit.device_name, [Validators.required, Validators.maxLength(45)]],
@@ -154,22 +189,29 @@ export class DevicesComponent implements OnInit, OnDestroy {
 
   }
 
+  /**
+   * On save button the device will be updated in the database
+   * sends the data from the form via body to the server
+   *
+   */
   editDeviceUpdate() {
     if (this.editDeviceForm.valid) {
       this.edit = !this.edit;
       const url = `http://localhost:3000/devices/edit`;
       this.http.patch<any>(url, this.editDeviceForm.value)
         .subscribe(res => {
-          console.log(res);
           this.snackBar.open('Device successfully updated', 'Okay', { duration: 3000 });
           this.getDeviceData();
         }, error => {
-          console.log(error);
           this.snackBar.open(error, 'Okay', { duration: 3000 });
         });
     }
   }
 
+  /**
+   * Get all devices with the device service and set up
+   * the rooms Array to be displayed as a navigation with its devices
+   */
   getDeviceData() {
     this.deviceData$ = this.device_service.getAllDevices();
     this.deviceData$.subscribe((res) => {
@@ -181,6 +223,10 @@ export class DevicesComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * get all devices statues infor ON/OFF
+   * and set the statues info foreach device in the stat property of the device
+   */
   getDevicesStats() {
     this.deviceData$.subscribe(() => {
       this.intervalS.DeviceStateAll().subscribe(data => {
@@ -192,36 +238,45 @@ export class DevicesComponent implements OnInit, OnDestroy {
     });
   }
 
+/**
+ * Show the room edit overlay
+ */
   showRoomSettings() {
     this.showRoomSetting = !this.showRoomSetting;
   }
 
+  /**
+   * delete a room
+   */
   deleteRoom() {
     if (this.deleteRoomForm.valid) {
       this.showRoomSetting = !this.showRoomSetting;
-      let url = "http://localhost:3000/room/deleteRoom"
+      const url = 'http://localhost:3000/room/deleteRoom';
       this.http.patch<any>(url, this.deleteRoomForm.value)
         .subscribe(res => {
           this.snackBar.open('Room deleted', 'Okay', { duration: 3000 });
           this.getDeviceData();
         }, err => {
           this.snackBar.open(err, 'Okay', { duration: 3000 });
-        })
+        });
     }
     this.deleteRoomForm.reset();
   }
 
+/**
+ * add a room
+ */
   addRoom() {
     if (this.addRoomForm.valid) {
       this.showRoomSetting = !this.showRoomSetting;
-      let url = "http://localhost:3000/room/addRoom"
+      const url = 'http://localhost:3000/room/addRoom';
       this.http.post<any>(url, this.addRoomForm.value)
         .subscribe(res => {
           this.snackBar.open('Room added', 'Okay', { duration: 3000 });
           this.getDeviceData();
         }, err => {
           this.snackBar.open(err, 'Okay', { duration: 3000 });
-        })
+        });
     }
     this.addRoomForm.reset();
   }

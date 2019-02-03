@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material';
  * provides the user authentication methods
  * login(), logout() and token check isTokenExpired()
  * token expiration is set to 1h
+ * @author Markus Macher
  */
 
 

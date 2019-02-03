@@ -1,3 +1,11 @@
+/**
+ * This holds all the relevant information for a specific device => SONOFF_4Ch
+ * it has 4 channels so all those need to bee access able with a button and the button needs
+ * to show the current state of that channel
+ *
+ * @author Manuel Dielacher
+ */
+
 import { Component, OnInit, Input, DoCheck } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Device } from '../../../../services/device';
@@ -25,6 +33,11 @@ export class Sonoff4chComponent implements OnInit, DoCheck {
   ngOnInit() {
 
   }
+
+  /**
+   * Checks the state from the device.state property against the current
+   * if they are different call checkState
+   */
   ngDoCheck() {
     if (this.device.stat !== undefined &&
         this.device.stat.POWER2 !== undefined) {
@@ -38,9 +51,13 @@ export class Sonoff4chComponent implements OnInit, DoCheck {
     }
   }
 
+  /**
+   * do a http patch reqest to update the device through the server
+   * the button state will update automaticaly when it was toggled successfully (interval.service) and ngDoCheck
+   *
+   * @param button the button that is pressend
+   */
   buttonToggle(button) {
-    // this[button].power = !this[button].power;
-    // this[button].text = (this[button].power) ? 'ON' : 'OFF';
     console.log(button);
     const url = 'http://localhost:3000/device/toggle';
     this.http.patch<any>(url, { powerState: !button.power, ip: this.device.ip, channel: button.num }).subscribe(response => {
@@ -49,6 +66,10 @@ export class Sonoff4chComponent implements OnInit, DoCheck {
       console.log(error);
     });
   }
+
+  /**
+   * update the shown state of the device/channel to the user
+   */
   checkState() {
     this.button1.power = this.device.stat.POWER1;
     this.button2.power = this.device.stat.POWER2;

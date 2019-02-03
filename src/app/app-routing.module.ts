@@ -1,3 +1,9 @@
+/**
+ * Angular routes
+ *
+ * @author Markus Macher
+ */
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DevicesComponent } from './devices/devices.component';

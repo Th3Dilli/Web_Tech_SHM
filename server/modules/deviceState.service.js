@@ -1,3 +1,13 @@
+/**
+ * This service can request from all devices that are in the databese the current statues. 
+ * The statues is saved on the server and if a client requests it will send it back to the client
+ * If a client is logged in and visits the Devices page on the front-end a intervall is started on the client the 
+ * requests the statues from the server the server than starts pulling the data from the devices and send the status back to the client
+ * there is only one interval running on the server no matter how many users request statues data
+ * 
+ * @author Manuel Dielacher, Philipp Freislich
+ */
+
 const _db = require('./database').getDb();
 const request = require('request');
 const devicesData = require('../modules/testMode/devices');

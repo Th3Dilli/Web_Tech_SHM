@@ -1,3 +1,12 @@
+/**
+ * Starts the interval to get the device statues every second if it is not running 
+ * and updates the timer so the interval function keeps running while user/users request the device statues
+ * 
+ * @Returns the status of all knowen devices to the client
+ *  
+ * @author Manuel Dielacher
+ */
+
 const express = require('express');
 const router = express.Router();
 const checkAuth = require('../modules/check_auth');

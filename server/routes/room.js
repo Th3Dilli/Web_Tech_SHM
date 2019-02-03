@@ -1,4 +1,12 @@
-const express = require('express');
+/**
+ *  This module handles the add room and delete room requests
+ *  adding and deleting rooms in the databse
+ * 
+ * 
+ * @author Markus Macher  
+ */
+
+ const express = require('express');
 const router = express.Router();
 const checkAuth = require('../modules/check_auth');
 const getDb = require('../modules/database').getDb;

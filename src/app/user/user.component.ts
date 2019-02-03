@@ -1,3 +1,9 @@
+/**
+ * The user component shows the user info and adds the ability to change the username and the email
+ *
+ * @author Markus Macher, Manuel Dielacher
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -21,9 +27,9 @@ export class UserComponent implements OnInit {
   email: String;
   role: String;
 
-  // TODO add picture for users
-  // picture: String;
-
+  /**
+   * decodes the token of the user and displays the data in the UserComponent
+   */
   ngOnInit() {
     const token = sessionStorage.getItem('token');
     const payload = this.jwtHelper.decodeToken(token);
@@ -37,10 +43,11 @@ export class UserComponent implements OnInit {
     });
   }
 
-  /*
-   *TODO form value when nothing change = "", "" , accept button must be disabled when user do no changes
-   *make an http req to the server with new data and update db + refresh the token
- */
+  /**
+   * Check if a field is valid or not
+   *
+   * @param  field the field is the formControlName that will be checked if it is valid
+   */
   isFieldInvalid(field: string) {
     return (
       (!this.form.get(field).valid && this.form.get(field).touched) ||
@@ -48,7 +55,10 @@ export class UserComponent implements OnInit {
     );
   }
 
-
+  /**
+   * Check for valid input and
+   * sends a http patch request to update the user info
+   */
   changeUser() {
     if (this.form.valid) {
       const userChangeUrl = 'http://localhost:3000/user/userEdit';

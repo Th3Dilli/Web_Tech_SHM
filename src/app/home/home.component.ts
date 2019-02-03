@@ -1,3 +1,9 @@
+/**
+ * Home screen for the user with additional navigation cards to the devices or the user component
+ *
+ * @author
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { DeviceService } from '../services/device.service';
@@ -31,11 +37,17 @@ export class HomeComponent implements OnInit {
     }, 120);
   }
 
+  /**
+   * Displays the local time on the home component
+   */
   getTime() {
     this.time_now = new Date().toLocaleTimeString();
     this.date_now = new Date().toLocaleDateString();
   }
 
+  /**
+   * Shows the amount of devices
+   */
   getDeviceLength() {
     this.device_service.getAllDevices()
       .subscribe(

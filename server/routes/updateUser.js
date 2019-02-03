@@ -1,3 +1,11 @@
+/**
+ * Handles the request for updating the user profile
+ * the username and the email can be changed at the moment there is nothing 
+ * to update the password else than in the database
+ * 
+ * @author Manuel Dielacher, Markus Macher
+ */
+
 const express = require('express');
 const router = express.Router();
 const checkAuth = require('../modules/check_auth')

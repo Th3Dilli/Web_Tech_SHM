@@ -1,8 +1,14 @@
-import { Injectable } from '@angular/core';
+/**
+ * Service for fetching devices from database
+ *
+ * @author Markus Macher, Manuel Dielacher, Philipp Freislich
+ */
+
+ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Device, DeviceData } from './device';
+import { DeviceData } from './device';
 
 @Injectable({
   providedIn: 'root'

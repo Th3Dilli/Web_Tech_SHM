@@ -1,3 +1,9 @@
+/**
+ * Handles the user login
+ *
+ * @author Markus Macher
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -18,14 +24,12 @@ export class LoginComponent implements OnInit {
   private failedLoginAttempt: boolean;
   private hide = true;
 
-
   constructor(private fb: FormBuilder, private _auth: AuthService, private _router: Router, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.form = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
-
     });
   }
 
@@ -36,6 +40,9 @@ export class LoginComponent implements OnInit {
     );
   }
 
+  /**
+   * On login button press user will be logged in if valid information was given
+   */
   onSubmit() {
     if (this.form.valid) {
       console.log(this.form.value);
@@ -50,6 +57,9 @@ export class LoginComponent implements OnInit {
     this.formSubmitAttempt = true;
   }
 
+  /**
+   * Snackbar to notify the user login was succesful
+   */
   loginSuccess() {
     this.snackBar.open('Successfully Logged In', 'Okay', { duration: 3000 });
   }

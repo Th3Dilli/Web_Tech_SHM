@@ -1,3 +1,9 @@
+/**
+ * NavigationComponent, holds all navigation elements (left side and top bar)
+ *
+ * @author Markus Macher
+ */
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
@@ -15,11 +21,17 @@ export class NavigationComponent implements OnInit {
   // ngif bug undefined, view child update the property if dom change
   @ViewChild('sidenav') sidenav;
 
+/**
+ * Responsive sidnavigation with hamburger icon
+ */
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
     );
 
+    /**
+     * If not logged in then the navigation will not be displayed
+     */
   isLoggedIn$: Observable<boolean>;
   constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService, public snackBar: MatSnackBar) { }
 

@@ -1,3 +1,21 @@
+/**
+ * This function handles all requests for the devices like ADD, REMOVE, EDIT and GET all the devices
+ * 
+ * ADD
+ * adds a new device and inserts the correct connection to the room
+ * 
+ * REMOVE
+ * removes a new device and its connection to the room
+ * 
+ * EDIT
+ * updated a device
+ * 
+ * GET all
+ * returns all devices that are in the database
+ * 
+ * @author Manuel Dielacher, Markus Macher
+ */
+
 const express = require('express');
 const router = express.Router();
 const checkAuth = require('../modules/check_auth')

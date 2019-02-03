@@ -1,3 +1,8 @@
+/**
+ * Root component for the appp
+ */
+
+
 import { Component } from '@angular/core';
 
 @Component({

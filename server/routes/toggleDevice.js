@@ -1,4 +1,13 @@
-const express = require('express');
+/**
+ * Handles the toggling of the devices requested by the client
+ * IF testMode is set to true the server will emulate the request and save the state in there
+ * IF testMode is set to false it will send http get request to the ip specified for each device
+ * and informs the client if success or not
+ * 
+ * @author Manuel Dielacher
+ */
+
+ const express = require('express');
 const router = express.Router();
 const checkAuth = require('../modules/check_auth');
 const request = require('request');

@@ -8,6 +8,7 @@ import { AuthService } from './auth.service';
  * Comment for method 'intercept()'
  * Intercepts any HTTP requests and adds an Authorization header with the JWT-Token to the request header.
  * for identifying the logged in user on the backend.
+ * @author Markus Macher
  */
 
 @Injectable()

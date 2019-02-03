@@ -8,6 +8,7 @@ import { AuthService } from './auth.service';
  * Comment for module 'error.inceptor.ts'.
  * Intercepts all 401 Unauthorized errors.
  * the user getting logged out if a 401 status response occurs.
+ * @author Markus Macher
  */
 
 @Injectable()

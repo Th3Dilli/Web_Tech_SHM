@@ -17,9 +17,12 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 
-/*Comment for module 'material-module.ts'
- *Importing all necessary Material Modules API References for Material
- *https://material.angular.io
+/**
+ * Comment for module 'material-module.ts'
+ *  Importing all necessary Material Modules API References for Material
+ *  https://material.angular.io
+ *
+ * @author Markus Macher
 */
 
 @NgModule({

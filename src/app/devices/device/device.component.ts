@@ -1,3 +1,10 @@
+/**
+ * Holds one device and all its information
+ * it dynamicly check what child component to load SONOFF_4CH  || SONOFF_BASIC for example
+ *
+ * @author Manuel Dielacher, Markus Macher
+ */
+
 import { Component, OnInit, Input, ViewChild, ComponentFactoryResolver, EventEmitter, Output } from '@angular/core';
 import { Device } from '../../services/device';
 import { TypeDirective } from './type.directive';
@@ -40,6 +47,10 @@ export class DeviceComponent implements OnInit {
     this.showInfo = !this.showInfo;
   }
 
+  /**
+   * Check what type of child component to load
+   * and passes the device property over
+   */
   loadComponent() {
     switch (this.device.module_type) {
       case 'SONOFF_4CH':

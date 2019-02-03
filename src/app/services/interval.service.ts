@@ -1,3 +1,9 @@
+/**
+ * Service for fetching the device statues from the back-end to the frond-end
+ *
+ * @author Phillip Freislich, Manuel Dielacher
+ */
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 

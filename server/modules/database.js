@@ -1,3 +1,8 @@
+/**
+ * Functions to initate the Database connection and to retrun the database to any other module
+ * 
+ * @author Markus Macher
+ */
 const cfg = require('../config/config_db')
 const mysql = require('mysql');
 
@@ -21,7 +26,7 @@ let initDb = new Promise((resolve, reject) => {
 
 function getDb() {
     if (!_db) {
-        console.log('Db has not been initialized. Please call init first.');
+        console.log('Database has not been initialized. Please call init first.');
         return;
     } else {
         return _db;

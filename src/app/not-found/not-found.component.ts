@@ -1,3 +1,9 @@
+/**
+ * Page not found component
+ *
+ * @author Markus Macher
+ */
+
 import { Component, OnInit } from '@angular/core';
 
 @Component({

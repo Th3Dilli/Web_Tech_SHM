@@ -1,3 +1,10 @@
+/**
+ * This is the emulated device module/service for testing purpose
+ * contains a simple data (objekt) structure to save the device state
+ * 
+ * @author Manuel Dielacher
+ */
+
 let devices = {
     '10.0.0.11': {
         module_type: 'SONOFF_4CH',

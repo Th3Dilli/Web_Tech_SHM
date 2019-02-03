@@ -1,3 +1,9 @@
+/**
+ * Checks the if the user is authenticated and has a valid token int he authorization header
+ * 
+ * @author Markus Macher
+ */
+
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const path = require('path');

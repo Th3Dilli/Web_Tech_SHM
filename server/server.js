@@ -1,3 +1,10 @@
+/**
+ * This is the main server module that processes all request and 
+ * routes them
+ * 
+ * @author Markus Macher
+ */
+
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');

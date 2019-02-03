@@ -1,4 +1,14 @@
-const getDb = require('../modules/database').getDb;
+/**
+ *  The username and the password is checked against the database
+ *  if they are valid the user will be logged in and get a uniqe token that is created using JWT module
+ *  
+ * the token is generted using a private and will be encrypted using the public key when the user request secure routes on the server
+ * 
+ * 
+ * @author Markus Macher 
+ */
+
+ const getDb = require('../modules/database').getDb;
 const jwt = require('jsonwebtoken');
 const _db = getDb();
 const express = require('express');
@@ -10,8 +20,8 @@ const privateKEY = fs.readFileSync(path.join(__dirname, 'private.key'), 'utf8');
 
 router.post('/', (req, res) => {
 
-  let username = req.body.username;
-  let password = req.body.password;
+  const username = req.body.username;
+  const password = req.body.password;
 
   const query = 'SELECT users_id, username, role, email FROM users WHERE username = ? AND password = ?';
 
@@ -25,18 +35,17 @@ router.post('/', (req, res) => {
         message: 'Authentication error'
       });
     } else {
-      let userid = results[0].users_id;
-      let username = results[0].username;
-      let email = results[0].email;
-      let role = results[0].role;
-      let secretKey = privateKEY;
+      const userid = results[0].users_id;
+      const username = results[0].username;
+      const email = results[0].email;
+      const role = results[0].role;
 
-      let token = jwt.sign({
+      const token = jwt.sign({
         user: username,
         userid: userid,
         email: email,
         role: role
-      }, secretKey, {
+      }, privateKEY, {
           expiresIn: '1h',
           algorithm: 'RS256'
         });
