@@ -64,6 +64,11 @@ function refreshStat() {
 }
 
 module.exports = {
+
+    /**
+     * gets the ips from the database for the refresh service that pulls the current state of each device
+     * @returns ip and module_type from the database 
+     */
     getIps: function () {
         _db.query('SELECT ip, module_type  FROM device', (error, results) => {
             if (error) {
@@ -89,6 +94,10 @@ module.exports = {
         clearInterval(statChanged);
         statChanged = null;
     },
+
+    /**
+     * @returns the statues of each device in a device object with all devices indside
+     */
     getDevices: function () {
         return devices;
     },

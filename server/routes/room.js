@@ -36,6 +36,9 @@ router.post('/addRoom', checkAuth, (req, res) => {
   });
 });
 
+/**
+ * Removes a rooms only if it has no devices in it
+ */
 router.patch('/deleteRoom', checkAuth, (req, res) => {
   let roomname = req.body.room_name;
   let queryRoom = `DELETE FROM rooms WHERE (name = ?)`

@@ -78,28 +78,6 @@ CREATE TABLE IF NOT EXISTS `smarthome`.`rooms_has_device` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table `smarthome`.`users_has_device`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `smarthome`.`users_has_device` (
-  `users_users_id` INT NOT NULL,
-  `device_device_id` INT NOT NULL,
-  PRIMARY KEY (`users_users_id`, `device_device_id`),
-  INDEX `fk_users_has_device_device1_idx` (`device_device_id` ASC) VISIBLE,
-  INDEX `fk_users_has_device_users1_idx` (`users_users_id` ASC) VISIBLE,
-  CONSTRAINT `fk_users_has_device_users1`
-    FOREIGN KEY (`users_users_id`)
-    REFERENCES `smarthome`.`users` (`users_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_users_has_device_device1`
-    FOREIGN KEY (`device_device_id`)
-    REFERENCES `smarthome`.`device` (`device_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
@@ -150,17 +128,6 @@ INSERT INTO `smarthome`.`rooms_has_device` (`rooms_rooms_id`, `device_device_id`
 INSERT INTO `smarthome`.`rooms_has_device` (`rooms_rooms_id`, `device_device_id`) VALUES (2, 3);
 INSERT INTO `smarthome`.`rooms_has_device` (`rooms_rooms_id`, `device_device_id`) VALUES (3, 1);
 INSERT INTO `smarthome`.`rooms_has_device` (`rooms_rooms_id`, `device_device_id`) VALUES (4, 4);
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `smarthome`.`users_has_device`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `smarthome`;
-INSERT INTO `smarthome`.`users_has_device` (`users_users_id`, `device_device_id`) VALUES (2, 2);
-INSERT INTO `smarthome`.`users_has_device` (`users_users_id`, `device_device_id`) VALUES (2, 4);
 
 COMMIT;
 

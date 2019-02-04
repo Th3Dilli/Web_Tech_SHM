@@ -1,8 +1,5 @@
 /**
  * This function handles all http requests for the devices like ADD, REMOVE, EDIT and GET all the DEVICES
- *
- * ADD
- * adds a new device and inserts the correct connection to the room
  * 
  * REMOVE
  * removes a new device and its connection to the room
@@ -23,7 +20,13 @@ const getDb = require('../modules/database').getDb
 const _db = getDb();
 const testMode = require('../config/config').testMode;
 const devices = require('../modules/testMode/devices');
+const deviceState_service = require('../modules/deviceState.service');
 
+/**
+ * GETALL
+ * return all device currently in the database
+ * @returns all devices that are in the database
+ */
 router.get('/all', checkAuth, (req, res) => {
 
   const queryDevice = `SELECT distinct d.*, rhs.rooms_rooms_id, r.name 
@@ -55,6 +58,10 @@ router.get('/all', checkAuth, (req, res) => {
   });
 });
 
+/**
+ * ADD
+ * adds a new device to the database and the connection to the room
+ */
 router.post('/addDevice', checkAuth, (req, res) => {
 
   const module_type = req.body.module_type;
@@ -108,8 +115,14 @@ router.post('/addDevice', checkAuth, (req, res) => {
       });
     }
   });
+  deviceState_service.getIps();
 });
 
+
+/**
+ * DELETE
+ * delete an existing device by its id from the database and its rooms connection
+ */
 router.delete('/deleteDevice/:id', checkAuth, (req, res) => {
   let device_id = req.params.id;
   if (testMode) {
@@ -144,8 +157,13 @@ router.delete('/deleteDevice/:id', checkAuth, (req, res) => {
       });
     }
   });
+  deviceState_service.getIps();
 });
 
+/**
+ * EDIT
+ * update the device data in the database
+ */
 router.patch('/edit', checkAuth, (req, res) => {
   if (testMode) {
     _db.query('SELECT ip,module_type  from `device` WHERE device_id = ?', [req.body.editDevice_id], (error, result) => {
@@ -169,6 +187,7 @@ router.patch('/edit', checkAuth, (req, res) => {
       });
     }
   });
+  deviceState_service.getIps();
 });
 
 module.exports = router;
