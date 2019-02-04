@@ -1,7 +1,7 @@
 /**
  * Home screen for the user with additional navigation cards to the devices or the user component
  *
- * @author
+ * @author Markus Macher
  */
 
 import { Component, OnInit } from '@angular/core';
