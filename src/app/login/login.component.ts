@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit {
 
   form: FormGroup;
   private formSubmitAttempt: boolean;
-  private failedLoginAttempt: boolean;
-  private hide = true;
+  failedLoginAttempt: boolean;
+  hide = true;
 
   constructor(private fb: FormBuilder, private _auth: AuthService, private _router: Router, public snackBar: MatSnackBar) { }
 

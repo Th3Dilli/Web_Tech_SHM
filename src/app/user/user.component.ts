@@ -18,6 +18,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class UserComponent implements OnInit {
 
   private formSubmitAttempt: boolean;
+  showEdit = false;
 
 
   constructor(public jwtHelper: JwtHelperService, private fb: FormBuilder, private http: HttpClient, public snackBar: MatSnackBar) { }
