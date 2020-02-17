@@ -19,7 +19,7 @@ import { MatSnackBar } from '@angular/material';
 export class NavigationComponent implements OnInit {
 
   // ngif bug undefined, view child update the property if dom change
-  @ViewChild('sidenav') sidenav;
+  @ViewChild('sidenav', { static: false }) sidenav;
 
 /**
  * Responsive side nav with hamburger icon

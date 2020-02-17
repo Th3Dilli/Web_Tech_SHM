@@ -27,7 +27,7 @@ export class DeviceComponent implements OnInit {
   buttonText: String = 'OFF';
   component: any;
 
-  @ViewChild(TypeDirective) appType: TypeDirective;
+  @ViewChild(TypeDirective, { static: true }) appType: TypeDirective;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
 
