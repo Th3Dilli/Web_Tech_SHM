@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 
 import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material';
-import { MatToolbarModule } from '@angular/material';
-import { MatSidenavModule } from '@angular/material';
-import { MatIconModule } from '@angular/material';
-import { MatListModule } from '@angular/material';
-import { MatInputModule } from '@angular/material';
-import { MatFormFieldModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatGridListModule } from '@angular/material/grid-list';

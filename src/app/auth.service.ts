@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { tap, catchError } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 /**
  * Comment for module 'auth.service.ts'.
